@@ -10,6 +10,7 @@ Feedstock license: BSD 3-Clause
 Summary: testing feedstock for the regro-cf-autotick-bot
 
 
+
 Current build status
 ====================
 
@@ -283,7 +284,4 @@ Feedstock Maintainers
 
 * [@beckermr](https://github.com/beckermr/)
 * [@conda-forge/bot](https://github.com/conda-forge/bot/)
-
-
-<!-- dummy commit to enable rerendering -->
 
