@@ -10,17 +10,8 @@ jobs:
   strategy:
     maxParallel: 8
     matrix:
-      osx_python2.7.____cpython:
-        CONFIG: osx_python2.7.____cpython
-        UPLOAD_PACKAGES: False
-      osx_python3.6.____cpython:
-        CONFIG: osx_python3.6.____cpython
-        UPLOAD_PACKAGES: False
-      osx_python3.7.____cpython:
-        CONFIG: osx_python3.7.____cpython
-        UPLOAD_PACKAGES: False
-      osx_python3.8.____cpython:
-        CONFIG: osx_python3.8.____cpython
+      osx_:
+        CONFIG: osx_
         UPLOAD_PACKAGES: False
 
   steps:
