@@ -5,12 +5,12 @@
 version: 2
 
 jobs:
-  build_osx_python2.7.____cpython:
+  build_osx_python3.6.____73_pypy:
     working_directory: ~/test
     macos:
       xcode: "9.0"
     environment:
-      - CONFIG: "osx_python2.7.____cpython"
+      - CONFIG: "osx_python3.6.____73_pypy"
     steps:
       - checkout
       - run:
@@ -82,7 +82,7 @@ workflows:
   version: 2
   build_and_test:
     jobs:
-      - build_osx_python2.7.____cpython
+      - build_osx_python3.6.____73_pypy
       - build_osx_python3.6.____cpython
       - build_osx_python3.7.____cpython
       - build_osx_python3.8.____cpython
