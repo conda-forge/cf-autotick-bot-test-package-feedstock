@@ -33,7 +33,7 @@ jobs:
       echo "Removing homebrew from Azure to avoid conflicts."
       curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/uninstall > ~/uninstall_homebrew
       chmod +x ~/uninstall_homebrew
-      curl -fsSL https://gist.githubusercontent.com/beckermr/324328c2e3db944c3e02919b5611a4f9/raw/4a9dfb9869db89cb8df2cd0a4c377805c86c47c4/mangle_homebrew.py > ~/mangle_homebrew.py
+      curl -fsSL https://gist.githubusercontent.com/beckermr/324328c2e3db944c3e02919b5611a4f9/raw/8da63598d75a3acf08495ded0a1147c3b145a263/mangle_homebrew.py > ~/mangle_homebrew.py
       chmod +x ~/mangle_homebrew.py
       pushd ~
       python mangle_homebrew.py
