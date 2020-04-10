@@ -55,7 +55,8 @@ jobs:
   - script: |
       source activate base
       curl -fsSL https://raw.githubusercontent.com/beckermr/conda-forge-ci-setup-feedstock/mangle-homebrew/recipe/conda_forge_ci_setup/mangle_homebrew.py > mangle_homebrew.py
-      python mangle_homebrew.py
+      /usr/bin/sudo python mangle_homebrew.py
+      /usr/bin/sudo -k
     displayName: 'Mangle homebrew Paths'
 
   - script: |
