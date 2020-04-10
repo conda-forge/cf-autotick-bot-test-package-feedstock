@@ -1,5 +1,5 @@
 {% set name = "cf-autotick-bot-test-package" %}
-{% set version = "0.9" %}
+{% set version = datetime.datetime.utcnow().strftime('%Y.%m.%d.%H.%M.%S') %}
 
 package:
   name: {{ name|lower }}
