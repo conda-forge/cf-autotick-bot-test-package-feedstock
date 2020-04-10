@@ -53,11 +53,11 @@ jobs:
     displayName: 'Add conda-forge-ci-setup=2'
 
   - script: |
+      echo "Mangling homebrew from Azure to avoid conflicts."
       source activate base
-      curl -fsSL https://raw.githubusercontent.com/beckermr/conda-forge-ci-setup-feedstock/mangle-homebrew/recipe/conda_forge_ci_setup/mangle_homebrew.py > mangle_homebrew.py
-      /usr/bin/sudo python mangle_homebrew.py
+      /usr/bin/sudo mangle_homebrew
       /usr/bin/sudo -k
-    displayName: 'Mangle homebrew Paths'
+    displayName: Mangle homebrew
 
   - script: |
       source activate base
