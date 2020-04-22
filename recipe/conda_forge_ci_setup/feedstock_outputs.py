@@ -92,7 +92,7 @@ def main(feedstock_root):
         print("Skipping output validation!")
         sys.exit(0)
 
-    feedstock = os.path.basename(feedstock_root)
+    feedstock = os.path.basename(os.path.abspath(feedstock_root))
 
     paths = (
         [
