@@ -70,6 +70,7 @@ docker run ${DOCKER_RUN_ARGS} \
            -e GIT_BRANCH \
            -e UPLOAD_ON_BRANCH \
            -e CI \
+           -e FEEDSTOCK_NAME \
            -e FEEDSTOCK_TOKEN \
            $DOCKER_IMAGE \
            bash \
