@@ -84,7 +84,8 @@ jobs:
     - script: |
         set "CI=azure"
         call activate base
-        run_conda_forge_build_setup
+        # Overriding global run_conda_forge_build_setup_win with local copy.
+        recipe\run_conda_forge_build_setup_win
       displayName: conda-forge build setup
     
 

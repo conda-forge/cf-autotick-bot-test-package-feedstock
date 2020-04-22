@@ -29,8 +29,8 @@ mangle_compiler ./ ./recipe .ci_support/${CONFIG}.yaml
 setup_conda_rc ./ ./recipe ./.ci_support/${CONFIG}.yaml
 
 
-source run_conda_forge_build_setup
-
+# Overriding global run_conda_forge_build_setup_osx with local copy.
+source recipe/run_conda_forge_build_setup_osx
 
 echo -en 'travis_fold:end:configure_conda\\r'
 
