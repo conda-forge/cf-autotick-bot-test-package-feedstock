@@ -23,6 +23,10 @@ jobs:
         CONDA_BLD_PATH: D:\\bld\\
         UPLOAD_PACKAGES: True
   steps:
+
+    - checkout: self
+      path: cf-autotick-bot-test-package-feedstock
+  
     # TODO: Fast finish on azure pipelines?
     - script: |
         ECHO ON
@@ -108,7 +112,7 @@ jobs:
       condition: not(contains(variables['CONFIG'], 'vs2008'))
     - script: |
         call activate base
-        validate_recipe_outputs
+        validate_recipe_outputs .\
       displayName: Validate Recipe Outputs
 
     - script: |
@@ -118,4 +122,5 @@ jobs:
       displayName: Upload package
       env:
         BINSTAR_TOKEN: $(BINSTAR_TOKEN)
+        FEEDSTOCK_TOKEN: $(FEEDSTOCK_TOKEN)
       condition: and(succeeded(), not(eq(variables['UPLOAD_PACKAGES'], 'False')))

@@ -30,18 +30,17 @@ def _compute_md5sum(pth):
     return h.hexdigest()
 
 
-def request_copy(dists, channel):
+def request_copy(feedstock, dists, channel):
     checksums = {}
     for dist in dists:
         checksums[dist] = _compute_md5sum(dist)
-
-    feedstock = os.path.basename(os.getcwd())
 
     if "FEEDSTOCK_TOKEN" not in os.environ:
         print(
             "ERROR you must have defined a FEEDSTOCK_TOKEN in order to "
             "perform output copies to the production channels!"
         )
+        return False
 
     headers = {"FEEDSTOCK_TOKEN": os.environ["FEEDSTOCK_TOKEN"]}
     json_data = {
@@ -71,9 +70,10 @@ def request_copy(dists, channel):
 
 
 @functools.lru_cache(maxsize=1)
-def _should_validate():
-    if os.path.exists("conda-forge.yml"):
-        with open("conda-forge.yml", "r") as fp:
+def _should_validate(feedstock_root):
+    fname = os.path.join(feedstock_root, "conda-forge.yml")
+    if os.path.exists(fname):
+        with open(fname, "r") as fp:
             cfg = safe_load(fp)
 
         return cfg.get("conda_forge_output_validation", False)
@@ -82,13 +82,17 @@ def _should_validate():
 
 
 @click.command()
-def main():
+@click.argument(
+    "feedstock_root", type=click.Path(exists=True, file_okay=False, dir_okay=True)
+)
+def main(feedstock_root):
     """Validate the feedstock outputs."""
 
-    if not _should_validate():
+    if not _should_validate(feedstock_root):
+        print("Skipping output validation!")
         sys.exit(0)
 
-    feedstock = os.path.basename(os.getcwd())
+    feedstock = os.path.basename(feedstock_root)
 
     paths = (
         [

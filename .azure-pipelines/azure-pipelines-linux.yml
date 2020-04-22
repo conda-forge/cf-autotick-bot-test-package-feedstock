@@ -27,6 +27,10 @@ jobs:
         UPLOAD_PACKAGES: True
         DOCKER_IMAGE: condaforge/linux-anvil-comp7
   steps:
+  # azure likes to use s to checkout - this breaks stuff
+  - checkout: self
+    path: cf-autotick-bot-test-package-feedstock
+
   # configure qemu binfmt-misc running.  This allows us to run docker containers
   # embedded qemu-static
   - script: |
@@ -42,3 +46,4 @@ jobs:
     displayName: Run docker build
     env:
       BINSTAR_TOKEN: $(BINSTAR_TOKEN)
+      FEEDSTOCK_TOKEN: $(FEEDSTOCK_TOKEN)

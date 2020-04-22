@@ -152,11 +152,15 @@ def upload_package(feedstock_root, recipe_root, config_file):
                     "is not allowed" % ("conda-forge", source_channel))
                 return
 
+    feedstock = os.path.basename(feedstock_root)
+
     for owner, channel in channels:
-        if _should_validate() and owner == "conda-forge":
-            retry_upload_or_check(recipe_root, STAGING, channel, [config_file])
+        if _should_validate(feedstock_root) and owner == "conda-forge":
+            retry_upload_or_check(
+                feedstock, recipe_root, STAGING, channel, [config_file], validate=True)
         else:
-            retry_upload_or_check(recipe_root, owner, channel, [config_file])
+            retry_upload_or_check(
+                feedstock, recipe_root, owner, channel, [config_file], validate=False)
 
 
 @click.command()
