@@ -39,6 +39,6 @@ set -e
 make_build_number ./ ./recipe ./.ci_support/${CONFIG}.yaml
 
 conda build ./recipe -m ./.ci_support/${CONFIG}.yaml --clobber-file ./.ci_support/clobber_${CONFIG}.yaml
-validate_recipe_outputs ./
+validate_recipe_outputs cf-autotick-bot-test-package-feedstock
 
-upload_package ./ ./recipe ./.ci_support/${CONFIG}.yaml
+upload_package --validate ./ ./recipe ./.ci_support/${CONFIG}.yaml

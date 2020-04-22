@@ -2,17 +2,11 @@ import os
 import sys
 import hashlib
 import json
-import functools
 
 import conda_build
 import conda_build.config
 import requests
 import click
-
-try:
-    from ruamel_yaml import safe_load
-except ImportError:
-    from yaml import safe_load
 
 VALIDATION_ENDPOINT = "https://conda-forge.herokuapp.com"
 STAGING = "cf-staging"
@@ -69,30 +63,10 @@ def request_copy(feedstock, dists, channel):
     return r.status_code == 200
 
 
-@functools.lru_cache(maxsize=1)
-def _should_validate(feedstock_root):
-    fname = os.path.join(feedstock_root, "conda-forge.yml")
-    if os.path.exists(fname):
-        with open(fname, "r") as fp:
-            cfg = safe_load(fp)
-
-        return cfg.get("conda_forge_output_validation", False)
-    else:
-        return False
-
-
 @click.command()
-@click.argument(
-    "feedstock_root", type=click.Path(exists=True, file_okay=False, dir_okay=True)
-)
-def main(feedstock_root):
+@click.argument("feedstock_name", type=str)
+def main(feedstock_name):
     """Validate the feedstock outputs."""
-
-    if not _should_validate(feedstock_root):
-        print("Skipping output validation!")
-        sys.exit(0)
-
-    feedstock = os.path.basename(os.path.abspath(feedstock_root))
 
     paths = (
         [
@@ -108,7 +82,7 @@ def main(feedstock_root):
     r = requests.post(
         "%s/feedstock-outputs/validate" % VALIDATION_ENDPOINT,
         json={
-            "feedstock": feedstock,
+            "feedstock": feedstock_name,
             "outputs": built_distributions,
         },
     )

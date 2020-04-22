@@ -11,7 +11,6 @@ THISDIR="$( cd "$( dirname "$0" )" >/dev/null && pwd )"
 PROVIDER_DIR="$(basename $THISDIR)"
 
 FEEDSTOCK_ROOT=$(cd "$(dirname "$0")/.."; pwd;)
-FEEDSTOCK_NAME=`basename ${FEEDSTOCK_ROOT}`
 RECIPE_ROOT="${FEEDSTOCK_ROOT}/recipe"
 
 docker info
@@ -62,7 +61,7 @@ fi
 export UPLOAD_PACKAGES="${UPLOAD_PACKAGES:-True}"
 docker run ${DOCKER_RUN_ARGS} \
            -v "${RECIPE_ROOT}":/home/conda/recipe_root:ro,z \
-           -v "${FEEDSTOCK_ROOT}":/home/conda/"${FEEDSTOCK_NAME}":rw,z \
+           -v "${FEEDSTOCK_ROOT}":/home/conda/feedstock_root:rw,z \
            -e CONFIG \
            -e BINSTAR_TOKEN \
            -e HOST_USER_ID \
@@ -70,11 +69,10 @@ docker run ${DOCKER_RUN_ARGS} \
            -e GIT_BRANCH \
            -e UPLOAD_ON_BRANCH \
            -e CI \
-           -e FEEDSTOCK_NAME \
            -e FEEDSTOCK_TOKEN \
            $DOCKER_IMAGE \
            bash \
-           /home/conda/${FEEDSTOCK_NAME}/${PROVIDER_DIR}/build_steps.sh
+           /home/conda/feedstock_root/${PROVIDER_DIR}/build_steps.sh
 
 # verify that the end of the script was reached
 test -f "$DONE_CANARY"
