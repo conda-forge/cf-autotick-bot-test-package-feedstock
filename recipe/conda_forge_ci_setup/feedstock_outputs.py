@@ -2,6 +2,7 @@ import os
 import sys
 import hashlib
 import json
+import pprint
 
 import conda_build
 import conda_build.config
@@ -78,6 +79,8 @@ def main(feedstock_name):
             for p in os.listdir(os.path.join(conda_build.config.croot, conda_build.config.subdir))  # noqa
         ])
     built_distributions = [path for path in paths if path.endswith('.tar.bz2')]
+
+    print("validating outputs:\n%s" % pprint.pformat(built_distributions))
 
     r = requests.post(
         "%s/feedstock-outputs/validate" % VALIDATION_ENDPOINT,
