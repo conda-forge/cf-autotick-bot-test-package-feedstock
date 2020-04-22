@@ -31,8 +31,9 @@ def _compute_md5sum(pth):
 
 def request_copy(feedstock, dists, channel):
     checksums = {}
-    for dist in dists:
-        checksums[_unix_path(dist)] = _compute_md5sum(dist)
+    for path in dists:
+        dist = _unix_path(os.path.relpath(conda_build.config.croot, path))
+        checksums[dist] = _compute_md5sum(path)
 
     if "FEEDSTOCK_TOKEN" not in os.environ:
         print(

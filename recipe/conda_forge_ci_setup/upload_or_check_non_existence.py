@@ -169,10 +169,7 @@ def upload_or_check(feedstock, recipe_dir, owner, channel, variant, validate=Fal
 
                 return request_copy(
                     feedstock,
-                    [
-                        os.path.relpath(conda_build.config.croot, path)
-                        for _, _, path in built_distributions
-                    ],
+                    [path for _, _, path in built_distributions],
                     channel,
                 )
             else:
