@@ -26,7 +26,7 @@ jobs:
 
     - checkout: self
       path: cf-autotick-bot-test-package-feedstock
-  
+
     # TODO: Fast finish on azure pipelines?
     - script: |
         ECHO ON
