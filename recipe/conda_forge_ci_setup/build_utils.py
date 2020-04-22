@@ -115,7 +115,7 @@ def setup_conda_rc(feedstock_root, recipe_root, config_file):
 @arg_feedstock_root
 @arg_recipe_root
 @arg_config_file
-@click.option("--validate", action="store_true")
+@click.option("--validate", is_flag=True)
 def upload_package(feedstock_name, feedstock_root, recipe_root, config_file, validate):
     specific_config = safe_load(open(config_file))
     if "channel_targets" in specific_config:
