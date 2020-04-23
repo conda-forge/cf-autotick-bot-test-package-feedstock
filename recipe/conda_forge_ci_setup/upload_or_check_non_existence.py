@@ -151,27 +151,36 @@ def upload_or_check(feedstock, recipe_dir, owner, channel, variant, validate=Fal
         with get_temp_token(cli.token) as token_fn:
             if validate:
                 for name, version, path in built_distributions:
-                    for i in range(0, 15):
+                    for i in range(0, 5):
                         time.sleep(i*15)
                         if not built_distribution_already_exists(
                             cli, name, version, path, owner
                         ):
                             upload(token_fn, path, owner, channel)
                             break
+                        else:
+                            print(
+                                "Distribution {} already exists on {}. "
+                                "Waiting another {} seconds to "
+                                "try uploading again.".format(path, owner, (i+1) * 15))
                     else:
                         print(
                             "WARNING: Distribution {} already existed in "
-                            "{} for a while.".format(path, owner)
+                            "{} for a while. Deleting and "
+                            "re-uploading.".format(path, owner)
                         )
-                        print("         Deleting and re-uploading.")
                         delete_dist(token_fn, path, owner, channel)
                         upload(token_fn, path, owner, channel)
 
-                return request_copy(
+                if not request_copy(
                     feedstock,
                     [path for _, _, path in built_distributions],
                     channel,
-                )
+                ):
+                    raise RuntimeError(
+                        "copy from staging to production channel failed")
+                else:
+                    return True
             else:
                 for name, version, path in built_distributions:
                     if not built_distribution_already_exists(
@@ -207,7 +216,7 @@ def retry_upload_or_check(
         except Exception as e:
             timeout = i ** 2
             print(
-                "Failed to upload due to {}.  Trying again in {} seconds".format(
+                "Failed to upload due to {}. Trying again in {} seconds".format(
                     e, timeout))
             time.sleep(timeout)
     raise TimeoutError("Did not manage to upload package.  Failing.")
