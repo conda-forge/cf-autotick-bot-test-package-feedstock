@@ -1,6 +1,7 @@
 #!/usr/bin/env bash
 
-set -x
+# turn this off as the output is far too verbose
+# set -x
 
 
 
@@ -24,7 +25,12 @@ fi
 source ${HOME}/miniforge3/etc/profile.d/conda.sh
 conda activate base
 
+echo "Installing conda-forge-ci-setup=2 and conda-build."
 conda install -n base --quiet --yes conda-forge-ci-setup=2 conda-build
+
+echo "Setting up the condarc and mangling the compiler."
+setup_conda_rc ./ ./recipe ./.ci_support/${CONFIG}.yaml
+mangle_compiler ./ ./recipe .ci_support/${CONFIG}.yaml
 
 echo "Mangling homebrew in the CI to avoid conflicts."
 if [[ ${CI} == "travis" ]]; then
@@ -36,9 +42,7 @@ if [[ ${CI} == "travis" ]]; then
   echo -en 'travis_fold:end:mangle_homebrew\\r'
 fi
 
-mangle_compiler ./ ./recipe .ci_support/${CONFIG}.yaml
-setup_conda_rc ./ ./recipe ./.ci_support/${CONFIG}.yaml
-
+echo "Running the build setup script."
 source run_conda_forge_build_setup
 
 
@@ -48,10 +52,11 @@ fi
 
 set -e
 
+echo "Making the build clobber file and running the build."
 make_build_number ./ ./recipe ./.ci_support/${CONFIG}.yaml
-
 conda build ./recipe -m ./.ci_support/${CONFIG}.yaml --clobber-file ./.ci_support/clobber_${CONFIG}.yaml
 
 if [[ "${UPLOAD_PACKAGES}" != "False" ]]; then
+  echo "Uploading the packages."
   upload_package ./ ./recipe ./.ci_support/${CONFIG}.yaml
 fi
