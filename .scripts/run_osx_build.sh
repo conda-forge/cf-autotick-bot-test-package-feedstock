@@ -30,14 +30,8 @@ setup_conda_rc ./ ./recipe ./.ci_support/${CONFIG}.yaml
 mangle_compiler ./ ./recipe .ci_support/${CONFIG}.yaml
 
 echo -e "\n\nMangling homebrew in the CI to avoid conflicts."
-if [[ ${CI} == "travis" ]]; then
-  echo -en 'travis_fold:start:mangle_homebrew\\r'
-fi
 /usr/bin/sudo mangle_homebrew
 /usr/bin/sudo -k
-if [[ ${CI} == "travis" ]]; then
-  echo -en 'travis_fold:end:mangle_homebrew\\r'
-fi
 
 echo -e "\n\nRunning the build setup script."
 source run_conda_forge_build_setup
