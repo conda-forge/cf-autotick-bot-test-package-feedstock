@@ -17,8 +17,6 @@ source ~/miniconda3/bin/activate root
 
 conda install -n root -c conda-forge --quiet --yes conda-forge-ci-setup=3 pip conda-build
 
-conda uninstall --quiet --yes --force conda-forge-ci-setup
-pip install --no-deps recipe/.
 
 echo "Mangling homebrew in the CI to avoid conflicts." && echo -en 'travis_fold:start:mangle_homebrew\\r'
 /usr/bin/sudo mangle_homebrew
@@ -29,8 +27,8 @@ mangle_compiler ./ ./recipe .ci_support/${CONFIG}.yaml
 setup_conda_rc ./ ./recipe ./.ci_support/${CONFIG}.yaml
 
 
-# Overriding global run_conda_forge_build_setup_osx with local copy.
-source recipe/run_conda_forge_build_setup_osx
+source run_conda_forge_build_setup
+
 
 echo -en 'travis_fold:end:configure_conda\\r'
 

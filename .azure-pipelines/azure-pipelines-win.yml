@@ -75,8 +75,6 @@ jobs:
     # Configure the VM
     - script: |
         call activate base
-        conda.exe uninstall --quiet --yes --force conda-forge-ci-setup
-        pip install --no-deps ".\recipe\."
         setup_conda_rc .\ ".\recipe" .\.ci_support\%CONFIG%.yaml
       displayName: conda-forge CI setup
 
@@ -84,8 +82,7 @@ jobs:
     - script: |
         set "CI=azure"
         call activate base
-        # Overriding global run_conda_forge_build_setup_win with local copy.
-        recipe\run_conda_forge_build_setup_win
+        run_conda_forge_build_setup
       displayName: conda-forge build setup
     
 
