@@ -35,6 +35,8 @@ echo -e "\n\nMangling homebrew in the CI to avoid conflicts."
 
 echo -e "\n\nRunning the build setup script."
 source run_conda_forge_build_setup
+
+
 if [[ ${CI} == "travis" ]]; then
   echo -en 'travis_fold:end:configure_conda\\r'
 fi
