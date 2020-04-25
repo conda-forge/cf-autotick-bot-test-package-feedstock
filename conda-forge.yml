@@ -1,8 +1,9 @@
-provider:
-  win: azure
-  osx: circle
-  linux_aarch64: default
-  linux_ppc64le: default
 bot:
   automerge: true
 conda_forge_output_validation: true
+provider:
+  linux: circle
+  linux_aarch64: default
+  linux_ppc64le: default
+  osx: circle
+  win: azure
