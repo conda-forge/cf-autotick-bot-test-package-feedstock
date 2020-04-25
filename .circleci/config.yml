@@ -11,6 +11,7 @@ jobs:
       xcode: "9.0"
     environment:
       - CONFIG: "osx_python3.6.____73_pypy"
+      - UPLOAD_PACKAGES: "True"
     steps:
       - checkout
       - run:
@@ -22,13 +23,14 @@ jobs:
           # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
           command: |
             export CI=circle
-            ./.circleci/run_osx_build.sh
+            ./.scripts/run_osx_build.sh
   build_osx_python3.6.____cpython:
     working_directory: ~/test
     macos:
       xcode: "9.0"
     environment:
       - CONFIG: "osx_python3.6.____cpython"
+      - UPLOAD_PACKAGES: "True"
     steps:
       - checkout
       - run:
@@ -40,13 +42,14 @@ jobs:
           # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
           command: |
             export CI=circle
-            ./.circleci/run_osx_build.sh
+            ./.scripts/run_osx_build.sh
   build_osx_python3.7.____cpython:
     working_directory: ~/test
     macos:
       xcode: "9.0"
     environment:
       - CONFIG: "osx_python3.7.____cpython"
+      - UPLOAD_PACKAGES: "True"
     steps:
       - checkout
       - run:
@@ -58,13 +61,14 @@ jobs:
           # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
           command: |
             export CI=circle
-            ./.circleci/run_osx_build.sh
+            ./.scripts/run_osx_build.sh
   build_osx_python3.8.____cpython:
     working_directory: ~/test
     macos:
       xcode: "9.0"
     environment:
       - CONFIG: "osx_python3.8.____cpython"
+      - UPLOAD_PACKAGES: "True"
     steps:
       - checkout
       - run:
@@ -76,7 +80,7 @@ jobs:
           # Run, test and (if we have a BINSTAR_TOKEN) upload the distributions.
           command: |
             export CI=circle
-            ./.circleci/run_osx_build.sh
+            ./.scripts/run_osx_build.sh
 
 workflows:
   version: 2
