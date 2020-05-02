@@ -1,9 +1,6 @@
 provider:
-  win: appveyor
-  osx: circle
-  linux: circle
-  linux_aarch64: default
-  linux_ppc64le: default
+  linux_aarch64: azure
+  linux_ppc64le: azure
 bot:
   automerge: true
 conda_forge_output_validation: false
