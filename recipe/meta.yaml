@@ -1,5 +1,5 @@
-{% set cislug = "circlecircle" %}
-{% set build = 16 %}
+{% set cislug = "circleazure" %}
+{% set build = 18 %}
 {% set name = "cf-autotick-bot-test-package" %}
 {% set version = "0.9" %}
 
@@ -14,6 +14,7 @@ source:
 build:
   number: {{ build }}
   string: "{{ cislug }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}"
+  script: exit 1  # [osx]
 
 requirements:
   host:
