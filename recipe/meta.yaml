@@ -1,5 +1,5 @@
 {% set cislug = "circleazure" %}
-{% set build = 20 %}
+{% set build = 34 %}
 {% set name = "cf-autotick-bot-test-package" %}
 {% set version = "0.9" %}
 
