@@ -1,3 +1,5 @@
+{% set cislug = "azurecircle" %}
+{% set build = 57 %}
 {% set name = "cf-autotick-bot-test-package" %}
 {% set version = "0.9" %}
 
@@ -10,7 +12,8 @@ source:
   sha256: 74d5197d4ca8afb34b72a36fc8763cfaeb06bdbc3f6d63e55099fe5e64326048
 
 build:
-  number: 18
+  number: {{ build }}
+  string: "{{ cislug }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}"
 
 requirements:
   host:
