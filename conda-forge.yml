@@ -1,6 +1,6 @@
 bot:
   automerge: true
-conda_forge_output_validation: false
+conda_forge_output_validation: true
 provider:
   linux: travis
   linux_aarch64: default
