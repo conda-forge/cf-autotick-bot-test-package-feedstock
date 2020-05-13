@@ -1,5 +1,5 @@
 {% set cislug = "travistravis" %}
-{% set build = 44 %}
+{% set build = 52 %}
 {% set name = "cf-autotick-bot-test-package" %}
 {% set version = "0.9" %}
 
