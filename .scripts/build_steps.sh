@@ -21,7 +21,6 @@ CONDARC
 
 conda install --yes --quiet conda-forge-ci-setup=3 conda-build pip -c conda-forge
 
-
 # set up the condarc
 setup_conda_rc "${FEEDSTOCK_ROOT}" "${RECIPE_ROOT}" "${CONFIG_FILE}"
 
@@ -32,10 +31,10 @@ make_build_number "${FEEDSTOCK_ROOT}" "${RECIPE_ROOT}" "${CONFIG_FILE}"
 
 conda build "${RECIPE_ROOT}" -m "${CI_SUPPORT}/${CONFIG}.yaml" \
     --clobber-file "${CI_SUPPORT}/clobber_${CONFIG}.yaml"
-validate_recipe_outputs "cf-autotick-bot-test-package-feedstock"
+validate_recipe_outputs "cf-autotick-bot-test-package-feedstock-v43"
 
 if [[ "${UPLOAD_PACKAGES}" != "False" ]]; then
-    upload_package --validate --feedstock-name="cf-autotick-bot-test-package-feedstock" "${FEEDSTOCK_ROOT}" "${RECIPE_ROOT}" "${CONFIG_FILE}"
+    upload_package --validate --feedstock-name="cf-autotick-bot-test-package-feedstock-v43" "${FEEDSTOCK_ROOT}" "${RECIPE_ROOT}" "${CONFIG_FILE}"
 fi
 
 touch "${FEEDSTOCK_ROOT}/build_artifacts/conda-forge-build-done-${CONFIG}"
