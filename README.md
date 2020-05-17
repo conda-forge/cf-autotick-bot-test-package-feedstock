@@ -166,6 +166,3 @@ Feedstock Maintainers
 * [@beckermr](https://github.com/beckermr/)
 * [@conda-forge/bot](https://github.com/conda-forge/bot/)
 
-
-<!-- dummy commit to enable rerendering -->
-
