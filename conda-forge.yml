@@ -5,5 +5,5 @@ provider:
   linux: azure
   linux_aarch64: azure
   linux_ppc64le: azure
-  osx: azure
+  osx: travis
   win: azure
