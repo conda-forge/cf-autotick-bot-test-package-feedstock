@@ -35,6 +35,8 @@ jobs:
   - script: |
         export CI=azure
         export GIT_BRANCH=$BUILD_SOURCEBRANCHNAME
+        fn=`basename ${BUILD_REPOSITORYURI}`
+        export FEEDSTOCK_NAME=${fn%".git"}
         .scripts/run_docker_build.sh
     displayName: Run docker build
     env:
