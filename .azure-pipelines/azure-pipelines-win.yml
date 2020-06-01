@@ -92,15 +92,21 @@ jobs:
       env:
         PYTHONUNBUFFERED: 1
       condition: not(contains(variables['CONFIG'], 'vs2008'))
+    # using this trick to get basename
+    # https://gist.github.com/Ciantic/092ec71fa76429cebd666bb6c789d089
     - script: |
+        for /F "delims=" %%i in (%BUILD_REPOSITORY_NAME%) do set FEEDSTOCK_NAME="%%~ni"
         call activate base
-        validate_recipe_outputs "cf-autotick-bot-test-package-feedstock"
+        validate_recipe_outputs "%FEEDSTOCK_NAME%"
       displayName: Validate Recipe Outputs
 
+    # using this trick to get basename
+    # https://gist.github.com/Ciantic/092ec71fa76429cebd666bb6c789d089
     - script: |
         set "GIT_BRANCH=%BUILD_SOURCEBRANCHNAME%"
+        for /F "delims=" %%i in (%BUILD_REPOSITORY_NAME%) do set FEEDSTOCK_NAME="%%~ni"
         call activate base
-        upload_package --validate --feedstock-name="cf-autotick-bot-test-package-feedstock" .\ ".\recipe" .ci_support\%CONFIG%.yaml
+        upload_package --validate --feedstock-name="%FEEDSTOCK_NAME%" .\ ".\recipe" .ci_support\%CONFIG%.yaml
       displayName: Upload package
       env:
         BINSTAR_TOKEN: $(BINSTAR_TOKEN)
