@@ -3,7 +3,7 @@ bot:
 conda_forge_output_validation: true
 provider:
   linux: azure
-  linux_aarch64: azure
+  linux_aarch64: drone
   linux_ppc64le: azure
   osx: azure
-  win: azure
+  win: appveyor
