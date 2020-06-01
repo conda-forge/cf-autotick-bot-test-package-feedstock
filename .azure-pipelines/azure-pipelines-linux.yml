@@ -33,7 +33,8 @@ jobs:
     displayName: Configure binfmt_misc
 
   - script: |
-        echo "============ ${BUILD_REPOSITORYURI} ====================="
+        echo "============ uri: ${BUILD_REPOSITORY_URI} ====================="
+        echo "============ name: ${BUILD_REPOSITORY_NAME} ====================="
         export CI=azure
         export GIT_BRANCH=$BUILD_SOURCEBRANCHNAME
         fn=`basename ${BUILD_REPOSITORYURI}`
