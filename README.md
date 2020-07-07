@@ -5,7 +5,7 @@ Home: https://github.com/regro/cf-scripts
 
 Package license: BSD-3-Clause
 
-Feedstock license: BSD 3-Clause
+Feedstock license: BSD-3-Clause
 
 Summary: testing feedstock for the regro-cf-autotick-bot
 
@@ -163,6 +163,5 @@ In order to produce a uniquely identifiable distribution:
 Feedstock Maintainers
 =====================
 
-* [@beckermr](https://github.com/beckermr/)
 * [@conda-forge/bot](https://github.com/conda-forge/bot/)
 
