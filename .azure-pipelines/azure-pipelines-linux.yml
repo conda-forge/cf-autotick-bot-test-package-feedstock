@@ -42,6 +42,8 @@ jobs:
         export GIT_BRANCH=$BUILD_SOURCEBRANCHNAME
         export FEEDSTOCK_NAME=$(basename ${BUILD_REPOSITORY_NAME})
         echo "git branch: ${GIT_BRANCH}"
+        echo "source branch ${SYSTEM_PULLREQUEST_SOURCEBRANCH}"
+        echo "target branch ${SYSTEM_PULLREQUEST_TARGETBRANCH}"
         .scripts/run_docker_build.sh
     displayName: Run docker build
     env:
