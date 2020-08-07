@@ -11,7 +11,6 @@ source:
 
 build:
   number: 172
-  skip: true  # [not linux64]
 
 requirements:
   host:
