@@ -1,9 +1,10 @@
 bot:
   automerge: true
-conda_forge_output_validation: true
 provider:
   linux: azure
   linux_aarch64: drone
   linux_ppc64le: travis
   osx: circle
-  win: azure
+  linux_aarch64: default
+  linux_ppc64le: default
+conda_forge_output_validation: true
