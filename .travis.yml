@@ -5,7 +5,7 @@ language: generic
 
 
 git:
-  depth: false
+  depth: 1
 
 matrix:
   include:

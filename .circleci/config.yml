@@ -13,7 +13,7 @@ jobs:
       - CONFIG: "osx_64_python3.8.____cpython"
       - UPLOAD_PACKAGES: "True"
     steps:
-      - checkout
+      - run: git clone --depth 1 "$CIRCLE_REPOSITORY_URL" --branch "$CIRCLE_BRANCH"
       - run:
           name: Fast finish outdated PRs and merge PRs
           command: |

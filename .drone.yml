@@ -6,7 +6,7 @@ platform:
   os: linux
   arch: arm64
 clone:
-  depth: 0
+  depth: 1
 
 steps:
 - name: Install and build

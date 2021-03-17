@@ -17,7 +17,7 @@ environment:
 # with the TARGET_ARCH variable.
 platform:
     - x64
-shallow_clone: false
+clone_depth: 1
 
 install:
     - cmd: set "CI=appveyor"
