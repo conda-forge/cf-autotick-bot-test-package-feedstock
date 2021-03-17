@@ -1,6 +1,6 @@
 bot:
   automerge: true
-clone_depth: 0
+clone_depth: 1
 conda_forge_output_validation: true
 provider:
   linux: azure
