@@ -1,9 +1,10 @@
 bot:
   automerge: true
+clone_depth: 0
 conda_forge_output_validation: true
 provider:
   linux: azure
   linux_aarch64: drone
   linux_ppc64le: travis
   osx: circle
-  win: azure
+  win: appveyor

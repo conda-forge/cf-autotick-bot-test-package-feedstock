@@ -11,7 +11,7 @@ source:
 
 build:
   number: 2
-  skip: true  # [not linux64]
+  skip: true  # [ py!=38 ]
 
 requirements:
   host:
