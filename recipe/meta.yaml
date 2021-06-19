@@ -2,35 +2,36 @@
 {% set version = "0.10" %}
 
 package:
-  name: {{ name|lower }}
-  version: {{ version }}
+name: {{ name|lower }}
+version: {{ version }}
 
 source:
-  url: https://github.com/regro/cf-autotick-bot-test-package/archive/v{{ version }}.tar.gz
-  sha256: fbee5bfbdbac135794f5730c3382ed8ccb97c8ec76daa6da9ac3435be83cb5db
+url: https://github.com/regro/cf-autotick-bot-test-package/archive/v{{ version }}.tar.gz
+sha256: fbee5bfbdbac135794f5730c3382ed8ccb97c8ec76daa6da9ac3435be83cb5db
 
 build:
-  number: 2
-  skip: true  # [not linux64]
+number: 2
+skip: true  # [not linux64]
 
 requirements:
-  host:
-    - python
-    - pip
-  run:
-    - python
+host:
+- python
+- pip
+run:
+- python
 
 test:
-  commands:
-    - echo "works!"
+commands:
+- echo "works!"
 
 about:
-  home: https://github.com/regro/cf-scripts
-  license: BSD-3-Clause
-  license_family: BSD
-  license_file: LICENSE
-  summary: testing feedstock for the regro-cf-autotick-bot
+home: https://github.com/regro/cf-scripts
+license: BSD-3-Clause
+license_family: BSD
+license_file: LICENSE
+summary: testing feedstock for the regro-cf-autotick-bot
 
 extra:
-  recipe-maintainers:
-    - conda-forge-daemon
+recipe-maintainers:
+    - beckermr
+- conda-forge-daemon
