@@ -8,7 +8,7 @@ on: [push, pull_request]
 jobs:
   build:
     name: ${{ matrix.CONFIG }}
-    runs-on: ${{ matrix.os }}-latest
+    runs-on: [${{ matrix.os }}, self-hosted, x64]
     strategy:
       fail-fast: false
       matrix:
