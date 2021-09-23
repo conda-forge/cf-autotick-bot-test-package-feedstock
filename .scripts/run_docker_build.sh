@@ -5,6 +5,12 @@
 # changes to this script, consider a proposal to conda-smithy so that other feedstocks can also
 # benefit from the improvement.
 
+echo " "
+
+env | sort
+
+echo " "
+
 set -xeo pipefail
 
 THISDIR="$( cd "$( dirname "$0" )" >/dev/null && pwd )"
