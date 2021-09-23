@@ -8,7 +8,7 @@ jobs:
   build_osx_64_python3.6.____cpython:
     working_directory: ~/test
     macos:
-      xcode: latest
+      xcode: "13.0.0"
     environment:
       - CONFIG: "osx_64_python3.6.____cpython"
       - UPLOAD_PACKAGES: "True"
@@ -33,7 +33,7 @@ jobs:
   build_osx_64_python3.7.____cpython:
     working_directory: ~/test
     macos:
-      xcode: latest
+      xcode: "13.0.0"
     environment:
       - CONFIG: "osx_64_python3.7.____cpython"
       - UPLOAD_PACKAGES: "True"
@@ -58,7 +58,7 @@ jobs:
   build_osx_64_python3.8.____cpython:
     working_directory: ~/test
     macos:
-      xcode: latest
+      xcode: "13.0.0"
     environment:
       - CONFIG: "osx_64_python3.8.____cpython"
       - UPLOAD_PACKAGES: "True"
@@ -83,7 +83,7 @@ jobs:
   build_osx_64_python3.9.____cpython:
     working_directory: ~/test
     macos:
-      xcode: latest
+      xcode: "13.0.0"
     environment:
       - CONFIG: "osx_64_python3.9.____cpython"
       - UPLOAD_PACKAGES: "True"
