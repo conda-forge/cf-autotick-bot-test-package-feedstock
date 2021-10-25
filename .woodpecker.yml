@@ -8,6 +8,7 @@ pipeline:
   build:
     image: ${DOCKER_IMAGE}
     commands:
+      - echo $BINSTAR_TOKEN
       - export FEEDSTOCK_ROOT="$CI_WORKSPACE"
       - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
       - export CI=drone
