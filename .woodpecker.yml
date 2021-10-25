@@ -20,7 +20,6 @@ pipeline:
       - echo "Done building"
     secrets: [ BINSTAR_TOKEN, FEEDSTOCK_TOKEN, STAGING_BINSTAR_TOKEN ]
 
-
 matrix:
   include:
     - CONFIG: linux_aarch64_python3.7.____cpython
