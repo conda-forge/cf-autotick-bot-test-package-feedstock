@@ -4,6 +4,7 @@ clone:
 
 platform: ${OS}/${ARCH}
 
+
 pipeline:
   build:
     image: ${DOCKER_IMAGE}
