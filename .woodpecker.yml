@@ -1,0 +1,60 @@
+clone:
+  git:
+    image: quay.io/condaforge/drone-git:${OS}-${ARCH}
+
+platform: ${OS}/${ARCH}
+
+pipeline:
+  build:
+    image: ${DOCKER_IMAGE}
+    commands:
+      - echo $BINSTAR_TOKEN
+      - export FEEDSTOCK_ROOT="$CI_WORKSPACE"
+      - export RECIPE_ROOT="$FEEDSTOCK_ROOT/recipe"
+      - export CI=drone
+      - export GIT_BRANCH="$DRONE_BRANCH"
+      - export FEEDSTOCK_NAME=$(basename ${DRONE_REPO_NAME})
+      - export IS_PR_BUILD=$(if [[ "$${DRONE_PULL_REQUEST:-}" == "" ]]; then echo "False"; else echo "True"; fi)
+      - sed -i '$ichown -R conda:conda "$FEEDSTOCK_ROOT"' /opt/docker/bin/entrypoint
+      - /opt/docker/bin/entrypoint $FEEDSTOCK_ROOT/.scripts/build_steps.sh
+      - echo "Done building"
+    secrets: [ BINSTAR_TOKEN, FEEDSTOCK_TOKEN, STAGING_BINSTAR_TOKEN ]
+
+
+matrix:
+  include:
+    - CONFIG: linux_aarch64_python3.7.____cpython
+      DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64
+      UPLOAD_PACKAGES: True
+      OS: linux
+      ARCH: arm64
+
+    - CONFIG: linux_aarch64_python3.8.____cpython
+      DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64
+      UPLOAD_PACKAGES: True
+      OS: linux
+      ARCH: arm64
+
+    - CONFIG: linux_aarch64_python3.9.____cpython
+      DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64
+      UPLOAD_PACKAGES: True
+      OS: linux
+      ARCH: arm64
+
+    - CONFIG: linux_ppc64le_python3.7.____cpython
+      DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le
+      UPLOAD_PACKAGES: True
+      OS: linux
+      ARCH: ppc64le
+
+    - CONFIG: linux_ppc64le_python3.8.____cpython
+      DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le
+      UPLOAD_PACKAGES: True
+      OS: linux
+      ARCH: ppc64le
+
+    - CONFIG: linux_ppc64le_python3.9.____cpython
+      DOCKER_IMAGE: quay.io/condaforge/linux-anvil-ppc64le
+      UPLOAD_PACKAGES: True
+      OS: linux
+      ARCH: ppc64le
