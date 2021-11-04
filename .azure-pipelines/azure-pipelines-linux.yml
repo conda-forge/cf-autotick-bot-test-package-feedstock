@@ -15,14 +15,6 @@ jobs:
         CONFIG: linux_aarch64_python3.7.____cpython
         UPLOAD_PACKAGES: 'True'
         DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64
-      linux_aarch64_python3.8.____cpython:
-        CONFIG: linux_aarch64_python3.8.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64
-      linux_aarch64_python3.9.____cpython:
-        CONFIG: linux_aarch64_python3.9.____cpython
-        UPLOAD_PACKAGES: 'True'
-        DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64
     maxParallel: 1
   timeoutInMinutes: 360
   workspace:
@@ -34,6 +26,7 @@ jobs:
         env
         ls -alh /home/conda
         cat /home/conda/start.sh
+        id -u
  
     displayName: Run docker build
     env:
