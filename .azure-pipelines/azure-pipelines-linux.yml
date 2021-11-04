@@ -29,30 +29,10 @@ jobs:
     clean: all
 
   steps:
-  - script: |
-         rm -rf /opt/ghc
-         df -h
-    displayName: Manage disk space
-
-  # configure qemu binfmt-misc running.  This allows us to run docker containers
-  # embedded qemu-static
-  - script: |
-      docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
-      ls /proc/sys/fs/binfmt_misc/
-    condition: not(startsWith(variables['CONFIG'], 'linux_64'))
-    displayName: Configure binfmt_misc
 
   - script: |
-        export CI=azure
-        export GIT_BRANCH=$BUILD_SOURCEBRANCHNAME
-        export FEEDSTOCK_NAME=$(basename ${BUILD_REPOSITORY_NAME})
-        export CONDA_FORGE_DOCKER_RUN_ARGS="-t --rm"
-        if [[ "${BUILD_REASON:-}" == "PullRequest" ]]; then
-          export IS_PR_BUILD="True"
-        else
-          export IS_PR_BUILD="False"
-        fi
-        .scripts/run_docker_build.sh
+        env
+        ls /home/conda
     displayName: Run docker build
     env:
       BINSTAR_TOKEN: $(BINSTAR_TOKEN)
