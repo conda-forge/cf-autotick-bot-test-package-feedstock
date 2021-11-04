@@ -6,6 +6,9 @@ jobs:
 - job: linux
   pool:
     name: conda-forge-internal-aarch64
+    demands:
+      - Agent.OS -equals Linux
+      - Agent.OSArchitecture -equals ARM64
   strategy:
     matrix:
       linux_aarch64_python3.7.____cpython:
