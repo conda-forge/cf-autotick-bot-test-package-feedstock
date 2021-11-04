@@ -24,7 +24,7 @@ jobs:
   - script: |
         env
         ls -alh /home/conda
-        cat /home/conda/start.sh
+        cat /home/conda/start2.sh
         id -u
  
     displayName: Run docker build
