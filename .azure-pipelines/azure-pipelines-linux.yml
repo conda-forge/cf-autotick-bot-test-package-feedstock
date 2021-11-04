@@ -33,7 +33,7 @@ jobs:
   - script: |
         env
         ls /home/conda
-        id
+        cat /home/conda/start.sh
     displayName: Run docker build
     env:
       BINSTAR_TOKEN: $(BINSTAR_TOKEN)
