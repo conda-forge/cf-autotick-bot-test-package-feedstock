@@ -21,7 +21,6 @@ jobs:
     clean: all
 
   steps:
-
   - script: |
         env
         ls -alh /home/conda
