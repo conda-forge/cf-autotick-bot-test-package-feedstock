@@ -11,13 +11,15 @@ MINIFORGE_HOME=${MINIFORGE_HOME:-${HOME}/miniforge3}
 MINIFORGE_URL="https://github.com/conda-forge/miniforge/releases/latest/download"
 MINIFORGE_FILE="Miniforge3-MacOSX-$(uname -m).sh"
 curl -L -O "${MINIFORGE_URL}/${MINIFORGE_FILE}"
+rm -rf ${MINIFORGE_HOME}
 bash $MINIFORGE_FILE -b -p ${MINIFORGE_HOME}
 
 ( endgroup "Installing a fresh version of Miniforge" ) 2> /dev/null
 
 ( startgroup "Configuring conda" ) 2> /dev/null
 
-BUILD_CMD=build
+GET_BOA=boa
+BUILD_CMD=mambabuild
 
 source ${MINIFORGE_HOME}/etc/profile.d/conda.sh
 conda activate base
