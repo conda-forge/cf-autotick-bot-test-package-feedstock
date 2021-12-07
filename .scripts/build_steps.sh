@@ -30,7 +30,7 @@ CONDARC
 GET_BOA=boa
 BUILD_CMD=mambabuild
 CONDA_INSTALL_CMD=mamba
-${CONDA_INSTALL_CMD} update --all --yes --quiet
+${CONDA_INSTALL_CMD} update --all --yes --quiet -c conda-forge
 ${CONDA_INSTALL_CMD} install --yes --quiet "conda-forge-ci-setup=3" conda-build pip ${GET_BOA:-} -c conda-forge
 
 # set up the condarc
