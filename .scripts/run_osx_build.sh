@@ -1,5 +1,7 @@
 #!/usr/bin/env bash
 
+# -*- mode: jinja-shell -*-
+
 source .scripts/logging_utils.sh
 
 set -xe
@@ -9,7 +11,7 @@ MINIFORGE_HOME=${MINIFORGE_HOME:-${HOME}/miniforge3}
 ( startgroup "Installing a fresh version of Miniforge" ) 2> /dev/null
 
 MINIFORGE_URL="https://github.com/conda-forge/miniforge/releases/latest/download"
-MINIFORGE_FILE="Miniforge3-MacOSX-$(uname -m).sh"
+MINIFORGE_FILE="Mambaforge-MacOSX-$(uname -m).sh"
 curl -L -O "${MINIFORGE_URL}/${MINIFORGE_FILE}"
 rm -rf ${MINIFORGE_HOME}
 bash $MINIFORGE_FILE -b -p ${MINIFORGE_HOME}
@@ -20,12 +22,14 @@ bash $MINIFORGE_FILE -b -p ${MINIFORGE_HOME}
 
 GET_BOA=boa
 BUILD_CMD=mambabuild
+CONDA_INSTALL_CMD=mamba
 
 source ${MINIFORGE_HOME}/etc/profile.d/conda.sh
 conda activate base
 
 echo -e "\n\nInstalling conda-forge-ci-setup=3 and conda-build."
-conda install -n base --quiet --yes "conda-forge-ci-setup=3" conda-build pip ${GET_BOA:-}
+${CONDA_INSTALL_CMD} install -n base --quiet --yes "conda-forge-ci-setup=3" conda-build pip ${GET_BOA:-}
+${CONDA_INSTALL_CMD} update -n base --quiet --yes "conda-forge-ci-setup=3" conda-build pip ${GET_BOA:-}
 
 
 
