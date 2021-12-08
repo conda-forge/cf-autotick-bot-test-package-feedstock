@@ -29,7 +29,8 @@ conda-build:
 CONDARC
 
 
-conda install --yes --quiet "conda-forge-ci-setup=3" conda-build conda pip boa -c conda-forge
+mamba install --yes --quiet "conda-forge-ci-setup=3" conda-build conda pip boa mamba -c conda-forge
+mamba update --yes --quiet "conda-forge-ci-setup=3" conda-build conda pip boa mamba -c conda-forge
 
 # set up the condarc
 setup_conda_rc "${FEEDSTOCK_ROOT}" "${RECIPE_ROOT}" "${CONFIG_FILE}"
