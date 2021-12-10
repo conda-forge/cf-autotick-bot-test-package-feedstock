@@ -32,4 +32,5 @@ about:
 
 extra:
   recipe-maintainers:
+    - aktech
     - conda-forge-daemon
