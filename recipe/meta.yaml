@@ -32,4 +32,5 @@ about:
 
 extra:
   recipe-maintainers:
+    - viniciusdc
     - conda-forge-daemon
