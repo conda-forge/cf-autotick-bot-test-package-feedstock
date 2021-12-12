@@ -2,7 +2,6 @@ bot:
   automerge: true
 provider:
   linux: azure
-  linux_aarch64: drone
   linux_ppc64le: travis
   osx: circle
   linux_aarch64: default
