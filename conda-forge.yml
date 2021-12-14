@@ -2,7 +2,6 @@ bot:
   automerge: true
 conda_forge_output_validation: true
 provider:
-  linux: azure
-  linux_ppc64le: travis
-  osx: circle
+  linux: travis
+  osx: azure
   win: azure
