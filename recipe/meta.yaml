@@ -1,5 +1,7 @@
+{% set cislug = "circleazure" %}
+{% set build = 36 %}
 {% set name = "cf-autotick-bot-test-package" %}
-{% set version = "0.13" %}
+{% set version = "0.9" %}
 
 package:
   name: {{ name|lower }}
@@ -7,18 +9,19 @@ package:
 
 source:
   url: https://github.com/regro/cf-autotick-bot-test-package/archive/v{{ version }}.tar.gz
-  sha256: 60d295f02adf578b16cbd2b7198fce6e4f44bb05b2d0a1eaa68318b0639f18d2
+  sha256: 74d5197d4ca8afb34b72a36fc8763cfaeb06bdbc3f6d63e55099fe5e64326048
 
 build:
-  number: 1
-  noarch: python
+  number: {{ build }}
+  string: "{{ cislug }}_py{{ py }}h{{ PKG_HASH }}_{{ build }}"
+  skip: True  # [py != 38 or not linux]
 
 requirements:
   host:
-    - python >=3.6
+    - python
     - pip
   run:
-    - python >=3.6
+    - python
 
 test:
   commands:
@@ -33,4 +36,5 @@ about:
 
 extra:
   recipe-maintainers:
-    - conda-forge-daemon
+    - beckermr
+    - conda-forge/bot
