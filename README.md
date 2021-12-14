@@ -13,10 +13,11 @@ Current build status
 ====================
 
 
-<table><tr><td>All platforms:</td>
+<table><tr>
+    <td>CircleCI</td>
     <td>
-      <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8857&branchName=master">
-        <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cf-autotick-bot-test-package-feedstock?branchName=master">
+      <a href="https://circleci.com/gh/conda-forge/cf-autotick-bot-test-package-feedstock">
+        <img alt="Linux" src="https://img.shields.io/circleci/project/github/conda-forge/cf-autotick-bot-test-package-feedstock/master.svg?label=Linux">
       </a>
     </td>
   </tr>
@@ -116,5 +117,6 @@ In order to produce a uniquely identifiable distribution:
 Feedstock Maintainers
 =====================
 
-* [@conda-forge-daemon](https://github.com/conda-forge-daemon/)
+* [@beckermr](https://github.com/beckermr/)
+* [@conda-forge/bot](https://github.com/conda-forge/bot/)
 
