@@ -9,6 +9,5 @@ provider:
   linux_ppc64le: azure
   osx: circle
   win: azure
-
 github_actions:
   self_hosted: true
