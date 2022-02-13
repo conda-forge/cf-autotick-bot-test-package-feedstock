@@ -5,7 +5,7 @@ Home: https://github.com/regro/cf-scripts
 
 Package license: BSD-3-Clause
 
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cf-autotick-bot-test-package-feedstock/blob/master/LICENSE.txt)
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cf-autotick-bot-test-package-feedstock/blob/main/LICENSE.txt)
 
 Summary: testing feedstock for the regro-cf-autotick-bot
 
@@ -15,8 +15,8 @@ Current build status
 
 <table><tr><td>All platforms:</td>
     <td>
-      <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8857&branchName=master">
-        <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cf-autotick-bot-test-package-feedstock?branchName=master">
+      <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8857&branchName=main">
+        <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cf-autotick-bot-test-package-feedstock?branchName=main">
       </a>
     </td>
   </tr>
@@ -117,7 +117,4 @@ Feedstock Maintainers
 =====================
 
 * [@conda-forge-daemon](https://github.com/conda-forge-daemon/)
-
-
-<!-- dummy commit to enable rerendering -->
 
