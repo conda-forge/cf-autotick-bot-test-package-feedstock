@@ -8,6 +8,10 @@ jobs:
     vmImage: windows-2019
   strategy:
     matrix:
+      win_64_python3.9.____73_pypy:
+        CONFIG: win_64_python3.9.____73_pypy
+        UPLOAD_PACKAGES: 'True'
+        SHORT_CONFIG: win_64_python3.9.____73_pypy
       win_64_python3.9.____cpython:
         CONFIG: win_64_python3.9.____cpython
         UPLOAD_PACKAGES: 'True'
