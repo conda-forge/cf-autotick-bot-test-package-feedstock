@@ -14,3 +14,4 @@ github_actions:
 github:
   branch_name: main
   tooling_branch_name: main
+conda_pkg_format: '2'
