@@ -33,17 +33,14 @@ CONDARC
 
 
 mamba install --update-specs --yes --quiet --channel conda-forge \
-    conda-build pip boa conda-forge-ci-setup=3 "py-lief<0.12" "anaconda-client>=1.11.0"
+    conda-build pip boa conda-forge-ci-setup=3 "py-lief<0.12"
 mamba update --update-specs --yes --quiet --channel conda-forge \
     conda-build pip boa conda-forge-ci-setup=3 "py-lief<0.12"
 
-conda uninstall --quiet --yes --force conda-forge-ci-setup=3 "py-lief<0.12"
-pip install --no-deps ${RECIPE_ROOT}/.
 # set up the condarc
 setup_conda_rc "${FEEDSTOCK_ROOT}" "${RECIPE_ROOT}" "${CONFIG_FILE}"
 
-# Overriding global run_conda_forge_build_setup_linux with local copy.
-source ${RECIPE_ROOT}/run_conda_forge_build_setup_linux
+source run_conda_forge_build_setup
 
 # make the build number clobber
 make_build_number "${FEEDSTOCK_ROOT}" "${RECIPE_ROOT}" "${CONFIG_FILE}"

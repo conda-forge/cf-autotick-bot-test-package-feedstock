@@ -1,26 +1,32 @@
-About cf-autotick-bot-test-package
-==================================
+About openmm
+============
 
-Home: https://github.com/regro/cf-scripts
+Home: http://openmm.org
 
-Package license: BSD-3-Clause
+Package license: LGPL-3.0-or-later
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cf-autotick-bot-test-package-feedstock/blob/main/LICENSE.txt)
 
-Summary: testing feedstock for the regro-cf-autotick-bot
+Summary: A high performance toolkit for molecular simulation.
+
+Development: https://github.com/openmm/openmm
+
+Documentation: http://docs.openmm.org
+
+OpenMM is a toolkit for molecular simulation. It can be used either as a
+stand-alone application for running simulations, or as a library you call
+from your own code. It provides a combination of extreme flexibility
+(through custom forces and integrators), openness, and high performance
+(especially on recent GPUs) that make it truly unique among simulation
+codes. OpenMM is MIT licensed with some LGPL portions (CUDA and OpenCL
+platforms).
+
 
 Current build status
 ====================
 
 
-<table><tr>
-    <td>Travis</td>
-    <td>
-      <a href="https://app.travis-ci.com/conda-forge/cf-autotick-bot-test-package-feedstock">
-        <img alt="linux" src="https://img.shields.io/travis/com/conda-forge/cf-autotick-bot-test-package-feedstock/main.svg?label=Linux">
-      </a>
-    </td>
-  </tr>
+<table>
     
   <tr>
     <td>Azure</td>
@@ -34,31 +40,10 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64_python3.9.____cpython</td>
+              <td>linux_64_c_compiler_version10cuda_compiler_version11.2cxx_compiler_version10numpy1.20python3.9.____cpython</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8857&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cf-autotick-bot-test-package-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.9.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>linux_ppc64le_python3.9.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8857&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cf-autotick-bot-test-package-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_python3.9.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>osx_64_python3.9.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8857&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cf-autotick-bot-test-package-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_python3.9.____cpython" alt="variant">
-                </a>
-              </td>
-            </tr><tr>
-              <td>win_64_python3.9.____cpython</td>
-              <td>
-                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8857&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cf-autotick-bot-test-package-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.9.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cf-autotick-bot-test-package-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_c_compiler_version10cuda_compiler_version11.2cxx_compiler_version10numpy1.20python3.9.____cpython" alt="variant">
                 </a>
               </td>
             </tr>
@@ -74,53 +59,53 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-cf--autotick--bot--test--package-green.svg)](https://anaconda.org/conda-forge/cf-autotick-bot-test-package) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cf-autotick-bot-test-package.svg)](https://anaconda.org/conda-forge/cf-autotick-bot-test-package) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cf-autotick-bot-test-package.svg)](https://anaconda.org/conda-forge/cf-autotick-bot-test-package) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cf-autotick-bot-test-package.svg)](https://anaconda.org/conda-forge/cf-autotick-bot-test-package) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-openmm-green.svg)](https://anaconda.org/conda-forge/openmm) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/openmm.svg)](https://anaconda.org/conda-forge/openmm) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/openmm.svg)](https://anaconda.org/conda-forge/openmm) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/openmm.svg)](https://anaconda.org/conda-forge/openmm) |
 
-Installing cf-autotick-bot-test-package
-=======================================
+Installing openmm
+=================
 
-Installing `cf-autotick-bot-test-package` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `openmm` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `cf-autotick-bot-test-package` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `openmm` can be installed with `conda`:
 
 ```
-conda install cf-autotick-bot-test-package
-```
-
-or with `mamba`:
-
-```
-mamba install cf-autotick-bot-test-package
-```
-
-It is possible to list all of the versions of `cf-autotick-bot-test-package` available on your platform with `conda`:
-
-```
-conda search cf-autotick-bot-test-package --channel conda-forge
+conda install openmm
 ```
 
 or with `mamba`:
 
 ```
-mamba search cf-autotick-bot-test-package --channel conda-forge
+mamba install openmm
+```
+
+It is possible to list all of the versions of `openmm` available on your platform with `conda`:
+
+```
+conda search openmm --channel conda-forge
+```
+
+or with `mamba`:
+
+```
+mamba search openmm --channel conda-forge
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search cf-autotick-bot-test-package --channel conda-forge
+mamba repoquery search openmm --channel conda-forge
 
-# List packages depending on `cf-autotick-bot-test-package`:
-mamba repoquery whoneeds cf-autotick-bot-test-package --channel conda-forge
+# List packages depending on `openmm`:
+mamba repoquery whoneeds openmm --channel conda-forge
 
-# List dependencies of `cf-autotick-bot-test-package`:
-mamba repoquery depends cf-autotick-bot-test-package --channel conda-forge
+# List dependencies of `openmm`:
+mamba repoquery depends openmm --channel conda-forge
 ```
 
 
@@ -165,17 +150,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating cf-autotick-bot-test-package-feedstock
-===============================================
+Updating openmm-feedstock
+=========================
 
-If you would like to improve the cf-autotick-bot-test-package recipe or build a new
+If you would like to improve the openmm recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/cf-autotick-bot-test-package-feedstock are
+Note that all branches in the conda-forge/openmm-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks and branches in the main repository should only be used to
 build distinct package versions.
@@ -190,5 +175,8 @@ In order to produce a uniquely identifiable distribution:
 Feedstock Maintainers
 =====================
 
-* [@conda-forge-daemon](https://github.com/conda-forge-daemon/)
+* [@jaimergp](https://github.com/jaimergp/)
+* [@jchodera](https://github.com/jchodera/)
+* [@mikemhenry](https://github.com/mikemhenry/)
+* [@peastman](https://github.com/peastman/)
 

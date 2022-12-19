@@ -1,36 +1,124 @@
-{% set name = "cf-autotick-bot-test-package" %}
-{% set version = "0.14" %}
+{% set name = "openmm" %}
+{% set version = "7.7.0" %}
+{% set build = 1 %}
+{% set with_test_suite = "false" %}
+{% set with_test_suite = "true" %}  # [(osx and arm64)]
 
 package:
-  name: {{ name|lower }}
+  name: {{ name }}
   version: {{ version }}
 
 source:
-  url: https://github.com/regro/cf-autotick-bot-test-package/archive/v{{ version }}.tar.gz
-  sha256: f6c45d5788f51dbe1cc55e1010f3e9ebd18b6c0f21907fc35499468a59827eef
+  git_url: https://github.com/openmm/{{ name }}.git
+  git_rev: "7.7.0"
 
 build:
-  number: 3
-  skip: True  # [py != 39]
+  number: {{ build }}
+  string: "py{{ PY_VER.replace('.', '') }}h{{ PKG_HASH }}_{{ build }}_{{ opencl_impl }}"  # [osx]
+  track_features:  # make Apple OpenCL low priority
+    - openmm_opencl_apple  # [osx and (opencl_impl == 'apple')]
+  skip: true  # [win or osx or cuda_compiler_version != '11.2' or py != 39]
+  script_env:
+    - CONFIG
+    - CUDA_HOME  # [ppc64le]
+  missing_dso_whitelist:
+    - "*/libcuda.*"    # [linux64 or ppc64le]
+    - "*/libOpenCL.*"  # [unix]
+    - "*/nvcuda.dll"   # [win]
+  script:
+    - env with_test_suite={{ with_test_suite }} bash {{ RECIPE_DIR }}/build_openmm.sh   # [unix]
+    - set with_test_suite={{ with_test_suite }} &&   {{ RECIPE_DIR }}\build_openmm.bat  # [win]
 
 requirements:
+  build:
+    - python                                 # [build_platform != target_platform]
+    - cross-python_{{ target_platform }}     # [build_platform != target_platform]
+    - cython                                 # [build_platform != target_platform]
+    - numpy                                  # [build_platform != target_platform]
+    - swig                                   # [build_platform != target_platform]
+    - {{ compiler('c') }}
+    - {{ compiler('cxx') }}
+    - {{ compiler('cuda') }}  # [linux64 or ppc64le or win]
+    - {{ cdt('mesa-libgl-devel') }}  # [linux]
+    - cmake
+    - make  # [unix]
+    - jom  # [win]
+    # needed for Python wrappers
+    - doxygen
+{% if with_test_suite == 'true' %}
+    - conda-build  # [osx]
+    - m2-findutils  # [win]
+    - m2-coreutils  # [win]
+{% endif %}
+
   host:
     - python
-    - pip
+    - fftw
+    - swig
+    - pthread-stubs
+    - lxml
+    - numpy
+    - cython
+    # OpenCL ICD
+    - ocl-icd  # [linux]
+    - khronos-opencl-icd-loader  # [win or (osx and opencl_impl == 'khronos')]
+
   run:
     - python
+    - fftw
+    - numpy
+    # OpenCL ICD
+    - ocl-icd  # [linux]
+    - ocl-icd-system  # [linux]
+    - khronos-opencl-icd-loader  # [win or (osx and opencl_impl == 'khronos')]
+    - ocl_icd_wrapper_apple      # [osx and opencl_impl == 'khronos']
+
+  run_constrained:
+    - khronos-opencl-icd-loader  ==9999999999  # [osx and opencl_impl == 'apple']
+    - ocl_icd_wrapper_apple      ==9999999999  # [osx and opencl_impl == 'apple']
+    - python <3.9.9  # [py == 39 and win]
 
 test:
+  requires:
+    - git
+    - pocl      # [linux]
+{% if with_test_suite == 'true' %}
+    - pytest
+    - pytest-xdist
+{% endif %}
+  files:
+    - test_openmm.sh   # [unix]
+    - test_openmm.bat  # [win]
+  imports:
+    - openmm
   commands:
-    - echo "works!"
+    - env with_test_suite={{ with_test_suite }} bash test_openmm.sh   # [unix]
+    - set with_test_suite={{ with_test_suite }} && .\test_openmm.bat  # [win]
 
 about:
-  home: https://github.com/regro/cf-scripts
-  license: BSD-3-Clause
-  license_family: BSD
-  license_file: LICENSE
-  summary: testing feedstock for the regro-cf-autotick-bot
+  home: http://openmm.org
+  license: LGPL-3.0-or-later
+  license_family: LGPL
+  license_file:
+    - docs-source/licenses/Licenses.txt
+    - docs-source/licenses/LGPL.txt
+    - docs-source/licenses/GPL.txt
+  summary: A high performance toolkit for molecular simulation.
+
+  description: |
+    OpenMM is a toolkit for molecular simulation. It can be used either as a
+    stand-alone application for running simulations, or as a library you call
+    from your own code. It provides a combination of extreme flexibility
+    (through custom forces and integrators), openness, and high performance
+    (especially on recent GPUs) that make it truly unique among simulation
+    codes. OpenMM is MIT licensed with some LGPL portions (CUDA and OpenCL
+    platforms).
+  doc_url: http://docs.openmm.org
+  dev_url: https://github.com/openmm/openmm
 
 extra:
   recipe-maintainers:
-    - conda-forge-daemon
+    - mikemhenry
+    - jchodera
+    - jaimergp
+    - peastman
