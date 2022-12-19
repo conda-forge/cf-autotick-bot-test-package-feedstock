@@ -10,3 +10,4 @@ azure:
   store_build_artifacts: true
 conda_build:
   pkg_format: 2
+upload_on_branch: main
