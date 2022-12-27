@@ -1,7 +1,8 @@
 runners:
   - # Custom runner 1
     name: cirun-openstack-gpu
-    labels: ['cirun-openstack-gpu']
+    labels:
+      - cirun-openstack-gpu
     cloud: openstack
     instance_type: gpu_tiny
     machine_image: ubuntu-focal-nvidia-14112022
