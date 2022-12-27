@@ -2,6 +2,9 @@ runners:
   - # Custom runner 1
     name: cirun-openstack-gpu
     labels:
+      - linux
+      - x64
+      - self-hosted
       - cirun-openstack-gpu
     cloud: openstack
     instance_type: gpu_tiny
