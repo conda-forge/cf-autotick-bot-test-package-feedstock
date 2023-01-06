@@ -7,6 +7,6 @@ runners:
       - self-hosted
       - cirun-openstack-gpu
     cloud: openstack
-    instance_type: gpu_tiny
+    instance_type: gpu_medium
     machine_image: ubuntu-2204-nvidia-docker-20221229
     region: RegionOne
