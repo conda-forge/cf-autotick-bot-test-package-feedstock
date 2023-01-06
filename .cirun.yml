@@ -8,5 +8,5 @@ runners:
       - cirun-openstack-gpu
     cloud: openstack
     instance_type: gpu_tiny
-    machine_image: ubuntu-focal-nvidia-14112022
+    machine_image: ubuntu-2204-nvidia-docker-20221229
     region: RegionOne
