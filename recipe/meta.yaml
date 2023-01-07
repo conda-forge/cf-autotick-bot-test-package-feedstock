@@ -11,6 +11,7 @@ source:
 
 build:
   noarch: python
+  noarch: python
   number: 5
   skip: True  # [py != 39]
 
