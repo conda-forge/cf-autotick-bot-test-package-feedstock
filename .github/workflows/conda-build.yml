@@ -15,13 +15,14 @@ jobs:
         include:
           - CONFIG: linux_64_c_compiler_version10cuda_compiler_version11.2cxx_compiler_version10numpy1.20python3.9.____cpython
             UPLOAD_PACKAGES: True
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cuda:11.2
             os: ubuntu
             labels:
+              - self-hosted
               - linux
               - x64
-              - self-hosted
-              - 'cirun-openstack-gpu--${{ github.run_id }}linux_64_c_compiler_version10cuda_c_h2a2c77454b'
+              - cirun-openstack-gpu--${{ github.run_id }}-linux_64_c_compiler_version10cuda_c_h2a2c77454b
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cuda:11.2
+            CONDA_FORGE_DOCKER_RUN_ARGS: "--gpus all"
     steps:
     - name: Checkout code
       uses: actions/checkout@v3
@@ -34,6 +35,7 @@ jobs:
         DOCKER_IMAGE: ${{ matrix.DOCKER_IMAGE }}
         CI: github_actions
         UPLOAD_ON_BRANCH: main
+        CONDA_FORGE_DOCKER_RUN_ARGS: "${{ matrix.CONDA_FORGE_DOCKER_RUN_ARGS }}"
         BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
         FEEDSTOCK_TOKEN: ${{ secrets.FEEDSTOCK_TOKEN }}
         STAGING_BINSTAR_TOKEN: ${{ secrets.STAGING_BINSTAR_TOKEN }}
