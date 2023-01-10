@@ -21,6 +21,22 @@ if [ -z ${FEEDSTOCK_NAME} ]; then
     export FEEDSTOCK_NAME=$(basename ${FEEDSTOCK_ROOT})
 fi
 
+# MTU PATCH
+python3 <<EOF
+import json
+from pathlib import Path
+mtu_data = {"mtu": 1200}
+daemon_json = Path("/etc/docker/daemon.json")
+if daemon_json.is_file():
+    data = json.loads(daemon_json.read_text())
+    data.update(mtu_data)
+    daemon_json.write_text(json.dumps(data))
+else:
+    daemon_json.write_text(json.dumps(mtu_data))
+EOF
+sudo systemctl restart docker
+# /MTU PATCH
+
 docker info
 
 # In order for the conda-build process in the container to write to the mounted
