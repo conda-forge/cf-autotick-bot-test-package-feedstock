@@ -22,7 +22,7 @@ if [ -z ${FEEDSTOCK_NAME} ]; then
 fi
 
 # MTU PATCH
-python3 <<EOF
+sudo python3 <<EOF
 import json
 from pathlib import Path
 mtu_data = {"mtu": 1200}
