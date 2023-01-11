@@ -1,13 +1,13 @@
-About cf-autotick-bot-test-package
-==================================
+About blah
+==========
 
-Home: https://github.com/regro/cf-scripts
+Home: 
 
-Package license: BSD-3-Clause
+Package license: 
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cf-autotick-bot-test-package-feedstock/blob/main/LICENSE.txt)
 
-Summary: testing feedstock for the regro-cf-autotick-bot
+Summary: blah
 
 Current build status
 ====================
@@ -34,31 +34,31 @@ Current build status
         <table>
           <thead><tr><th>Variant</th><th>Status</th></tr></thead>
           <tbody><tr>
-              <td>linux_64_python3.9.____cpython</td>
+              <td>linux_64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8857&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cf-autotick-bot-test-package-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_python3.9.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cf-autotick-bot-test-package-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_64_" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>linux_ppc64le_python3.9.____cpython</td>
+              <td>linux_ppc64le</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8857&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cf-autotick-bot-test-package-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_python3.9.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cf-autotick-bot-test-package-feedstock?branchName=main&jobName=linux&configuration=linux%20linux_ppc64le_" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>osx_64_python3.9.____cpython</td>
+              <td>osx_64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8857&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cf-autotick-bot-test-package-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_python3.9.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cf-autotick-bot-test-package-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_" alt="variant">
                 </a>
               </td>
             </tr><tr>
-              <td>win_64_python3.9.____cpython</td>
+              <td>win_64</td>
               <td>
                 <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8857&branchName=main">
-                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cf-autotick-bot-test-package-feedstock?branchName=main&jobName=win&configuration=win%20win_64_python3.9.____cpython" alt="variant">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cf-autotick-bot-test-package-feedstock?branchName=main&jobName=win&configuration=win%20win_64_" alt="variant">
                 </a>
               </td>
             </tr>
@@ -74,53 +74,53 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-cf--autotick--bot--test--package-green.svg)](https://anaconda.org/conda-forge/cf-autotick-bot-test-package) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cf-autotick-bot-test-package.svg)](https://anaconda.org/conda-forge/cf-autotick-bot-test-package) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cf-autotick-bot-test-package.svg)](https://anaconda.org/conda-forge/cf-autotick-bot-test-package) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cf-autotick-bot-test-package.svg)](https://anaconda.org/conda-forge/cf-autotick-bot-test-package) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-blah-green.svg)](https://anaconda.org/conda-forge/blah) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/blah.svg)](https://anaconda.org/conda-forge/blah) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/blah.svg)](https://anaconda.org/conda-forge/blah) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/blah.svg)](https://anaconda.org/conda-forge/blah) |
 
-Installing cf-autotick-bot-test-package
-=======================================
+Installing blah
+===============
 
-Installing `cf-autotick-bot-test-package` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `blah` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
 conda config --set channel_priority strict
 ```
 
-Once the `conda-forge` channel has been enabled, `cf-autotick-bot-test-package` can be installed with `conda`:
+Once the `conda-forge` channel has been enabled, `blah` can be installed with `conda`:
 
 ```
-conda install cf-autotick-bot-test-package
-```
-
-or with `mamba`:
-
-```
-mamba install cf-autotick-bot-test-package
-```
-
-It is possible to list all of the versions of `cf-autotick-bot-test-package` available on your platform with `conda`:
-
-```
-conda search cf-autotick-bot-test-package --channel conda-forge
+conda install blah
 ```
 
 or with `mamba`:
 
 ```
-mamba search cf-autotick-bot-test-package --channel conda-forge
+mamba install blah
+```
+
+It is possible to list all of the versions of `blah` available on your platform with `conda`:
+
+```
+conda search blah --channel conda-forge
+```
+
+or with `mamba`:
+
+```
+mamba search blah --channel conda-forge
 ```
 
 Alternatively, `mamba repoquery` may provide more information:
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search cf-autotick-bot-test-package --channel conda-forge
+mamba repoquery search blah --channel conda-forge
 
-# List packages depending on `cf-autotick-bot-test-package`:
-mamba repoquery whoneeds cf-autotick-bot-test-package --channel conda-forge
+# List packages depending on `blah`:
+mamba repoquery whoneeds blah --channel conda-forge
 
-# List dependencies of `cf-autotick-bot-test-package`:
-mamba repoquery depends cf-autotick-bot-test-package --channel conda-forge
+# List dependencies of `blah`:
+mamba repoquery depends blah --channel conda-forge
 ```
 
 
@@ -165,17 +165,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating cf-autotick-bot-test-package-feedstock
-===============================================
+Updating blah-feedstock
+=======================
 
-If you would like to improve the cf-autotick-bot-test-package recipe or build a new
+If you would like to improve the blah recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/cf-autotick-bot-test-package-feedstock are
+Note that all branches in the conda-forge/blah-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks and branches in the main repository should only be used to
 build distinct package versions.
@@ -189,7 +189,5 @@ In order to produce a uniquely identifiable distribution:
 
 Feedstock Maintainers
 =====================
-
-* [@conda-forge-daemon](https://github.com/conda-forge-daemon/)
 
 
