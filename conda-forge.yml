@@ -4,9 +4,14 @@ conda_forge_output_validation: true
 github:
   branch_name: main
   tooling_branch_name: main
+os_version:
+  linux_64: cos7
+  linux_aarch64: cos7
+  linux_ppc64le: cos7
 provider:
-  linux:
-    - github_actions
+  linux: github_actions
+  linux_aarch64: github_actions
+  linux_ppc64le: github_actions
 conda_build:
   pkg_format: 2
 upload_on_branch: main
