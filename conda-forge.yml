@@ -12,6 +12,6 @@ conda_build:
 upload_on_branch: main
 github_actions:
   self_hosted: true
-  self_hosted_triggers: ["push", "pull_request"]
+  self_hosted_triggers: ["pull_request"]
   self_hosted_labels:
     - cirun-openstack-gpu
