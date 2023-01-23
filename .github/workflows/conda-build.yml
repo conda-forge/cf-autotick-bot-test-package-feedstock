@@ -4,6 +4,9 @@
 
 name: Build conda package
 on: ['pull_request']
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.sha }}
+  cancel-in-progress: true
 
 jobs:
   build:
@@ -13,15 +16,15 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - CONFIG: linux_64_c_compiler_version10cuda_compiler_version11.2cudnn8cxx_compiler_version10python3.9.____cpython
+          - CONFIG: linux_64_c_compiler_version10cuda_compiler_version11.1cudnn8cxx_compiler_version10python3.9.____cpython
             UPLOAD_PACKAGES: True
             os: ubuntu
             labels:
               - self-hosted
               - linux
               - x64
-              - cirun-openstack-gpu--${{ github.run_id }}-linux_64_c_compiler_version10cuda_c_h4b2e19d586
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cuda:11.2
+              - cirun-openstack-gpu--${{ github.run_id }}-linux_64_c_compiler_version10cuda_c_h77ddf0f142
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cuda:11.1
             CONDA_FORGE_DOCKER_RUN_ARGS: "--gpus all"
     steps:
     - name: Checkout code
