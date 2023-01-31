@@ -52,6 +52,6 @@ except Exception as e:
     sys.exit(0)
 
 ## Run CuPy's test suite
-import py
-py.test.cmdline.main(["tests/cupy_tests"])
-py.test.cmdline.main(["tests/cupyx_tests"])
+import pytest
+pytest.cmdline.main(["tests/cupy_tests"])
+pytest.cmdline.main(["tests/cupyx_tests"])
