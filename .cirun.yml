@@ -3,7 +3,7 @@ runners:
     name: cirun-openstack-gpu
     labels: ['linux', 'x64', 'self-hosted', 'cirun-openstack-gpu']
     cloud: openstack
-    instance_type: gpu_large
+    instance_type: gpu_xlarge
     machine_image: ubuntu-2204-nvidia-container-runtime-20230107
     region: RegionOne
   - # Custom runner 2
