@@ -53,6 +53,6 @@ except Exception as e:
 
 ## Run CuPy's test suite
 import pytest
-cupy_exit_code = pytest.cmdline.main(["tests/cupy_tests"])
-cupyx_exit_code = pytest.cmdline.main(["tests/cupyx_tests"])
+cupy_exit_code = pytest.cmdline.main(["tests/cupy_tests", "-vvvs"])
+cupyx_exit_code = pytest.cmdline.main(["tests/cupyx_tests", "-vvvs"])
 sys.exit(cupy_exit_code + cupyx_exit_code)
