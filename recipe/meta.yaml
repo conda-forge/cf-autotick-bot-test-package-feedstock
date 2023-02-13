@@ -119,6 +119,10 @@ test:
     - cudnn
     - setuptools <66.0a0
     - hypothesis >=6.37.2,<6.55.0
+    - scipy
+    - optuna
+    - cython
+    - numpy
   source_files:
     - tests
 
