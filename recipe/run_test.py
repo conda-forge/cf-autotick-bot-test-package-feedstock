@@ -58,6 +58,9 @@ if sys.platform.startswith("linux"):
     gcc = os.path.join(os.environ["PREFIX"], "bin", "gcc")
     if "CC" in os.environ and not os.path.exists(gcc):
         os.symlink(os.environ["CC"], gcc)
+    gxx = os.path.join(os.environ["PREFIX"], "bin", "g++")
+    if "CXX" in os.environ and not os.path.exists(gxx):
+        os.symlink(os.environ["CXX"], gxx)
 
 cupy_exit_code = pytest.cmdline.main(["tests/cupy_tests", "-vv", "-m", "not slow"])
 cupyx_exit_code = pytest.cmdline.main(["tests/cupyx_tests", "-vv", "-m", "not slow"])
