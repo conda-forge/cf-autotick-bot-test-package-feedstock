@@ -125,6 +125,8 @@ test:
     - cython
   source_files:
     - tests
+    - setup.cfg
+
 
 about:
   home: https://cupy.dev/
