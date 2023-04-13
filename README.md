@@ -1,11 +1,11 @@
-About cf-autotick-bot-test-package
-==================================
+About cf-autotick-bot-test-package-feedstock
+============================================
+
+Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cf-autotick-bot-test-package-feedstock/blob/main/LICENSE.txt)
 
 Home: https://github.com/regro/cf-scripts
 
 Package license: BSD-3-Clause
-
-Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cf-autotick-bot-test-package-feedstock/blob/main/LICENSE.txt)
 
 Summary: testing feedstock for the regro-cf-autotick-bot
 
@@ -191,7 +191,4 @@ Feedstock Maintainers
 =====================
 
 * [@conda-forge-daemon](https://github.com/conda-forge-daemon/)
-
-
-<!-- dummy commit to enable rerendering -->
 
