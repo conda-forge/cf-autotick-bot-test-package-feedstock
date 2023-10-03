@@ -10,7 +10,7 @@ source:
   sha256: blah
 
 build:
-  number: 0
+  number: 1
   skip: true  # [py != 39]
 
 requirements:
