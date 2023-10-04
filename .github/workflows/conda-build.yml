@@ -12,20 +12,30 @@ jobs:
   build:
     name: ${{ matrix.CONFIG }}
     runs-on: ${{ matrix.labels }}
-    timeout-minutes: 720  # 12h
+    timeout-minutes: 720
     strategy:
       fail-fast: false
       matrix:
         include:
-          - CONFIG: linux_64_c_compiler_version10cuda_compiler_version11.1cudnn8cxx_compiler_version10python3.9.____cpython
+          - CONFIG: linux_64_c_compiler_version11cuda_compilernvcccuda_compiler_version11.8cxx_compiler_version11python3.9.____cpython
             UPLOAD_PACKAGES: True
             os: ubuntu
             labels:
               - self-hosted
               - linux
               - x64
-              - cirun-openstack-gpu--${{ github.run_id }}-linux_64_c_compiler_version10cuda_c_h77ddf0f142
-            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cuda:11.1
+              - cirun-openstack-gpu--${{ github.run_id }}-linux_64_c_compiler_version11cuda_c_hfa7a9894d1
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cuda:11.8
+            CONDA_FORGE_DOCKER_RUN_ARGS: "--gpus all"
+          - CONFIG: linux_64_c_compiler_version12cuda_compilercuda-nvcccuda_compiler_version12.0cxx_compiler_version12python3.9.____cpython
+            UPLOAD_PACKAGES: True
+            os: ubuntu
+            labels:
+              - self-hosted
+              - linux
+              - x64
+              - cirun-openstack-gpu--${{ github.run_id }}-linux_64_c_compiler_version12cuda_c_h625cfcfe2e
+            DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
             CONDA_FORGE_DOCKER_RUN_ARGS: "--gpus all"
     steps:
     - name: Checkout code
@@ -84,35 +94,11 @@ jobs:
         miniforge-version: latest
         miniforge-variant: Mambaforge
       if: matrix.os == 'windows'
+
     - name: Build on windows
       shell: cmd
       run: |
-        call activate base
-        mamba.exe install -c conda-forge 'python=3.9' conda-build conda pip boa conda-forge-ci-setup=3
-        if errorlevel 1 exit 1
-        setup_conda_rc .\ ".\recipe" .\.ci_support\%CONFIG%.yaml
-        if errorlevel 1 exit 1
-        
-
-        if EXIST LICENSE.txt (
-          copy LICENSE.txt "recipe\\recipe-scripts-license.txt"
-        )
-        conda.exe mambabuild "recipe" -m .ci_support\%CONFIG%.yaml
-        if errorlevel 1 exit 1
-        set "FEEDSTOCK_NAME=%GITHUB_REPOSITORY:*/=%"
-        set "GIT_BRANCH=%GITHUB_REF:refs/heads/=%"
-        if /i "%GITHUB_EVENT_NAME%" == "pull_request" (
-          set "IS_PR_BUILD=True"
-        ) else (
-          set "IS_PR_BUILD=False"
-        )
-        validate_recipe_outputs "%FEEDSTOCK_NAME%"
-        if errorlevel 1 exit 1
-        if /i "%UPLOAD_PACKAGES%" == "true" (
-          if /i "%IS_PR_BUILD%" == "false" (
-            upload_package --validate --feedstock-name="%FEEDSTOCK_NAME%" .\ ".\recipe" .ci_support\%CONFIG%.yaml
-          )
-        )
+        call ".scripts\run_win_build.bat"
       env:
         PYTHONUNBUFFERED: 1
         CONFIG: ${{ matrix.CONFIG }}
