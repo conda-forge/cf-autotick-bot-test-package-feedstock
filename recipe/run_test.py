@@ -36,7 +36,7 @@ else:
 # Note: This would make the actual tests fail on GPU CI!
 if sys.platform.startswith('linux') and '12' in os.environ.get('CONDA_OVERRIDE_CUDA', ''):
     try:
-        stub = f"{os.environ['PREFIX']}/targets/{get_target_name()}/lib/stubs/libcuda.so"
+        stub = f"{os.environ['BUILD_PREFIX']}/targets/{get_target_name()}/lib/stubs/libcuda.so"
         stub = ctypes.CDLL(stub)
     except Exception as e:
         print(f"{stub=} was not loaded:")
