@@ -49,9 +49,10 @@ except Exception as e:
     if sys.platform.startswith('win32'):
         print("No driver available on Windows. Exiting...")
         sys.exit(0)
+    raise e
 else:
     print("import ok")
-    sys.exit(0)
+    # sys.exit(0)
 
 # Ensure CuPy picks up the correct CUDA_VERSION
 from cupy.cuda import driver
