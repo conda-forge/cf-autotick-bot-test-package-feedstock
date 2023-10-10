@@ -159,7 +159,7 @@ test:
   requires:
     # need the libcuda stub for import test
     - cuda-driver-dev  # [(cuda_compiler_version or "").startswith("12")]
-
+    - pytest
   source_files:
     - tests
 
