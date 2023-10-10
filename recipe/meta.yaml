@@ -162,8 +162,17 @@ test:
     - pytest >=7.2
     - hypothesis >=6.37.2,<6.55.0
     - setuptools
+    - {{ compiler("c") }}
+    - {{ compiler("cxx") }}
+    - {{ compiler("cuda") }}  # tests need nvcc
+    - cupy
+    - cudnn
+    - scipy >=1.7,<1.13
+    - cython >=0.29.22,<3
+    - optuna >=2.0
   source_files:
     - tests
+    - setup.cfg
 
 about:
   home: https://cupy.dev/
