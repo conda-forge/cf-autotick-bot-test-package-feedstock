@@ -62,6 +62,8 @@ cuda_ver = int(cuda_ver[0]) * 1000 + int(cuda_ver[1]) * 10
 if ver != cuda_ver:
     raise ValueError('CUDA version {0} != cuda_compiler_version {1}'.format(
         ver, cuda_ver))
+else:
+    print('CUDA version {0} == cuda_compiler_version {1}'.format(ver, cuda_ver))
 
 try:
     # Print CuPy runtime info
