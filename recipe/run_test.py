@@ -32,15 +32,15 @@ for cp in pypaths:
 else:
     raise RuntimeError('_wheel.json is not found in the package')
 
-# dlopen the driver stub so that CuPy can be imported later
-# Note: This would make the actual tests fail on GPU CI!
-if sys.platform.startswith('linux') and '12' in os.environ.get('CONDA_OVERRIDE_CUDA', ''):
-    try:
-        stub = f"{os.environ['BUILD_PREFIX']}/targets/{get_target_name()}/lib/stubs/libcuda.so"
-        stub = ctypes.CDLL(stub)
-    except Exception as e:
-        print(f"{stub=} was not loaded:")
-        raise
+# # dlopen the driver stub so that CuPy can be imported later
+# # Note: This would make the actual tests fail on GPU CI!
+# if sys.platform.startswith('linux') and '12' in os.environ.get('CONDA_OVERRIDE_CUDA', ''):
+#     try:
+#         stub = f"{os.environ['BUILD_PREFIX']}/targets/{get_target_name()}/lib/stubs/libcuda.so"
+#         stub = ctypes.CDLL(stub)
+#     except Exception as e:
+#         print(f"{stub=} was not loaded:")
+#         raise
 
 # TODO: do we not ship a stub on Windows?
 try:
