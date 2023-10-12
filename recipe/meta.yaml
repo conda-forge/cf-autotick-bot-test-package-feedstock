@@ -167,7 +167,8 @@ test:
     - {{ compiler("cuda") }}  # tests need nvcc
     - cupy
     - cudnn
-    - scipy >=1.7,<1.13
+    - numpy 1.24.*
+    - scipy 1.10.*
     - cython >=0.29.22,<3
     - optuna >=2.0
   source_files:
