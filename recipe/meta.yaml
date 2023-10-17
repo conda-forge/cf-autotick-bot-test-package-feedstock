@@ -171,6 +171,10 @@ test:
     - scipy 1.10.*
     - cython >=0.29.22,<3
     - optuna >=2.0
+    {% if cuda_major == 12 %}
+    - cuda-cudart-dev
+    - libcufft-dev
+    {% endif %}
   source_files:
     - tests
     - setup.cfg
