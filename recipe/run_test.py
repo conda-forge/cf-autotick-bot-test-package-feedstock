@@ -86,4 +86,4 @@ if sys.platform.startswith("linux"):
 
 import pytest
 
-sys.exit(pytest.main(["tests/cupy_tests", "tests/cupyx_tests", "-vv", "-m", "not slow"]))
+sys.exit(pytest.main(["tests/cupy_tests", "tests/cupyx_tests", "-m", "not slow"]))
