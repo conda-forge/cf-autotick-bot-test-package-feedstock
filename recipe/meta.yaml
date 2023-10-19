@@ -173,6 +173,7 @@ test:
     - optuna >=2.0
     {% if cuda_major == 12 %}
     - cuda-cudart-dev
+    - libcufft-static
     - libcufft-dev
     {% endif %}
   source_files:
