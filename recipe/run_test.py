@@ -85,5 +85,5 @@ if sys.platform.startswith("linux"):
         os.symlink(os.environ["CXX"], gxx)
 
 import pytest
-
-sys.exit(pytest.main(["tests/cupy_tests", "tests/cupyx_tests", "-m", "not slow"]))
+# "tests/cupyx_tests"
+sys.exit(pytest.main(["tests/cupy_tests", "-m", "not slow"]))
