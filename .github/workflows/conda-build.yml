@@ -8,7 +8,7 @@ on: [push]
 jobs:
   build:
     name: ${{ matrix.CONFIG }}
-    runs-on: ${{ matrix.labels }}
+    runs-on: ${{ matrix.os }}-latest
     strategy:
       fail-fast: false
       matrix:
@@ -22,14 +22,17 @@ jobs:
             UPLOAD_PACKAGES: True
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
             os: ubuntu
+            labels: ['linux', 'self-hosted', 'x64']
           - CONFIG: linux_64_python3.8.____cpython
             UPLOAD_PACKAGES: True
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
             os: ubuntu
+            labels: ['linux', 'self-hosted', 'x64']
           - CONFIG: linux_64_python3.9.____cpython
             UPLOAD_PACKAGES: True
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-cos7-x86_64
             os: ubuntu
+            labels: ['linux', 'self-hosted', 'x64']
     steps:
 
     - name: Checkout code
