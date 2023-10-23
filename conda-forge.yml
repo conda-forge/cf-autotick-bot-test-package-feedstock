@@ -17,10 +17,7 @@ conda_build:
 upload_on_branch: main
 github_actions:
   self_hosted: true
-  self_hosted_triggers: ["pull_request"]
-  self_hosted_timeout_minutes: 720
-  self_hosted_labels:
-    - cirun-openstack-gpu-large
+  timeout_minutes: 720
 build_platform:
   linux_aarch64: linux_64
   linux_ppc64le: linux_64
