@@ -18,6 +18,7 @@ upload_on_branch: main
 github_actions:
   self_hosted: true
   timeout_minutes: 720
+  triggers: [pull_request]
 build_platform:
   linux_aarch64: linux_64
   linux_ppc64le: linux_64
