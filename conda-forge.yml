@@ -19,6 +19,7 @@ github_actions:
   self_hosted: true
   timeout_minutes: 720
   triggers: [pull_request]
+  store_build_artifacts: true
 build_platform:
   linux_aarch64: linux_64
   linux_ppc64le: linux_64
