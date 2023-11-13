@@ -6,6 +6,8 @@ channel_targets:
 - conda-forge main
 docker_image:
 - quay.io/condaforge/linux-anvil-ppc64le
+github_actions_labels:
+- cirun-openstack-gpu-large
 pin_run_as_build:
   python:
     min_pin: x.x

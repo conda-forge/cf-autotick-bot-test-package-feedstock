@@ -2,6 +2,8 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
+github_actions_labels:
+- cirun-openstack-gpu-large
 pin_run_as_build:
   python:
     min_pin: x.x

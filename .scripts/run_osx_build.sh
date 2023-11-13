@@ -47,8 +47,8 @@ else
   echo -e "\n\nNot mangling homebrew as we are not running in CI"
 fi
 
-if [[ "${GIT_SHA1:-}" == "" ]]; then
-  GIT_SHA1=$(git rev-parse HEAD)
+if [[ "${sha:-}" == "" ]]; then
+  sha=$(git rev-parse HEAD)
 fi
 
 echo -e "\n\nRunning the build setup script."
@@ -80,7 +80,7 @@ else
     conda build ./recipe -m ./.ci_support/${CONFIG}.yaml \
         --suppress-variables ${EXTRA_CB_OPTIONS:-} \
         --clobber-file ./.ci_support/clobber_${CONFIG}.yaml \
-        --extra-meta CI_RUN_ID="$CI_RUN_ID" GIT_URL="$GIT_URL" GIT_SHA1="$GIT_SHA1"
+        --extra-meta flow_run_id="$flow_run_id" remote_url="$remote_url" sha="$sha"
     ( startgroup "Validating outputs" ) 2> /dev/null
 
     validate_recipe_outputs "${FEEDSTOCK_NAME}"

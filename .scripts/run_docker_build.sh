@@ -91,9 +91,9 @@ docker run ${DOCKER_RUN_ARGS} \
            -e CPU_COUNT \
            -e BUILD_WITH_CONDA_DEBUG \
            -e BUILD_OUTPUT_ID \
-           -e CI_RUN_ID \
-           -e GIT_URL \
-           -e GIT_SHA1 \
+           -e flow_run_id \
+           -e remote_url \
+           -e sha \
            -e BINSTAR_TOKEN \
            -e FEEDSTOCK_TOKEN \
            -e STAGING_BINSTAR_TOKEN \

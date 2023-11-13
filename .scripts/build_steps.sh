@@ -54,9 +54,9 @@ if [[ -f "${FEEDSTOCK_ROOT}/LICENSE.txt" ]]; then
   cp "${FEEDSTOCK_ROOT}/LICENSE.txt" "${RECIPE_ROOT}/recipe-scripts-license.txt"
 fi
 
-if [[ "${GIT_SHA1:-}" == "" ]]; then
+if [[ "${sha:-}" == "" ]]; then
   pushd ${FEEDSTOCK_ROOT}
-  GIT_SHA1=$(git rev-parse HEAD)
+  sha=$(git rev-parse HEAD)
   popd
 fi
 
@@ -74,7 +74,7 @@ else
     conda build "${RECIPE_ROOT}" -m "${CI_SUPPORT}/${CONFIG}.yaml" \
         --suppress-variables ${EXTRA_CB_OPTIONS:-} \
         --clobber-file "${CI_SUPPORT}/clobber_${CONFIG}.yaml" \
-        --extra-meta CI_RUN_ID="${CI_RUN_ID:-}" GIT_URL="${GIT_URL:-}" GIT_SHA1="${GIT_SHA1:-}"
+        --extra-meta flow_run_id="${flow_run_id:-}" remote_url="${remote_url:-}" sha="${sha:-}"
     ( startgroup "Validating outputs" ) 2> /dev/null
 
     validate_recipe_outputs "${FEEDSTOCK_NAME}"
