@@ -4,8 +4,14 @@ conda_forge_output_validation: true
 github:
   branch_name: main
   tooling_branch_name: main
+github_actions:
+  self_hosted: true
+  triggers:
+    - push
+    - pull_request
 provider:
   linux_ppc64le: travis
+  linux_64: github_actions
 azure:
   store_build_artifacts: true
 conda_build:
