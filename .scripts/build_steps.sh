@@ -38,13 +38,10 @@ mamba install --update-specs --yes --quiet --channel conda-forge --strict-channe
 mamba update --update-specs --yes --quiet --channel conda-forge --strict-channel-priority \
     pip mamba conda-build conda-forge-ci-setup=4 "conda-build>=24.1"
 
-conda uninstall --quiet --yes --force conda-forge-ci-setup=4 "conda-build>=24.1"
-pip install --no-deps ${RECIPE_ROOT}/.
 # set up the condarc
 setup_conda_rc "${FEEDSTOCK_ROOT}" "${RECIPE_ROOT}" "${CONFIG_FILE}"
 
-# Overriding global run_conda_forge_build_setup_linux with local copy.
-source ${RECIPE_ROOT}/run_conda_forge_build_setup_linux
+source run_conda_forge_build_setup
 
 # make the build number clobber
 make_build_number "${FEEDSTOCK_ROOT}" "${RECIPE_ROOT}" "${CONFIG_FILE}"

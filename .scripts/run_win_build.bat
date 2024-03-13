@@ -26,19 +26,13 @@ set "CONDA_LIBMAMBA_SOLVER_NO_CHANNELS_FROM_INSTALLED=1"
 echo Installing dependencies
 mamba.exe install "python=3.10" pip mamba conda-build conda-forge-ci-setup=4 "conda-build>=24.1" -c conda-forge --strict-channel-priority --yes
 if !errorlevel! neq 0 exit /b !errorlevel!
-echo Overriding conda-forge-ci-setup with local version
-conda.exe uninstall --quiet --yes --force conda-forge-ci-setup=4 "conda-build>=24.1"
-if !errorlevel! neq 0 exit /b !errorlevel!
-pip install --no-deps ".\recipe\."
-if !errorlevel! neq 0 exit /b !errorlevel!
 
 :: Set basic configuration
 echo Setting up configuration
 setup_conda_rc .\ ".\recipe" .\.ci_support\%CONFIG%.yaml
 if !errorlevel! neq 0 exit /b !errorlevel!
 echo Running build setup
-:: Overriding global run_conda_forge_build_setup_win with local copy.
-CALL recipe\run_conda_forge_build_setup_win
+CALL run_conda_forge_build_setup
 
 if !errorlevel! neq 0 exit /b !errorlevel!
 

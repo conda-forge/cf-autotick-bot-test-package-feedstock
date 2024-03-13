@@ -31,8 +31,6 @@ mamba update --update-specs --yes --quiet --channel conda-forge --strict-channel
     pip mamba conda-build conda-forge-ci-setup=4 "conda-build>=24.1"
 
 
-conda uninstall --quiet --yes --force conda-forge-ci-setup=4 "conda-build>=24.1"
-pip install --no-deps recipe/.
 
 echo -e "\n\nSetting up the condarc and mangling the compiler."
 setup_conda_rc ./ ./recipe ./.ci_support/${CONFIG}.yaml
@@ -54,8 +52,8 @@ if [[ "${sha:-}" == "" ]]; then
 fi
 
 echo -e "\n\nRunning the build setup script."
-# Overriding global run_conda_forge_build_setup_osx with local copy.
-source recipe/run_conda_forge_build_setup_osx
+source run_conda_forge_build_setup
+
 
 
 ( endgroup "Configuring conda" ) 2> /dev/null
