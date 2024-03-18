@@ -4,8 +4,6 @@ conda_forge_output_validation: true
 github:
   branch_name: main
   tooling_branch_name: main
-provider:
-  linux_ppc64le: travis
 azure:
   store_build_artifacts: true
 conda_build:
