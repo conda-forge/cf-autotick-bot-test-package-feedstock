@@ -10,7 +10,7 @@ source:
   sha256: blah
 
 build:
-  number: 0
+  number: 100
   skip: true  # [py != 39 or win or osx or aarch64 or ppc64le or s390x]
 
 requirements:
