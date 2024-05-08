@@ -4,10 +4,23 @@ conda_forge_output_validation: true
 github:
   branch_name: main
   tooling_branch_name: main
+os_version:
+  linux_64: cos7
+  linux_aarch64: cos7
+  linux_ppc64le: cos7
 provider:
-  linux_ppc64le: travis
-azure:
-  store_build_artifacts: true
+  linux: github_actions
+  linux_aarch64: github_actions
+  linux_ppc64le: github_actions
 conda_build:
   pkg_format: 2
 upload_on_branch: main
+github_actions:
+  self_hosted: true
+  timeout_minutes: 720
+  triggers: [pull_request]
+  store_build_artifacts: true
+build_platform:
+  linux_aarch64: linux_64
+  linux_ppc64le: linux_64
+test: native
