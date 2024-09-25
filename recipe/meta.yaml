@@ -33,4 +33,5 @@ about:
 
 extra:
   recipe-maintainers:
+    - beckermr
     - conda-forge-daemon
