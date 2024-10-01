@@ -1,5 +1,5 @@
 {% set name = "cf-autotick-bot-test-package" %}
-{% set version = "0.14" %}
+{% set version = "0.13" %}
 
 package:
   name: {{ name|lower }}
@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/regro/cf-autotick-bot-test-package/archive/v{{ version }}.tar.gz
-  sha256: 434ebedb766408e8e59f1e8eeb96ab0b94b10a436930c0e0c3ba47830bd6ea05
+  sha256: b09f22e051846655a8f72c8b54905525d2d19d92c7f5c0ea7e8c26c38d6eeb98
 
 build:
   number: 0
