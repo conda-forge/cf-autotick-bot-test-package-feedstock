@@ -1,8 +1,8 @@
 on:
-status: {}
-check_suite:
-types:
-- completed
+  status: {}
+  check_suite:
+    types:
+      - completed
 
 jobs:
   automerge-action:
