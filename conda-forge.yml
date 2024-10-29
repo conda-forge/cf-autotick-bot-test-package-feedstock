@@ -8,6 +8,3 @@ azure:
   store_build_artifacts: true
 conda_build:
   pkg_format: 2
-provider:
-  linux_64: azure
-  osx_64: github_actions
