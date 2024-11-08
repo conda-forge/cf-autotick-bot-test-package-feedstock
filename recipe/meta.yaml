@@ -10,7 +10,7 @@ source:
   sha256: 67cf01cad2b30383a33e14ceceff96da2dbf853ba7bf8d4c1a39f73231a0ddf9
 
 build:
-  number: 124
+  number: 125
   skip: true  # [py != 39 or win or aarch64 or ppc64le or s390x]
 
 requirements:
