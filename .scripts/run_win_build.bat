@@ -57,6 +57,7 @@ if !errorlevel! neq 0 exit /b !errorlevel!
 echo Running build setup
 CALL run_conda_forge_build_setup
 
+where link
 
 if !errorlevel! neq 0 exit /b !errorlevel!
 
