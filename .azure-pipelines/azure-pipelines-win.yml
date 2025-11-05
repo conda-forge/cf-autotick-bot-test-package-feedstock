@@ -33,9 +33,9 @@ jobs:
   steps:
 
     - script: |
-        dir C:/Windows/System32/
+        dir "C:/Windows/System32"
         echo "downlevel"
-        dir C:/Windows/System32/downlevel
+        dir "C:/Windows/System32/downlevel"
         call ".scripts\run_win_build.bat"
       displayName: Run Windows build
       env:
