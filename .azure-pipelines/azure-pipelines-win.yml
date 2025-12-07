@@ -33,11 +33,7 @@ jobs:
   steps:
 
     - script: |
-        dir "C:/Windows/System32"
-        echo "downlevel"
-        dir "C:/Windows/System32/downlevel"
         where OpenCL.dll
-        call ".scripts\run_win_build.bat"
       displayName: Run Windows build
       env:
         MINIFORGE_HOME: $(MINIFORGE_HOME)
