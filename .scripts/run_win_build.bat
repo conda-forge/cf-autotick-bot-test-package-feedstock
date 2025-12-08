@@ -12,8 +12,6 @@
 
 setlocal enableextensions enabledelayedexpansion
 
-dir C:\Windows\System32\
-
 FOR %%A IN ("%~dp0.") DO SET "REPO_ROOT=%%~dpA"
 if "%MINIFORGE_HOME%"=="" set "MINIFORGE_HOME=%USERPROFILE%\Miniforge3"
 :: Remove trailing backslash, if present
@@ -71,6 +69,9 @@ if NOT [%flow_run_id%] == [] (
 )
 
 call :end_group
+
+echo %PATH%
+where windres.exe
 
 :: Build the recipe
 echo Building recipe
