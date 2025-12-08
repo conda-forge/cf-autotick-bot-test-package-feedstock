@@ -72,6 +72,7 @@ call :end_group
 
 echo %PATH%
 where windres.exe
+where rc.exe
 
 :: Build the recipe
 echo Building recipe
