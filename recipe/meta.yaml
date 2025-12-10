@@ -12,11 +12,15 @@ source:
 build:
   number: 128
   skip: true  # [not win]
+  script:
+    - where rc.exe
+    - bash -c 'which rc'
 
 requirements:
   build:
     - {{ compiler('cxx') }}
     - {{ stdlib('c') }}
+    - m2-bash
   host:
     - python
     - pip
