@@ -14,6 +14,9 @@ build:
   skip: true  # [not win]
 
 requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - {{ stdlib('c') }}
   host:
     - python
     - pip
