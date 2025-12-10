@@ -55,7 +55,6 @@ if !errorlevel! neq 0 exit /b !errorlevel!
 echo Running build setup
 CALL run_conda_forge_build_setup
 
-where link
 
 if !errorlevel! neq 0 exit /b !errorlevel!
 
@@ -69,10 +68,6 @@ if NOT [%flow_run_id%] == [] (
 )
 
 call :end_group
-
-echo %PATH%
-where windres.exe
-where rc.exe
 
 :: Build the recipe
 echo Building recipe
