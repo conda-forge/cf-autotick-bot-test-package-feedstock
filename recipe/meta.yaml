@@ -11,9 +11,19 @@ source:
 
 build:
   number: 128
-  skip: true  # [py != 313 or win or aarch64 or ppc64le or s390x]
+  skip: true  # [not win]
+  script:
+    - where rc.exe
+    - where windres.exe
+    - bash -c 'which rc'
+    - bash -c 'which windres'
 
 requirements:
+  build:
+    - {{ compiler('cxx') }}
+    - {{ stdlib('c') }}
+    - m2-bash
+    - m2-base
   host:
     - python
     - pip
