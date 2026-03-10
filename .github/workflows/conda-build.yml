@@ -19,7 +19,7 @@ jobs:
     timeout-minutes: 360
     strategy:
       fail-fast: false
-      max-parallel: 10
+      max-parallel: 50
       matrix:
         include:
           - CONFIG: osx_64_python3.13.____cp313
