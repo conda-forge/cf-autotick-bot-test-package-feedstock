@@ -11,7 +11,7 @@ source:
 
 build:
   number: 128
-  skip: true  # [not win]
+  skip: true  # [not win or py!=312]
   script:
     - where rc.exe
     - where windres.exe
