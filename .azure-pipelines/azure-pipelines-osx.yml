@@ -8,11 +8,6 @@ jobs:
     vmImage: $(VMIMAGE)
   strategy:
     matrix:
-      osx_64_python3.13.____cp313:
-        CONFIG: osx_64_python3.13.____cp313
-        UPLOAD_PACKAGES: 'True'
-        SHORT_CONFIG: osx_64_python3.13.____cp313
-        VMIMAGE: macOS-15
       osx_arm64_python3.13.____cp313:
         CONFIG: osx_arm64_python3.13.____cp313
         UPLOAD_PACKAGES: 'True'
