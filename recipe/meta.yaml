@@ -33,4 +33,5 @@ about:
   summary: testing feedstock for the regro-cf-autotick-bot
 
 extra:
-  recipe-maintainers: []
+  recipe-maintainers:
+    - conda-forge-daemon
