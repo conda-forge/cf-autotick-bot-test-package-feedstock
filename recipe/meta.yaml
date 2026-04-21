@@ -34,5 +34,5 @@ about:
 
 extra:
   recipe-maintainers:
-    - conda-forge-daemon
     - conda-forge-test
+    - conda-forge-daemon
