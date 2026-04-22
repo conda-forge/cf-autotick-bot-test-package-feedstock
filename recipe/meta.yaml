@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/regro/cf-autotick-bot-test-package/archive/v{{ version }}.tar.gz
-  sha256: b46b2bef2cf41013360b46b146978dd1df53cdb2c6c642433f72a8ed5f4ebad1
+  sha256: 5c668191e8bfdf21263d6cfcfa86e72f50834f70e59c6c6d1158ed2a2abc9129
 
 build:
   number: 128
@@ -34,4 +34,4 @@ about:
 
 extra:
   recipe-maintainers:
-    - conda-forge-daemon
+    - conda-forge-blah
