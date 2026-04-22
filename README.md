@@ -169,5 +169,5 @@ In order to produce a uniquely identifiable distribution:
 Feedstock Maintainers
 =====================
 
-* [@conda-forge-daemon](https://github.com/conda-forge-daemon/)
+* [@conda-forge-blah](https://github.com/conda-forge-blah/)
 
