@@ -3,7 +3,7 @@ About cf-autotick-bot-test-package-feedstock
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cf-autotick-bot-test-package-feedstock/blob/main/LICENSE.txt)
 
-Home: https://github.com/regro/cf-scripts
+Home: https://github.com/conda-forge/conda-forge-bot
 
 Package license: BSD-3-Clause
 
