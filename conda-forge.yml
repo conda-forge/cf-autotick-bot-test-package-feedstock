@@ -15,3 +15,4 @@ provider:
 build_platform:
   osx_arm64: osx_arm64
   linux_aarch64: linux_aarch64
+upload_on_branch: main
