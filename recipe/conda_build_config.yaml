@@ -1,5 +1,5 @@
 github_actions_labels:
-  - depot-ubuntu-24.04-8  # [linux64]
-  - depot-ubuntu-24.04-arm-8  # [linux and aarch64]
+  - depot-ubuntu-24.04-64  # [linux64]
+  - depot-ubuntu-24.04-arm-64  # [linux and aarch64]
   - depot-macos-15  # [osx and arm64]
-  - depot-windows-2025-8  # [win]
+  - depot-windows-2025-64  # [win]

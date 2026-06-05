@@ -28,7 +28,7 @@ jobs:
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
-            runs_on: ['depot-ubuntu-24.04-8']
+            runs_on: ['depot-ubuntu-24.04-64']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-x86_64:alma9
             tools_install_dir: ~/miniforge3
             build_workspace_dir: build_artifacts
@@ -37,7 +37,7 @@ jobs:
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: ubuntu
-            runs_on: ['depot-ubuntu-24.04-arm-8']
+            runs_on: ['depot-ubuntu-24.04-arm-64']
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma9
             tools_install_dir: ~/miniforge3
             build_workspace_dir: build_artifacts
@@ -54,7 +54,7 @@ jobs:
             STORE_BUILD_ARTIFACTS: False
             UPLOAD_PACKAGES: True
             os: windows
-            runs_on: ['depot-windows-2025-8']
+            runs_on: ['depot-windows-2025-64']
             tools_install_dir: C:\Miniforge
             build_workspace_dir: C:\\bld\\
             docker_run_args: 

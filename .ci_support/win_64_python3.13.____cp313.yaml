@@ -3,7 +3,7 @@ channel_sources:
 channel_targets:
 - conda-forge main
 github_actions_labels:
-- depot-windows-2025-8
+- depot-windows-2025-64
 pin_run_as_build:
   python:
     min_pin: x.x
