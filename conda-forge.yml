@@ -7,5 +7,7 @@ github:
 conda_build:
   pkg_format: 2
 provider:
-  linux_64: azure
-  osx_64: github_actions
+  linux_64: github_actions
+  linux_aarch64: github_actions
+  osx_arm64: github_actions
+  win64: github_actions
