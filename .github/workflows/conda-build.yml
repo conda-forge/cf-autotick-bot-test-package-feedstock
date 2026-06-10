@@ -31,7 +31,7 @@ jobs:
             free_disk_space: skip
             os: ubuntu
             pagefile_size: 1
-            runs_on: ['namespace-profile-8cpu-on-linux-64']
+            runs_on: ['namespace-profile-8cpu-on-linux-64;container.privileged=true;container.mount-scratch=true']
             tools_install_dir: ~/miniforge3
           - CONFIG: linux_aarch64_python3.13.____cp313
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma9
@@ -42,7 +42,7 @@ jobs:
             free_disk_space: skip
             os: ubuntu
             pagefile_size: 1
-            runs_on: ['namespace-profile-8cpu-on-linux-aarch64']
+            runs_on: ['namespace-profile-8cpu-on-linux-aarch64;container.privileged=true;container.mount-scratch=true']
             tools_install_dir: ~/miniforge3
           - CONFIG: osx_arm64_python3.13.____cp313
             STORE_BUILD_ARTIFACTS: False
@@ -52,7 +52,7 @@ jobs:
             free_disk_space: skip
             os: macos
             pagefile_size: 1
-            runs_on: ['namespace-profile-6cpu-on-osx-arm64']
+            runs_on: ['namespace-profile-6cpu-on-osx-arm64;container.privileged=true;container.mount-scratch=true']
             tools_install_dir: ~/miniforge3
           - CONFIG: win_64_python3.13.____cp313
             STORE_BUILD_ARTIFACTS: False
@@ -62,7 +62,7 @@ jobs:
             free_disk_space: skip
             os: windows
             pagefile_size: 1
-            runs_on: ['namespace-profile-8cpu-on-win-64']
+            runs_on: ['namespace-profile-8cpu-on-win-64;container.privileged=true;container.mount-scratch=true']
             tools_install_dir: D:\Miniforge
     steps:
 
