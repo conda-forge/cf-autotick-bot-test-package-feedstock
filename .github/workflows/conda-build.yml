@@ -52,7 +52,7 @@ jobs:
             free_disk_space: skip
             os: macos
             pagefile_size: 1
-            runs_on: ['namespace-profile-6cpu-on-osx-arm64;container.privileged=true;container.mount-scratch=true']
+            runs_on: ['namespace-profile-6cpu-on-osx-arm64']
             tools_install_dir: ~/miniforge3
           - CONFIG: win_64_python3.13.____cp313
             STORE_BUILD_ARTIFACTS: False
@@ -62,7 +62,7 @@ jobs:
             free_disk_space: skip
             os: windows
             pagefile_size: 1
-            runs_on: ['namespace-profile-8cpu-on-win-64;container.privileged=true;container.mount-scratch=true']
+            runs_on: ['namespace-profile-8cpu-on-win-64']
             tools_install_dir: D:\Miniforge
     steps:
 
