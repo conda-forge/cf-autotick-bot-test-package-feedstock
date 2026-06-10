@@ -81,6 +81,7 @@ jobs:
         DOCKER_IMAGE: ${{ matrix.DOCKER_IMAGE }}
         UPLOAD_PACKAGES: ${{ matrix.UPLOAD_PACKAGES }}
         PAGEFILE_SIZE: ${{ matrix.pagefile_size }}
+        GHA_RUNS_ON: ${{ fromJson(matrix.gha_runs_on) }}
         BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
         FEEDSTOCK_TOKEN: ${{ secrets.FEEDSTOCK_TOKEN }}
         STAGING_BINSTAR_TOKEN: ${{ secrets.STAGING_BINSTAR_TOKEN }}
