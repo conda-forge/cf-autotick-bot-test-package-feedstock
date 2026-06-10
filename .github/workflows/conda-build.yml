@@ -54,6 +54,16 @@ jobs:
             pagefile_size: 0
             runs_on: ['namespace-profile-6cpu-on-osx-arm64']
             tools_install_dir: ~/miniforge3
+          - CONFIG: win_64_python3.13.____cp313
+            STORE_BUILD_ARTIFACTS: False
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: D:\\bld\\
+            docker_run_args: 
+            free_disk_space: skip
+            os: windows
+            pagefile_size: 0
+            runs_on: ['namespace-profile-8cpu-on-win-64']
+            tools_install_dir: D:\Miniforge
     steps:
 
     - name: Checkout code
