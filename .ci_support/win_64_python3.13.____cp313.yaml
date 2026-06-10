@@ -2,8 +2,6 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
-github_actions_labels:
-- namespace-profile-8cpu-on-win-64
 pin_run_as_build:
   python:
     min_pin: x.x
