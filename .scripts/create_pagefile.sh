@@ -2,6 +2,8 @@
 
 set -ex
 
+echo $GHA_RUNS_ON
+
 PAGEFILE_SIZE=${1}
 
 [[ ${PAGEFILE_SIZE} -le 0 ]] && exit
