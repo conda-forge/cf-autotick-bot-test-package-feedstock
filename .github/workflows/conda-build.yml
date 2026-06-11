@@ -31,7 +31,7 @@ jobs:
             free_disk_space: skip
             os: ubuntu
             pagefile_size: 1
-            runs_on: ['namespace-profile-8cpu-on-linux-64;container.privileged=false;container.mount-scratch=false;container.privileged=true;container.mount-scratch=true']
+            runs_on: ['namespace-profile-8cpu-on-linux-64;container.privileged=true;container.mount-scratch=true']
             tools_install_dir: ~/miniforge3
           - CONFIG: linux_aarch64_python3.13.____cp313
             DOCKER_IMAGE: quay.io/condaforge/linux-anvil-aarch64:alma9
@@ -69,6 +69,32 @@ jobs:
     - name: Checkout code
       uses: actions/checkout@de0fac2e4500dabe0009e67214ff5f5447ce83dd # v6.0.2
 
+    - name: Configure binfmt_misc
+      if: matrix.os == 'ubuntu'
+      shell: bash
+      run: |
+        if [[ "$(uname -m)" == "x86_64" ]]; then
+          docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
+        fi
+
+    - name: Configure swap file
+      if: matrix.os == 'ubuntu' and matrix.pagefile_size > 0
+      shell: bash
+      env:
+        PAGEFILE_SIZE: ${{ matrix.pagefile_size }}
+        GHA_RUNS_ON: ${{ join(matrix.runs_on, ' ') }}
+      run: |
+        .scripts/create_pagefile.sh "${PAGEFILE_SIZE}"
+
+    - name: Configure page file
+      if: matrix.os == 'windows' and matrix.pagefile_size > 0
+      shell: cmd
+      run: |
+        call ".scripts\create_pagefile.bat" %PAGEFILE_SIZE%
+      env:
+        CONDA_BLD_PATH: ${{ matrix.build_workspace_dir }}
+        PAGEFILE_SIZE: ${{ matrix.pagefile_size }}
+
     - name: Build on Linux
       id: build-linux
       if: matrix.os == 'ubuntu'
@@ -80,17 +106,11 @@ jobs:
         MINIFORGE_HOME: ${{ matrix.tools_install_dir }}
         DOCKER_IMAGE: ${{ matrix.DOCKER_IMAGE }}
         UPLOAD_PACKAGES: ${{ matrix.UPLOAD_PACKAGES }}
-        PAGEFILE_SIZE: ${{ matrix.pagefile_size }}
-        GHA_RUNS_ON: ${{ join(matrix.runs_on, ' ') }}
         BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
         FEEDSTOCK_TOKEN: ${{ secrets.FEEDSTOCK_TOKEN }}
         STAGING_BINSTAR_TOKEN: ${{ secrets.STAGING_BINSTAR_TOKEN }}
       shell: bash
       run: |
-        if [[ "$(uname -m)" == "x86_64" ]]; then
-          echo "::group::Configure binfmt_misc"
-          docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
-        fi
         export CONDA_BLD_PATH="${CONDA_BLD_PATH/#~/${HOME}}"
         export FEEDSTOCK_NAME="$(basename $GITHUB_REPOSITORY)"
         export GIT_BRANCH="$(basename $GITHUB_REF)"
@@ -102,12 +122,6 @@ jobs:
           export IS_PR_BUILD="True"
         else
           export IS_PR_BUILD="False"
-        fi
-        echo "::endgroup::"
-        if [[ ${PAGEFILE_SIZE} -gt 0 ]]; then
-            echo "::group::Setting up swap file"
-            .scripts/create_pagefile.sh "${PAGEFILE_SIZE}"
-            echo "::endgroup::"
         fi
         ./.scripts/run_docker_build.sh
 
@@ -147,14 +161,12 @@ jobs:
         set "flow_run_id=github_%GITHUB_RUN_ID%"
         set "remote_url=https://github.com/%GITHUB_REPOSITORY%"
         set "sha=%GITHUB_SHA%"
-        call ".scripts\create_pagefile.bat" %PAGEFILE_SIZE%
         call ".scripts\run_win_build.bat"
       env:
         CI: github_actions
         CONDA_BLD_PATH: ${{ matrix.build_workspace_dir }}
         CONFIG: ${{ matrix.CONFIG }}
         MINIFORGE_HOME: ${{ matrix.tools_install_dir }}
-        PAGEFILE_SIZE: ${{ matrix.pagefile_size }}
         PYTHONUNBUFFERED: 1
         UPLOAD_PACKAGES: ${{ matrix.UPLOAD_PACKAGES }}
         BINSTAR_TOKEN: ${{ secrets.BINSTAR_TOKEN }}
