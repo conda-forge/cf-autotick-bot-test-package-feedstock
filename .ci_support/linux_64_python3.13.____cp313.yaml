@@ -5,7 +5,7 @@ channel_targets:
 docker_image:
 - quay.io/condaforge/linux-anvil-x86_64:alma9
 github_actions_labels:
-- namespace-profile-8cpu-on-linux-64;container.privileged=false;container.mount-scratch=false
+- namespace-profile-8cpu-on-linux-64
 pin_run_as_build:
   python:
     min_pin: x.x
