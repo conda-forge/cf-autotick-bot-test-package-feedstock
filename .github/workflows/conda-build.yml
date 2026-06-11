@@ -41,7 +41,7 @@ jobs:
             docker_run_args: 
             free_disk_space: skip
             os: ubuntu
-            pagefile_size: 1
+            pagefile_size: 0
             runs_on: ['namespace-profile-8cpu-on-linux-aarch64;container.privileged=true;container.mount-scratch=true']
             tools_install_dir: ~/miniforge3
           - CONFIG: osx_arm64_python3.13.____cp313
@@ -51,7 +51,7 @@ jobs:
             docker_run_args: 
             free_disk_space: skip
             os: macos
-            pagefile_size: 1
+            pagefile_size: 0
             runs_on: ['namespace-profile-6cpu-on-osx-arm64']
             tools_install_dir: ~/miniforge3
           - CONFIG: win_64_python3.13.____cp313
@@ -61,7 +61,7 @@ jobs:
             docker_run_args: 
             free_disk_space: skip
             os: windows
-            pagefile_size: 1
+            pagefile_size: 0
             runs_on: ['namespace-profile-8cpu-on-win-64']
             tools_install_dir: D:\Miniforge
     steps:
