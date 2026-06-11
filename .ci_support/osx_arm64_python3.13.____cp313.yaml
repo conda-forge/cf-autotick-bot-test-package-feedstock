@@ -6,8 +6,6 @@ channel_sources:
 - conda-forge
 channel_targets:
 - conda-forge main
-github_actions_labels:
-- namespace-profile-6cpu-on-osx-arm64
 macos_machine:
 - arm64-apple-darwin20.0.0
 pin_run_as_build:
