@@ -41,7 +41,7 @@ jobs:
             docker_run_args: 
             free_disk_space: skip
             os: ubuntu
-            pagefile_size: 1
+            pagefile_size: 0
             runs_on: ['ubuntu-24.04-arm']
             tools_install_dir: ~/miniforge3
           - CONFIG: osx_64_python3.13.____cp313
@@ -51,7 +51,7 @@ jobs:
             docker_run_args: 
             free_disk_space: skip
             os: macos
-            pagefile_size: 1
+            pagefile_size: 0
             runs_on: ['macos-15-intel']
             tools_install_dir: ~/miniforge3
           - CONFIG: osx_arm64_python3.13.____cp313
@@ -61,7 +61,7 @@ jobs:
             docker_run_args: 
             free_disk_space: skip
             os: macos
-            pagefile_size: 1
+            pagefile_size: 0
             runs_on: ['macos-15']
             tools_install_dir: ~/miniforge3
           - CONFIG: win_64_python3.13.____cp313
@@ -95,7 +95,6 @@ jobs:
         GHA_RUNS_ON: ${{ join(matrix.runs_on, ' ') }}
       run: |
         .scripts/create_pagefile.sh "${PAGEFILE_SIZE}"
-
     - name: Configure page file on Windows
       if: matrix.os == 'windows' && matrix.pagefile_size > 0
       shell: cmd
@@ -104,7 +103,6 @@ jobs:
         PAGEFILE_SIZE: ${{ matrix.pagefile_size }}
       run: |
         call ".scripts\create_pagefile.bat" %PAGEFILE_SIZE%
-
     - name: Build on Linux
       id: build-linux
       if: matrix.os == 'ubuntu'
