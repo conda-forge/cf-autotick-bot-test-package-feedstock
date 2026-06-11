@@ -78,7 +78,7 @@ jobs:
         fi
 
     - name: Configure swap file
-      if: matrix.os == 'ubuntu' and matrix.pagefile_size > 0
+      if: matrix.os == 'ubuntu' && matrix.pagefile_size > 0
       shell: bash
       env:
         PAGEFILE_SIZE: ${{ matrix.pagefile_size }}
@@ -87,7 +87,7 @@ jobs:
         .scripts/create_pagefile.sh "${PAGEFILE_SIZE}"
 
     - name: Configure page file
-      if: matrix.os == 'windows' and matrix.pagefile_size > 0
+      if: matrix.os == 'windows' && matrix.pagefile_size > 0
       shell: cmd
       run: |
         call ".scripts\create_pagefile.bat" %PAGEFILE_SIZE%
