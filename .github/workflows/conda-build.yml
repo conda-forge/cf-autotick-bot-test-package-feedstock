@@ -41,7 +41,7 @@ jobs:
             docker_run_args: 
             free_disk_space: skip
             os: ubuntu
-            pagefile_size: 0
+            pagefile_size: 1
             runs_on: ['ubuntu-24.04-arm']
             tools_install_dir: ~/miniforge3
           - CONFIG: osx_arm64_python3.13.____cp313
@@ -51,7 +51,7 @@ jobs:
             docker_run_args: 
             free_disk_space: skip
             os: macos
-            pagefile_size: 0
+            pagefile_size: 1
             runs_on: ['macos-15']
             tools_install_dir: ~/miniforge3
           - CONFIG: win_64_python3.13.____cp313
@@ -61,7 +61,7 @@ jobs:
             docker_run_args: 
             free_disk_space: skip
             os: windows
-            pagefile_size: 0
+            pagefile_size: 1
             runs_on: ['windows-2022']
             tools_install_dir: D:\Miniforge
     steps:
@@ -89,11 +89,11 @@ jobs:
     - name: Configure page file
       if: matrix.os == 'windows' && matrix.pagefile_size > 0
       shell: cmd
-      run: |
-        call ".scripts\create_pagefile.bat" %PAGEFILE_SIZE%
       env:
         CONDA_BLD_PATH: ${{ matrix.build_workspace_dir }}
         PAGEFILE_SIZE: ${{ matrix.pagefile_size }}
+      run: |
+        call ".scripts\create_pagefile.bat" %PAGEFILE_SIZE%
 
     - name: Build on Linux
       id: build-linux
