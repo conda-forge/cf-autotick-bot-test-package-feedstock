@@ -76,7 +76,7 @@ jobs:
             free_disk_space: skip
             os: windows
             pagefile_size: 0
-            resize_partitions: True
+            resize_partitions: False
             runs_on: ['windows-2022']
             tools_install_dir: D:\Miniforge
     steps:
