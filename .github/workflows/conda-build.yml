@@ -151,7 +151,7 @@ jobs:
 
     # https://github.com/aktech/cirun-azure-resize-disk
     - name: Resize all partitions to maximum
-      if: matrix.os == 'windows' && matrix.resize_win_partitions
+      if: matrix.os == 'windows' && matrix.resize_partitions
       shell: pwsh
       run: |
         Write-Output "=== RESIZING PARTITIONS ==="
