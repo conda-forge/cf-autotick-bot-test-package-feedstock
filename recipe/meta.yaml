@@ -11,15 +11,10 @@ source:
 
 build:
   number: 128
-  skip: true  # [py != 313]
 
 requirements:
-  host:
-    - python
-    - pip
-    - setuptools
   run:
-    - python
+    - ca-certificates
 
 test:
   commands:
