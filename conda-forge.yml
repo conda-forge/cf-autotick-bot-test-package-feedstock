@@ -9,3 +9,4 @@ provider:
   win_arm64: default
 conda_build:
   pkg_format: 2
+upload_on_branch: main
