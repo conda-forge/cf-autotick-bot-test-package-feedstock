@@ -26,9 +26,6 @@ source .scripts/logging_utils.sh
 # and that might end up inserting extraneous quotation marks in output variables
 set -e
 
-tar --version
-zstd --version
-
 # Check that the conda-build directory exists
 if [ ! -d "$CONDA_BLD_PATH" ]; then
     echo "conda-build directory does not exist"

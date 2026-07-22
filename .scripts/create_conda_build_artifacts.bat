@@ -20,10 +20,6 @@ rem BLD_ARTIFACT_PATH
 rem ENV_ARTIFACT_NAME
 rem ENV_ARTIFACT_PATH
 
-tar --version
-zstd --version
-exit 1
-
 rem Check that the conda-build directory exists
 if not exist %CONDA_BLD_PATH% (
     echo conda-build directory does not exist
