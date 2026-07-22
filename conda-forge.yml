@@ -14,5 +14,4 @@ provider:
   win_64: github_actions
   win_arm64: github_actions
 workflow_settings:
-  pagefile_size:
-    - value: 1
+  store_build_artifacts: true
