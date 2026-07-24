@@ -57,7 +57,7 @@ echo "ARTIFACT_UNIQUE_ID: $ARTIFACT_UNIQUE_ID"
 # Set a descriptive ID for the archive(s), specialized for this particular job run
 ARCHIVE_UNIQUE_ID="${CI_RUN_ID}_${CONFIG}"
 
-# Make the build artifact zip
+# Make the build artifact archive
 if [[ ! -z "$BLD_ARTIFACT_PREFIX" ]]; then
     export BLD_ARTIFACT_NAME="${BLD_ARTIFACT_PREFIX}_${ARTIFACT_UNIQUE_ID}"
     export BLD_ARTIFACT_PATH="${ARTIFACT_STAGING_DIR}/${FEEDSTOCK_NAME}_${BLD_ARTIFACT_PREFIX}_${ARCHIVE_UNIQUE_ID}.tar.zst"
@@ -85,7 +85,7 @@ if [[ ! -z "$BLD_ARTIFACT_PREFIX" ]]; then
     fi
 fi
 
-# Make the environments artifact zip
+# Make the environments artifact archive
 if [[ ! -z "$ENV_ARTIFACT_PREFIX" ]]; then
     export ENV_ARTIFACT_NAME="${ENV_ARTIFACT_PREFIX}_${ARTIFACT_UNIQUE_ID}"
     export ENV_ARTIFACT_PATH="${ARTIFACT_STAGING_DIR}/${FEEDSTOCK_NAME}_${ENV_ARTIFACT_PREFIX}_${ARCHIVE_UNIQUE_ID}.tar.zst"
@@ -93,7 +93,7 @@ if [[ ! -z "$ENV_ARTIFACT_PREFIX" ]]; then
     ( startgroup "Archive conda build environments" ) 2> /dev/null
 
     pushd "${CONDA_BLD_PATH}"
-    tar -c -f "${BLD_ARTIFACT_PATH}" --zstd '*_*_env*'
+    tar -c -f "${BLD_ARTIFACT_PATH}" --zstd *_*_env*
     popd
 
     ( endgroup "Archive conda build environments" ) 2> /dev/null
