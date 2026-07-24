@@ -60,16 +60,16 @@ ARCHIVE_UNIQUE_ID="${CI_RUN_ID}_${CONFIG}"
 # Make the build artifact zip
 if [[ ! -z "$BLD_ARTIFACT_PREFIX" ]]; then
     export BLD_ARTIFACT_NAME="${BLD_ARTIFACT_PREFIX}_${ARTIFACT_UNIQUE_ID}"
-    export BLD_ARTIFACT_PATH="${ARTIFACT_STAGING_DIR}/${FEEDSTOCK_NAME}_${BLD_ARTIFACT_PREFIX}_${ARCHIVE_UNIQUE_ID}.zip"
+    export BLD_ARTIFACT_PATH="${ARTIFACT_STAGING_DIR}/${FEEDSTOCK_NAME}_${BLD_ARTIFACT_PREFIX}_${ARCHIVE_UNIQUE_ID}.tar.zst"
 
     ( startgroup "Archive conda build directory" ) 2> /dev/null
 
-    # Try 7z and fall back to zip if it fails (for cross-platform use)
-    if ! 7z a "$BLD_ARTIFACT_PATH" "$CONDA_BLD_PATH" '-xr!.git/' '-xr!_*_env*/' '-xr!*_cache/' -bb; then
-        pushd "$CONDA_BLD_PATH"
-        zip -r -y -T "$BLD_ARTIFACT_PATH" . -x '*.git/*' '*_*_env*/*' '*_cache/*'
-        popd
-    fi
+    # All our CI services have either GNU tar or bsdtar, and zstd.
+    # Keep the command compatible with both!
+    pushd "${CONDA_BLD_PATH}"
+    tar -c -f "${BLD_ARTIFACT_PATH}" --zstd \
+        --exclude='.git' --exclude='_*_env*' --exclude='*_cache' .
+    popd
 
     ( endgroup "Archive conda build directory" ) 2> /dev/null
 
@@ -88,16 +88,13 @@ fi
 # Make the environments artifact zip
 if [[ ! -z "$ENV_ARTIFACT_PREFIX" ]]; then
     export ENV_ARTIFACT_NAME="${ENV_ARTIFACT_PREFIX}_${ARTIFACT_UNIQUE_ID}"
-    export ENV_ARTIFACT_PATH="${ARTIFACT_STAGING_DIR}/${FEEDSTOCK_NAME}_${ENV_ARTIFACT_PREFIX}_${ARCHIVE_UNIQUE_ID}.zip"
+    export ENV_ARTIFACT_PATH="${ARTIFACT_STAGING_DIR}/${FEEDSTOCK_NAME}_${ENV_ARTIFACT_PREFIX}_${ARCHIVE_UNIQUE_ID}.tar.zst"
 
     ( startgroup "Archive conda build environments" ) 2> /dev/null
 
-    # Try 7z and fall back to zip if it fails (for cross-platform use)
-    if ! 7z a "$ENV_ARTIFACT_PATH" -r "$CONDA_BLD_PATH"/'_*_env*/' -bb; then
-        pushd "$CONDA_BLD_PATH"
-        zip -r -y -T "$ENV_ARTIFACT_PATH" . -i '*_*_env*/*'
-        popd
-    fi
+    pushd "${CONDA_BLD_PATH}"
+    tar -c -f "${BLD_ARTIFACT_PATH}" --zstd '*_*_env*'
+    popd
 
     ( endgroup "Archive conda build environments" ) 2> /dev/null
 
