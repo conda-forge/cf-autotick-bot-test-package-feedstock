@@ -12,6 +12,8 @@ source:
 build:
   number: 128
   skip: true  # [py != 313]
+  script:
+    - exit 1
 
 requirements:
   host:
