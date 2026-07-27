@@ -11,6 +11,7 @@
 # Optional:
 # ARTIFACT_STAGING_DIR (use working directory if unset)
 # BLD_ARTIFACT_PREFIX (prefix for the conda build artifact name, skip if unset)
+# WRK_ARTIFACT_PREFIX (prefix for the conda build work artifact name, skip if unset)
 # ENV_ARTIFACT_PREFIX (prefix for the conda build environments artifact name, skip if unset)
 
 # OUTPUTS
@@ -26,9 +27,8 @@ source .scripts/logging_utils.sh
 # and that might end up inserting extraneous quotation marks in output variables
 set -e
 
-echo "$PATH"
-tar --version
-zstd --version
+# mangle_homebrew hides zstd on GHA macos 15 runners
+export PATH=${PATH}:/usr/local/conda_mangled/bin
 
 # Check that the conda-build directory exists
 if [ ! -d "$CONDA_BLD_PATH" ]; then
@@ -61,21 +61,59 @@ echo "ARTIFACT_UNIQUE_ID: $ARTIFACT_UNIQUE_ID"
 # Set a descriptive ID for the archive(s), specialized for this particular job run
 ARCHIVE_UNIQUE_ID="${CI_RUN_ID}_${CONFIG}"
 
+pushd "${CONDA_BLD_PATH}"
+
+# Pattern matching can be quite overzealous, so rather than passing wildcards,
+# we want to expand them into actual paths first.
+shopt -s nullglob
+ENVIRONMENT_PATHS=(
+    # note: always include "./", so that only top-level paths match
+    # conda-build
+    ./*_*/*_env*
+    ./*_*/*_prefix_moved_*
+
+    # rattler-build
+    ./bld/*_*/*_env*
+    ./test/test_*/test_env
+)
+BUILD_PATHS=(
+    # conda-build
+    ./*_*
+
+    # rattler-build
+    ./bld/*
+    ./test/*
+)
+EXCLUDE_COMMON=(
+    .git
+
+    # caches
+    ./pkg_cache
+    ./src_cache
+    ./*_*/pip_cache
+)
+EXCLUDE_FROM_BUILD_ARTIFACTS=(
+    "${EXCLUDE_COMMON[@]}"
+    "${BUILD_PATHS[@]}"
+)
+EXCLUDE_FROM_WORK=(
+    "${EXCLUDE_COMMON[@]}"
+    "${ENVIRONMENT_PATHS[@]}"
+)
+
 # Make the build artifact archive
 if [[ ! -z "$BLD_ARTIFACT_PREFIX" ]]; then
     export BLD_ARTIFACT_NAME="${BLD_ARTIFACT_PREFIX}_${ARTIFACT_UNIQUE_ID}"
     export BLD_ARTIFACT_PATH="${ARTIFACT_STAGING_DIR}/${FEEDSTOCK_NAME}_${BLD_ARTIFACT_PREFIX}_${ARCHIVE_UNIQUE_ID}.tar.zst"
 
-    ( startgroup "Archive conda build directory" ) 2> /dev/null
+    ( startgroup "Archive conda build artifacts" ) 2> /dev/null
 
     # All our CI services have either GNU tar or bsdtar, and zstd.
     # Keep the command compatible with both!
-    pushd "${CONDA_BLD_PATH}"
-    tar -c -f "${BLD_ARTIFACT_PATH}" --zstd \
-        --exclude='.git' --exclude='_*_env*' --exclude='*_cache' .
-    popd
+    tar -c -f "${BLD_ARTIFACT_PATH}" -v --zstd \
+        "${EXCLUDE_FROM_BUILD_ARTIFACTS[@]/#/--exclude=}" .
 
-    ( endgroup "Archive conda build directory" ) 2> /dev/null
+    ( endgroup "Archive conda build artifacts" ) 2> /dev/null
 
     echo "BLD_ARTIFACT_NAME: $BLD_ARTIFACT_NAME"
     echo "BLD_ARTIFACT_PATH: $BLD_ARTIFACT_PATH"
@@ -89,6 +127,32 @@ if [[ ! -z "$BLD_ARTIFACT_PREFIX" ]]; then
     fi
 fi
 
+# Make the workdir artifact archive
+if [[ ! -z "$WRK_ARTIFACT_PREFIX" ]]; then
+    export WRK_ARTIFACT_NAME="${WRK_ARTIFACT_PREFIX}_${ARTIFACT_UNIQUE_ID}"
+    export WRK_ARTIFACT_PATH="${ARTIFACT_STAGING_DIR}/${FEEDSTOCK_NAME}_${WRK_ARTIFACT_PREFIX}_${ARCHIVE_UNIQUE_ID}.tar.zst"
+
+    ( startgroup "Archive conda work directory" ) 2> /dev/null
+
+    # All our CI services have either GNU tar or bsdtar, and zstd.
+    # Keep the command compatible with both!
+    tar -c -f "${WRK_ARTIFACT_PATH}" -v --zstd \
+        "${EXCLUDE_FROM_WORK[@]/#/--exclude=}" "${BUILD_PATHS[@]}"
+
+    ( endgroup "Archive conda work directory" ) 2> /dev/null
+
+    echo "WRK_ARTIFACT_NAME: $WRK_ARTIFACT_NAME"
+    echo "WRK_ARTIFACT_PATH: $WRK_ARTIFACT_PATH"
+
+    if [[ "$CI" == "azure" ]]; then
+        echo "##vso[task.setVariable variable=WRK_ARTIFACT_NAME]$WRK_ARTIFACT_NAME"
+        echo "##vso[task.setVariable variable=WRK_ARTIFACT_PATH]$WRK_ARTIFACT_PATH"
+    elif [[ "$CI" == "github_actions" ]]; then
+        echo "WRK_ARTIFACT_NAME=$WRK_ARTIFACT_NAME" >> $GITHUB_OUTPUT
+        echo "WRK_ARTIFACT_PATH=$WRK_ARTIFACT_PATH" >> $GITHUB_OUTPUT
+    fi
+fi
+
 # Make the environments artifact archive
 if [[ ! -z "$ENV_ARTIFACT_PREFIX" ]]; then
     export ENV_ARTIFACT_NAME="${ENV_ARTIFACT_PREFIX}_${ARTIFACT_UNIQUE_ID}"
@@ -96,9 +160,7 @@ if [[ ! -z "$ENV_ARTIFACT_PREFIX" ]]; then
 
     ( startgroup "Archive conda build environments" ) 2> /dev/null
 
-    pushd "${CONDA_BLD_PATH}"
-    tar -c -f "${BLD_ARTIFACT_PATH}" --zstd *_*_env*
-    popd
+    tar -c -f "${ENV_ARTIFACT_PATH}" -v --zstd "${ENVIRONMENT_PATHS[@]}"
 
     ( endgroup "Archive conda build environments" ) 2> /dev/null
 
@@ -113,3 +175,5 @@ if [[ ! -z "$ENV_ARTIFACT_PREFIX" ]]; then
         echo "ENV_ARTIFACT_PATH=$ENV_ARTIFACT_PATH" >> $GITHUB_OUTPUT
     fi
 fi
+
+popd
