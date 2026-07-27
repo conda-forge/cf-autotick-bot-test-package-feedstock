@@ -61,13 +61,6 @@ jobs:
             tools_install_dir: D:\Miniforge
     steps:
 
-    - name: test
-      shell: bash
-      run: |
-        zstd --version
-        tar --version
-        exit 1
-
     - name: Checkout code
       uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
     - name: Configure binfmt_misc
@@ -77,6 +70,13 @@ jobs:
         if [[ "$(uname -m)" == "x86_64" ]]; then
           docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
         fi
+
+    - name: test
+      shell: bash
+      run: |
+        zstd --version
+        tar --version
+        exit 1
 
     - name: Build on Linux
       id: build-linux
