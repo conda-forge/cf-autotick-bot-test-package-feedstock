@@ -26,6 +26,7 @@ source .scripts/logging_utils.sh
 # and that might end up inserting extraneous quotation marks in output variables
 set -e
 
+echo "$PATH"
 tar --version
 zstd --version
 

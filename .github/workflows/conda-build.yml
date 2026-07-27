@@ -74,9 +74,9 @@ jobs:
     - name: test
       shell: bash
       run: |
+        echo "$PATH"
         zstd --version
         tar --version
-        exit 1
 
     - name: Build on Linux
       id: build-linux
