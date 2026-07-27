@@ -28,7 +28,9 @@ source .scripts/logging_utils.sh
 set -e
 
 # mangle_homebrew hides zstd on GHA macos 15 runners
-export PATH=${PATH}:/usr/local/conda_mangled/bin
+if [[ -d /usr/local/conda_mangled ]]; then
+    mv /usr/local/conda_mangled/* /usr/local/
+fi
 
 # Check that the conda-build directory exists
 if [ ! -d "$CONDA_BLD_PATH" ]; then
