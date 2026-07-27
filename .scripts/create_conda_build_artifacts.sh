@@ -27,10 +27,8 @@ source .scripts/logging_utils.sh
 # and that might end up inserting extraneous quotation marks in output variables
 set -e
 
-# mangle_homebrew hides zstd on GHA macos 15 runners
-if [[ -d /usr/local/conda_mangled ]]; then
-    mv /usr/local/conda_mangled/* /usr/local/
-fi
+# mangle_homebrew hides zstd on GHA macos 15 runners, so use conda-forge tools
+export PATH=${MINIFORGE_HOME}/bin:${PATH}
 
 # Check that the conda-build directory exists
 if [ ! -d "$CONDA_BLD_PATH" ]; then
