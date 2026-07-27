@@ -71,13 +71,6 @@ jobs:
           docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
         fi
 
-    - name: test
-      shell: bash
-      run: |
-        zstd --version
-        tar --version
-        exit 1
-
     - name: Build on Linux
       id: build-linux
       if: matrix.os == 'ubuntu'
@@ -139,6 +132,13 @@ jobs:
           export IS_PR_BUILD="False"
         fi
         ./.scripts/run_osx_build.sh
+
+    - name: post-build
+      shell: bash
+      run: |
+        zstd --version
+        tar --version
+        exit 1
 
     - name: Build on windows
       id: build-windows
