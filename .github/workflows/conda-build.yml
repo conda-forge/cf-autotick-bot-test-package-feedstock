@@ -75,6 +75,7 @@ jobs:
       shell: bash
       run: |
         echo "$PATH"
+        type -P zstd
         zstd --version
         tar --version
 
