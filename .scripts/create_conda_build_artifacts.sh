@@ -30,7 +30,7 @@ source .scripts/logging_utils.sh
 set -e
 
 # mangle_homebrew hides zstd on GHA macos 15 runners, so use conda-forge tools
-. "${MINIFORGE_HOME}/etc/profile.d/conda.sh
+. "${MINIFORGE_HOME}/etc/profile.d/conda.sh"
 conda activate
 
 # Check that the conda-build directory exists
