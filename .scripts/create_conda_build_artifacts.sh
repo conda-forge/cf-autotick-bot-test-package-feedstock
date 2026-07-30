@@ -68,6 +68,11 @@ ARCHIVE_UNIQUE_ID="${CI_RUN_ID}_${CONFIG}"
 
 pushd "${CONDA_BLD_PATH}"
 
+# --use-compress-prog= lets us pass the options to GNU tar and libarchive tar
+# -T0 uses all cores
+# 12 gives reasonable compression while remaining fast
+ZSTD="--use-compress-prog=zstd -T0 -12"
+
 # Pattern matching can be quite overzealous, so rather than passing wildcards,
 # we want to expand them into actual paths first.
 shopt -s nullglob
@@ -111,14 +116,10 @@ if [[ ! -z "$BLD_ARTIFACT_PREFIX" ]]; then
     export BLD_ARTIFACT_NAME="${BLD_ARTIFACT_PREFIX}_${ARTIFACT_UNIQUE_ID}"
     export BLD_ARTIFACT_PATH="${ARTIFACT_STAGING_DIR}/${FEEDSTOCK_NAME}_${BLD_ARTIFACT_PREFIX}_${ARCHIVE_UNIQUE_ID}.tar.zst"
 
-    ( startgroup "Archive conda build artifacts" ) 2> /dev/null
-
     # All our CI services have either GNU tar or bsdtar, and zstd.
     # Keep the command compatible with both!
-    time tar -c -f "${BLD_ARTIFACT_PATH}" --zstd \
+    time tar -c -f "${BLD_ARTIFACT_PATH}" "${ZSTD}" \
         "${EXCLUDE_FROM_BUILD_ARTIFACTS[@]/#/--exclude=}" .
-
-    ( endgroup "Archive conda build artifacts" ) 2> /dev/null
 
     echo "BLD_ARTIFACT_NAME: $BLD_ARTIFACT_NAME"
     echo "BLD_ARTIFACT_PATH: $BLD_ARTIFACT_PATH"
@@ -137,14 +138,10 @@ if [[ ! -z "$WRK_ARTIFACT_PREFIX" ]]; then
     export WRK_ARTIFACT_NAME="${WRK_ARTIFACT_PREFIX}_${ARTIFACT_UNIQUE_ID}"
     export WRK_ARTIFACT_PATH="${ARTIFACT_STAGING_DIR}/${FEEDSTOCK_NAME}_${WRK_ARTIFACT_PREFIX}_${ARCHIVE_UNIQUE_ID}.tar.zst"
 
-    ( startgroup "Archive conda work directory" ) 2> /dev/null
-
     # All our CI services have either GNU tar or bsdtar, and zstd.
     # Keep the command compatible with both!
-    time tar -c -f "${WRK_ARTIFACT_PATH}" --zstd \
+    time tar -c -f "${WRK_ARTIFACT_PATH}" "${ZSTD}" \
         "${EXCLUDE_FROM_WORK[@]/#/--exclude=}" "${BUILD_PATHS[@]}"
-
-    ( endgroup "Archive conda work directory" ) 2> /dev/null
 
     echo "WRK_ARTIFACT_NAME: $WRK_ARTIFACT_NAME"
     echo "WRK_ARTIFACT_PATH: $WRK_ARTIFACT_PATH"
@@ -163,11 +160,7 @@ if [[ ! -z "$ENV_ARTIFACT_PREFIX" ]]; then
     export ENV_ARTIFACT_NAME="${ENV_ARTIFACT_PREFIX}_${ARTIFACT_UNIQUE_ID}"
     export ENV_ARTIFACT_PATH="${ARTIFACT_STAGING_DIR}/${FEEDSTOCK_NAME}_${ENV_ARTIFACT_PREFIX}_${ARCHIVE_UNIQUE_ID}.tar.zst"
 
-    ( startgroup "Archive conda build environments" ) 2> /dev/null
-
-    time tar -c -f "${ENV_ARTIFACT_PATH}" --zstd "${ENVIRONMENT_PATHS[@]}"
-
-    ( endgroup "Archive conda build environments" ) 2> /dev/null
+    time tar -c -f "${ENV_ARTIFACT_PATH}" "${ZSTD}" "${ENVIRONMENT_PATHS[@]}"
 
     echo "ENV_ARTIFACT_NAME: $ENV_ARTIFACT_NAME"
     echo "ENV_ARTIFACT_PATH: $ENV_ARTIFACT_PATH"
