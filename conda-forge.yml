@@ -10,8 +10,8 @@ conda_build:
   pkg_format: 2
 conda_build_tool: rattler-build
 provider:
-  linux_64: github_actions
-  linux_aarch64: azure
+  linux_aarch64: github_actions
+  linux_64: azure
   osx_64: github_actions
   osx_arm64: azure
   win_64: github_actions
