@@ -115,7 +115,7 @@ if [[ ! -z "$BLD_ARTIFACT_PREFIX" ]]; then
 
     # All our CI services have either GNU tar or bsdtar, and zstd.
     # Keep the command compatible with both!
-    tar -c -f "${BLD_ARTIFACT_PATH}" -v --zstd \
+    time tar -c -f "${BLD_ARTIFACT_PATH}" --zstd \
         "${EXCLUDE_FROM_BUILD_ARTIFACTS[@]/#/--exclude=}" .
 
     ( endgroup "Archive conda build artifacts" ) 2> /dev/null
@@ -141,7 +141,7 @@ if [[ ! -z "$WRK_ARTIFACT_PREFIX" ]]; then
 
     # All our CI services have either GNU tar or bsdtar, and zstd.
     # Keep the command compatible with both!
-    tar -c -f "${WRK_ARTIFACT_PATH}" -v --zstd \
+    time tar -c -f "${WRK_ARTIFACT_PATH}" --zstd \
         "${EXCLUDE_FROM_WORK[@]/#/--exclude=}" "${BUILD_PATHS[@]}"
 
     ( endgroup "Archive conda work directory" ) 2> /dev/null
@@ -165,7 +165,7 @@ if [[ ! -z "$ENV_ARTIFACT_PREFIX" ]]; then
 
     ( startgroup "Archive conda build environments" ) 2> /dev/null
 
-    tar -c -f "${ENV_ARTIFACT_PATH}" -v --zstd "${ENVIRONMENT_PATHS[@]}"
+    time tar -c -f "${ENV_ARTIFACT_PATH}" --zstd "${ENVIRONMENT_PATHS[@]}"
 
     ( endgroup "Archive conda build environments" ) 2> /dev/null
 
