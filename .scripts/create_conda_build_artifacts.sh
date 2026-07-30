@@ -11,8 +11,8 @@
 # Optional:
 # ARTIFACT_STAGING_DIR (use working directory if unset)
 # BLD_ARTIFACT_PREFIX (prefix for the conda build artifact name, skip if unset)
-# WRK_ARTIFACT_PREFIX (prefix for the conda build work artifact name, skip if unset)
 # ENV_ARTIFACT_PREFIX (prefix for the conda build environments artifact name, skip if unset)
+# WRK_ARTIFACT_PREFIX (prefix for the conda build work artifact name, skip if unset)
 
 # OUTPUTS
 #
@@ -20,6 +20,8 @@
 # BLD_ARTIFACT_PATH
 # ENV_ARTIFACT_NAME
 # ENV_ARTIFACT_PATH
+# WRK_ARTIFACT_NAME
+# WRK_ARTIFACT_PATH
 
 source .scripts/logging_utils.sh
 
@@ -28,7 +30,8 @@ source .scripts/logging_utils.sh
 set -e
 
 # mangle_homebrew hides zstd on GHA macos 15 runners, so use conda-forge tools
-export PATH=${MINIFORGE_HOME}/bin:${PATH}
+. "${MINIFORGE_HOME}/etc/profile.d/conda.sh
+conda activate
 
 # Check that the conda-build directory exists
 if [ ! -d "$CONDA_BLD_PATH" ]; then
