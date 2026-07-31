@@ -82,6 +82,13 @@ if defined BLD_ARTIFACT_PREFIX (
     echo BLD_ARTIFACT_NAME: !BLD_ARTIFACT_NAME!
 
     set "BLD_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%BLD_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zstd"
+    echo tar -c -f "!BLD_ARTIFACT_PATH!" .
+    tar -c -f "!BLD_ARTIFACT_PATH!" .
+    if errorlevel 1 exit 1
+    echo tar -c -f "!BLD_ARTIFACT_PATH!" "%ZSTD%" .
+    tar -c -f "!BLD_ARTIFACT_PATH!" "%ZSTD%" .
+    if errorlevel 1 exit 1
+    echo tar -c -f "!BLD_ARTIFACT_PATH!" "%ZSTD%" %EXCLUDE_FROM_BUILD_ARTIFACTS% .
     tar -c -f "!BLD_ARTIFACT_PATH!" "%ZSTD%" %EXCLUDE_FROM_BUILD_ARTIFACTS% .
     if errorlevel 1 exit 1
     echo BLD_ARTIFACT_PATH: !BLD_ARTIFACT_PATH!
