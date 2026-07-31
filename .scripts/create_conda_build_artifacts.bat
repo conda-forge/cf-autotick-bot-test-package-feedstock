@@ -42,15 +42,15 @@ if not "%ARTIFACT_UNIQUE_ID%" == "%ARTIFACT_UNIQUE_ID:~0,80%" (
 
 set "ZSTD=--use-compress-prog=zstd -T0 -12"
 
-rem Mirror the logic from create_conda_build_artifacts.sh.tmpl,
-rem see the comments there.
+rem Mirror the logic from create_conda_build_artifacts.sh.tmpl.
+rem Note that paths to tar must use forward slashes.
 
 cd "%CONDA_BLD_PATH%"
 if errorlevel 1 exit 1
 
 set BUILD_PATHS=
 set ENVIRONMENT_PATHS=
-set "EXCLUDE_COMMON=--exclude=.git --exclude=.\pkg_cache --exclude=.\src_cache"
+set "EXCLUDE_COMMON=--exclude=.git --exclude=./pkg_cache --exclude=./src_cache"
 set EXCLUDE_FROM_BUILD_ARTIFACTS=
 set EXCLUDE_FROM_WORK=
 
@@ -59,16 +59,16 @@ for /d %%a in (. bld test) do (
         cd %%a
         for /d %%b in (*_*) do (
             if exist %%a\%%b\pip_cache (
-                set "EXCLUDE_COMMON=!EXCLUDE_COMMON! --exclude=%%a\%%b\pip_cache"
+                set "EXCLUDE_COMMON=!EXCLUDE_COMMON! --exclude=%%a/%%b/pip_cache"
             )
 
-            set "BUILD_PATHS=!BUILD_PATHS! %%a\%%b"
-            set "EXCLUDE_FROM_BUILD_ARTIFACTS=!EXCLUDE_FROM_BUILD_ARTIFACTS! --exclude=%%a\%%b"
+            set "BUILD_PATHS=!BUILD_PATHS! %%a/%%b"
+            set "EXCLUDE_FROM_BUILD_ARTIFACTS=!EXCLUDE_FROM_BUILD_ARTIFACTS! --exclude=%%a/%%b"
 
             cd %%b
             for /d %%c in (*_env* *_prefix_moved_*) do (
-                set "ENVIRONMENT_PATHS=!ENVIRONMENT_PATHS! %%a\%%b\%%c"
-                set "EXCLUDE_FROM_WORK=!EXCLUDE_FROM_WORK! --exclude=%%a\%%b\%%c"
+                set "ENVIRONMENT_PATHS=!ENVIRONMENT_PATHS! %%a/%%b/%%c"
+                set "EXCLUDE_FROM_WORK=!EXCLUDE_FROM_WORK! --exclude=%%a/%%b/%%c"
             )
             cd ..
         )
