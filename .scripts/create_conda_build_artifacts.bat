@@ -42,7 +42,7 @@ if not "%ARTIFACT_UNIQUE_ID%" == "%ARTIFACT_UNIQUE_ID:~0,80%" (
     set ARTIFACT_UNIQUE_ID=%CI_RUN_ID%_%CONFIG_SHORT%
 )
 
-set "ZSTD=--use-compress-prog=zstd -T0 -0"
+set "ZSTD=--use-compress-prog=zstd -T0 -0 -vv"
 
 rem Mirror the logic from create_conda_build_artifacts.sh.tmpl.
 rem Note that paths to tar must use forward slashes.
@@ -87,7 +87,7 @@ if defined BLD_ARTIFACT_PREFIX (
     echo BLD_ARTIFACT_NAME: !BLD_ARTIFACT_NAME!
 
     set "BLD_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%BLD_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zst"
-    bsdtar -c -f - "%ZSTD%" %EXCLUDE_FROM_BUILD_ARTIFACTS% . >"!BLD_ARTIFACT_PATH!"
+    bsdtar -c -f "!BLD_ARTIFACT_PATH!" "%ZSTD%" %EXCLUDE_FROM_BUILD_ARTIFACTS% .
     if errorlevel 1 exit 1
     echo BLD_ARTIFACT_PATH: !BLD_ARTIFACT_PATH!
 
@@ -107,7 +107,7 @@ if defined WRK_ARTIFACT_PREFIX (
     echo WRK_ARTIFACT_NAME: !WRK_ARTIFACT_NAME!
 
     set "WRK_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%WRK_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zst"
-    bsdtar -c -f - "%ZSTD%" %EXCLUDE_FROM_WORK% %WORK_PATHS% >"!WRK_ARTIFACT_PATH!"
+    bsdtar -c -f "!WRK_ARTIFACT_PATH!" "%ZSTD%" %EXCLUDE_FROM_WORK% %WORK_PATHS%
     if errorlevel 1 exit 1
     echo WRK_ARTIFACT_PATH: !WRK_ARTIFACT_PATH!
 
@@ -127,7 +127,7 @@ if defined ENV_ARTIFACT_PREFIX (
     echo ENV_ARTIFACT_NAME: !ENV_ARTIFACT_NAME!
 
     set "ENV_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%ENV_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zst"
-    bsdtar -c -v -f "!ENV_ARTIFACT_PATH!" %ENVIRONMENT_PATHS%
+    bsdtar -c -f "!ENV_ARTIFACT_PATH!" "%ZSTD%" %ENVIRONMENT_PATHS%
     if errorlevel 1 exit 1
     echo ENV_ARTIFACT_PATH: !ENV_ARTIFACT_PATH!
 
