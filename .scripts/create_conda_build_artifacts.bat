@@ -25,6 +25,9 @@ rem WRK_ARTIFACT_PATH
 
 call "%MINIFORGE_HOME%\Scripts\activate.bat"
 
+where tar
+where zstd
+
 rem Check that the conda-build directory exists
 if not exist %CONDA_BLD_PATH% (
     echo conda-build directory does not exist
@@ -42,7 +45,7 @@ if not "%ARTIFACT_UNIQUE_ID%" == "%ARTIFACT_UNIQUE_ID:~0,80%" (
     set ARTIFACT_UNIQUE_ID=%CI_RUN_ID%_%CONFIG_SHORT%
 )
 
-set "ZSTD=--use-compress-prog=zstd -T0 -12"
+set "ZSTD=--use-compress-prog=zstd -T0 -0"
 
 rem Mirror the logic from create_conda_build_artifacts.sh.tmpl.
 rem Note that paths to tar must use forward slashes.
