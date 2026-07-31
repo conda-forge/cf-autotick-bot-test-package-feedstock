@@ -82,6 +82,9 @@ if defined BLD_ARTIFACT_PREFIX (
     echo BLD_ARTIFACT_NAME: !BLD_ARTIFACT_NAME!
 
     set "BLD_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%BLD_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zstd"
+    tar --version
+    gtar --version
+    bsdtar --version
     echo tar -c -f "!BLD_ARTIFACT_PATH!" .
     tar -c -f "!BLD_ARTIFACT_PATH!" .
     if errorlevel 1 exit 1
