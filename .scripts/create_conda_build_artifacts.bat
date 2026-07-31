@@ -25,10 +25,6 @@ rem WRK_ARTIFACT_PATH
 
 call "%MINIFORGE_HOME%\Scripts\activate.bat"
 
-where tar
-where bsdtar
-where zstd
-
 rem Check that the conda-build directory exists
 if not exist %CONDA_BLD_PATH% (
     echo conda-build directory does not exist
@@ -131,7 +127,7 @@ if defined ENV_ARTIFACT_PREFIX (
     echo ENV_ARTIFACT_NAME: !ENV_ARTIFACT_NAME!
 
     set "ENV_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%ENV_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zst"
-    bsdtar -c -v -f - "%ZSTD%" %ENVIRONMENT_PATHS% >"!ENV_ARTIFACT_PATH!"
+    bsdtar -c -v -f "!ENV_ARTIFACT_PATH!" "%ZSTD%" %ENVIRONMENT_PATHS%
     if errorlevel 1 exit 1
     echo ENV_ARTIFACT_PATH: !ENV_ARTIFACT_PATH!
 
