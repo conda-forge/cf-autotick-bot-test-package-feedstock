@@ -42,7 +42,7 @@ if not "%ARTIFACT_UNIQUE_ID%" == "%ARTIFACT_UNIQUE_ID:~0,80%" (
     set ARTIFACT_UNIQUE_ID=%CI_RUN_ID%_%CONFIG_SHORT%
 )
 
-set "ZSTD=--use-compress-prog=zstd -T0 -0 -vv"
+set "ZSTD=--zstd"
 
 rem Mirror the logic from create_conda_build_artifacts.sh.tmpl.
 rem Note that paths to tar must use forward slashes.
