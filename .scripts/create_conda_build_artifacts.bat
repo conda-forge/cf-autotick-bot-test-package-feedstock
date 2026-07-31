@@ -12,6 +12,7 @@ rem Optional:
 rem ARTIFACT_STAGING_DIR (use working directory if unset)
 rem BLD_ARTIFACT_PREFIX (prefix for the conda build artifact name, skip if unset)
 rem ENV_ARTIFACT_PREFIX (prefix for the conda build environments artifact name, skip if unset)
+rem WRK_ARTIFACT_PREFIX (prefix for the conda work directory artifact name, skip if unset)
 
 rem OUTPUTS
 rem
@@ -19,6 +20,8 @@ rem BLD_ARTIFACT_NAME
 rem BLD_ARTIFACT_PATH
 rem ENV_ARTIFACT_NAME
 rem ENV_ARTIFACT_PATH
+rem WRK_ARTIFACT_NAME
+rem WRK_ARTIFACT_PATH
 
 rem Check that the conda-build directory exists
 if not exist %CONDA_BLD_PATH% (
@@ -37,13 +40,49 @@ if not "%ARTIFACT_UNIQUE_ID%" == "%ARTIFACT_UNIQUE_ID:~0,80%" (
     set ARTIFACT_UNIQUE_ID=%CI_RUN_ID%_%CONFIG_SHORT%
 )
 
-rem Make the build artifact zip
+set "ZSTD=--use-compress-prog=zstd -T0 -12"
+
+rem Mirror the logic from create_conda_build_artifacts.sh.tmpl,
+rem see the comments there.
+
+set BUILD_PATHS=
+set ENVIRONMENT_PATHS=
+set "EXCLUDE_COMMON=--exclude=.git --exclude=.\pkg_cache --exclude=.\src_cache"
+set EXCLUDE_FROM_BUILD_ARTIFACTS=
+set EXCLUDE_FROM_WORK=
+
+for /d %%a in (. bld test) do (
+    if exist %%a (
+        cd %%a
+        for /d %%b in (*_*) do (
+            if exist %%a\%%b\pip_cache (
+                set "EXCLUDE_COMMON=!EXCLUDE_COMMON! --exclude=%%a\%%b\pip_cache"
+            )
+
+            set "BUILD_PATHS=!BUILD_PATHS! %%a\%%b"
+            set "EXCLUDE_FROM_BUILD_ARTIFACTS=!EXCLUDE_FROM_BUILD_ARTIFACTS! --exclude=%%a\%%b"
+
+            cd %%b
+            for /d %%c in (*_env* *_prefix_moved_*) do (
+                set "ENVIRONMENT_PATHS=!ENVIRONMENT_PATHS! %%a\%%b\%%c"
+                set "EXCLUDE_FROM_WORK=!EXCLUDE_FROM_WORK! --exclude=%%a\%%b\%%c"
+            )
+            cd ..
+        )
+        if not %%a == . cd ..
+    )
+)
+
+set "EXCLUDE_FROM_BUILD_ARTIFACTS=%EXCLUDE_COMMON%%EXCLUDE_FROM_BUILD_ARTIFACTS%"
+set "EXCLUDE_FROM_WORK=%EXCLUDE_COMMON%%EXCLUDE_FROM_WORK%"
+
+rem Make the build artifact archive
 if defined BLD_ARTIFACT_PREFIX (
     set BLD_ARTIFACT_NAME=%BLD_ARTIFACT_PREFIX%_%ARTIFACT_UNIQUE_ID%
     echo BLD_ARTIFACT_NAME: !BLD_ARTIFACT_NAME!
 
-    set "BLD_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%BLD_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.zip"
-    7z a "!BLD_ARTIFACT_PATH!" "%CONDA_BLD_PATH%" -xr^^!.git/ -xr^^!_*_env*/ -xr^^!*_cache/ -bb
+    set "BLD_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%BLD_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zstd"
+    tar -c -f "!BLD_ARTIFACT_PATH!" "%ZSTD%" "%EXCLUDE_FROM_BUILD_ARTIFACTS%" .
     if errorlevel 1 exit 1
     echo BLD_ARTIFACT_PATH: !BLD_ARTIFACT_PATH!
 

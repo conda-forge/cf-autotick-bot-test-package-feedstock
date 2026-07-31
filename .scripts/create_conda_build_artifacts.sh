@@ -118,7 +118,7 @@ if [[ ! -z "$BLD_ARTIFACT_PREFIX" ]]; then
 
     # All our CI services have either GNU tar or bsdtar, and zstd.
     # Keep the command compatible with both!
-    time tar -c -f "${BLD_ARTIFACT_PATH}" "${ZSTD}" \
+    tar -c -f "${BLD_ARTIFACT_PATH}" "${ZSTD}" \
         "${EXCLUDE_FROM_BUILD_ARTIFACTS[@]/#/--exclude=}" .
 
     echo "BLD_ARTIFACT_NAME: $BLD_ARTIFACT_NAME"
@@ -140,7 +140,7 @@ if [[ ! -z "$WRK_ARTIFACT_PREFIX" ]]; then
 
     # All our CI services have either GNU tar or bsdtar, and zstd.
     # Keep the command compatible with both!
-    time tar -c -f "${WRK_ARTIFACT_PATH}" "${ZSTD}" \
+    tar -c -f "${WRK_ARTIFACT_PATH}" "${ZSTD}" \
         "${EXCLUDE_FROM_WORK[@]/#/--exclude=}" "${BUILD_PATHS[@]}"
 
     echo "WRK_ARTIFACT_NAME: $WRK_ARTIFACT_NAME"
@@ -160,7 +160,7 @@ if [[ ! -z "$ENV_ARTIFACT_PREFIX" ]]; then
     export ENV_ARTIFACT_NAME="${ENV_ARTIFACT_PREFIX}_${ARTIFACT_UNIQUE_ID}"
     export ENV_ARTIFACT_PATH="${ARTIFACT_STAGING_DIR}/${FEEDSTOCK_NAME}_${ENV_ARTIFACT_PREFIX}_${ARCHIVE_UNIQUE_ID}.tar.zst"
 
-    time tar -c -f "${ENV_ARTIFACT_PATH}" "${ZSTD}" "${ENVIRONMENT_PATHS[@]}"
+    tar -c -f "${ENV_ARTIFACT_PATH}" "${ZSTD}" "${ENVIRONMENT_PATHS[@]}"
 
     echo "ENV_ARTIFACT_NAME: $ENV_ARTIFACT_NAME"
     echo "ENV_ARTIFACT_PATH: $ENV_ARTIFACT_PATH"
