@@ -45,6 +45,9 @@ set "ZSTD=--use-compress-prog=zstd -T0 -12"
 rem Mirror the logic from create_conda_build_artifacts.sh.tmpl,
 rem see the comments there.
 
+cd "%CONDA_BLD_PATH%"
+if errorlevel 1 exit 1
+
 set BUILD_PATHS=
 set ENVIRONMENT_PATHS=
 set "EXCLUDE_COMMON=--exclude=.git --exclude=.\pkg_cache --exclude=.\src_cache"
