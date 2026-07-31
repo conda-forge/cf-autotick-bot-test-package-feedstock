@@ -23,11 +23,6 @@ rem ENV_ARTIFACT_PATH
 rem WRK_ARTIFACT_NAME
 rem WRK_ARTIFACT_PATH
 
-tar --version
-gtar --version
-bsdtar --version
-zstd --version
-
 rem Check that the conda-build directory exists
 if not exist %CONDA_BLD_PATH% (
     echo conda-build directory does not exist
@@ -90,6 +85,8 @@ if defined BLD_ARTIFACT_PREFIX (
     echo BLD_ARTIFACT_NAME: !BLD_ARTIFACT_NAME!
 
     set "BLD_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%BLD_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zst"
+    dir %ARTIFACT_STAGING_DIR%
+    echo tar -c -f - "%ZSTD%" %EXCLUDE_FROM_BUILD_ARTIFACTS% . >"!BLD_ARTIFACT_PATH!"
     tar -c -f - "%ZSTD%" %EXCLUDE_FROM_BUILD_ARTIFACTS% . >"!BLD_ARTIFACT_PATH!"
     if errorlevel 1 exit 1
     echo BLD_ARTIFACT_PATH: !BLD_ARTIFACT_PATH!
