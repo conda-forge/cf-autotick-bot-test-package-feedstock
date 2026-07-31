@@ -26,6 +26,7 @@ rem WRK_ARTIFACT_PATH
 call "%MINIFORGE_HOME%\Scripts\activate.bat"
 
 where tar
+where bsdtar
 where zstd
 
 rem Check that the conda-build directory exists
@@ -90,7 +91,7 @@ if defined BLD_ARTIFACT_PREFIX (
     echo BLD_ARTIFACT_NAME: !BLD_ARTIFACT_NAME!
 
     set "BLD_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%BLD_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zst"
-    tar -c -f - "%ZSTD%" %EXCLUDE_FROM_BUILD_ARTIFACTS% . >"!BLD_ARTIFACT_PATH!"
+    bsdtar -c -f - "%ZSTD%" %EXCLUDE_FROM_BUILD_ARTIFACTS% . >"!BLD_ARTIFACT_PATH!"
     if errorlevel 1 exit 1
     echo BLD_ARTIFACT_PATH: !BLD_ARTIFACT_PATH!
 
@@ -110,7 +111,7 @@ if defined WRK_ARTIFACT_PREFIX (
     echo WRK_ARTIFACT_NAME: !WRK_ARTIFACT_NAME!
 
     set "WRK_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%WRK_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zst"
-    tar -c -f - "%ZSTD%" %EXCLUDE_FROM_WORK% %WORK_PATHS% >"!WRK_ARTIFACT_PATH!"
+    bsdtar -c -f - "%ZSTD%" %EXCLUDE_FROM_WORK% %WORK_PATHS% >"!WRK_ARTIFACT_PATH!"
     if errorlevel 1 exit 1
     echo WRK_ARTIFACT_PATH: !WRK_ARTIFACT_PATH!
 
@@ -130,7 +131,7 @@ if defined ENV_ARTIFACT_PREFIX (
     echo ENV_ARTIFACT_NAME: !ENV_ARTIFACT_NAME!
 
     set "ENV_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%ENV_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zst"
-    tar -v -c -f - "%ZSTD%" %ENVIRONMENT_PATHS% >"!ENV_ARTIFACT_PATH!"
+    bsdtar -c -v -f - "%ZSTD%" %ENVIRONMENT_PATHS% >"!ENV_ARTIFACT_PATH!"
     if errorlevel 1 exit 1
     echo ENV_ARTIFACT_PATH: !ENV_ARTIFACT_PATH!
 
