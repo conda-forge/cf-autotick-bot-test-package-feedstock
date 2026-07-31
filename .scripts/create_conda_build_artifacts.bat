@@ -14,6 +14,8 @@ rem BLD_ARTIFACT_PREFIX (prefix for the conda build artifact name, skip if unset
 rem ENV_ARTIFACT_PREFIX (prefix for the conda build environments artifact name, skip if unset)
 rem WRK_ARTIFACT_PREFIX (prefix for the conda work directory artifact name, skip if unset)
 
+echo FEEDSTOCK_NAME: %FEEDSTOCK_NAME%
+
 rem OUTPUTS
 rem
 rem BLD_ARTIFACT_NAME
@@ -85,8 +87,6 @@ if defined BLD_ARTIFACT_PREFIX (
     echo BLD_ARTIFACT_NAME: !BLD_ARTIFACT_NAME!
 
     set "BLD_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%BLD_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zst"
-    dir %ARTIFACT_STAGING_DIR%
-    echo tar -c -f - "%ZSTD%" %EXCLUDE_FROM_BUILD_ARTIFACTS% . >"!BLD_ARTIFACT_PATH!"
     tar -c -f - "%ZSTD%" %EXCLUDE_FROM_BUILD_ARTIFACTS% . >"!BLD_ARTIFACT_PATH!"
     if errorlevel 1 exit 1
     echo BLD_ARTIFACT_PATH: !BLD_ARTIFACT_PATH!
