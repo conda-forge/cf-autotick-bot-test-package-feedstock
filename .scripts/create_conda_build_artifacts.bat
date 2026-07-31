@@ -23,6 +23,11 @@ rem ENV_ARTIFACT_PATH
 rem WRK_ARTIFACT_NAME
 rem WRK_ARTIFACT_PATH
 
+tar --version
+gtar --version
+bsdtar --version
+zstd --version
+
 rem Check that the conda-build directory exists
 if not exist %CONDA_BLD_PATH% (
     echo conda-build directory does not exist
