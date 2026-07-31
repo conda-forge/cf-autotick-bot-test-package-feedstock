@@ -86,7 +86,7 @@ ENVIRONMENT_PATHS=(
     ./bld/*_*/*_env*
     ./test/test_*/test_env
 )
-BUILD_PATHS=(
+WORK_PATHS=(
     # conda-build
     ./*_*
 
@@ -104,7 +104,7 @@ EXCLUDE_COMMON=(
 )
 EXCLUDE_FROM_BUILD_ARTIFACTS=(
     "${EXCLUDE_COMMON[@]}"
-    "${BUILD_PATHS[@]}"
+    "${WORK_PATHS[@]}"
 )
 EXCLUDE_FROM_WORK=(
     "${EXCLUDE_COMMON[@]}"
@@ -141,7 +141,7 @@ if [[ ! -z "$WRK_ARTIFACT_PREFIX" ]]; then
     # All our CI services have either GNU tar or bsdtar, and zstd.
     # Keep the command compatible with both!
     tar -c -f "${WRK_ARTIFACT_PATH}" "${ZSTD}" \
-        "${EXCLUDE_FROM_WORK[@]/#/--exclude=}" "${BUILD_PATHS[@]}"
+        "${EXCLUDE_FROM_WORK[@]/#/--exclude=}" "${WORK_PATHS[@]}"
 
     echo "WRK_ARTIFACT_NAME: $WRK_ARTIFACT_NAME"
     echo "WRK_ARTIFACT_PATH: $WRK_ARTIFACT_PATH"

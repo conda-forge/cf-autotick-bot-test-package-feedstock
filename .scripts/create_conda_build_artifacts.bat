@@ -48,8 +48,8 @@ rem Note that paths to tar must use forward slashes.
 cd "%CONDA_BLD_PATH%"
 if errorlevel 1 exit 1
 
-set BUILD_PATHS=
 set ENVIRONMENT_PATHS=
+set WORK_PATHS=
 set "EXCLUDE_COMMON=--exclude=.git --exclude=./pkg_cache --exclude=./src_cache"
 set EXCLUDE_FROM_BUILD_ARTIFACTS=
 set EXCLUDE_FROM_WORK=
@@ -62,7 +62,7 @@ for /d %%a in (. bld test) do (
                 set "EXCLUDE_COMMON=!EXCLUDE_COMMON! --exclude=%%a/%%b/pip_cache"
             )
 
-            set "BUILD_PATHS=!BUILD_PATHS! %%a/%%b"
+            set "WORK_PATHS=!WORK_PATHS! %%a/%%b"
             set "EXCLUDE_FROM_BUILD_ARTIFACTS=!EXCLUDE_FROM_BUILD_ARTIFACTS! --exclude=%%a/%%b"
 
             cd %%b
@@ -99,13 +99,33 @@ if defined BLD_ARTIFACT_PREFIX (
     )
 )
 
-rem Make the environments artifact zip
+rem Make the work directory artifact archive
+if defined WRK_ARTIFACT_PREFIX (
+    set WRK_ARTIFACT_NAME=!WRK_ARTIFACT_PREFIX!_%ARTIFACT_UNIQUE_ID%
+    echo WRK_ARTIFACT_NAME: !WRK_ARTIFACT_NAME!
+
+    set "WRK_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%WRK_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zst"
+    tar -v -c -f - "%ZSTD%" %EXCLUDE_FROM_WORK% %WORK_PATHS% >"!WRK_ARTIFACT_PATH!"
+    if errorlevel 1 exit 1
+    echo WRK_ARTIFACT_PATH: !WRK_ARTIFACT_PATH!
+
+    if "%CI%" == "azure" (
+        echo ##vso[task.setVariable variable=WRK_ARTIFACT_NAME]!WRK_ARTIFACT_NAME!
+        echo ##vso[task.setVariable variable=WRK_ARTIFACT_PATH]!WRK_ARTIFACT_PATH!
+    )
+    if "%CI%" == "github_actions" (
+        echo WRK_ARTIFACT_NAME=!WRK_ARTIFACT_NAME!>> !GITHUB_OUTPUT!
+        echo WRK_ARTIFACT_PATH=!WRK_ARTIFACT_PATH!>> !GITHUB_OUTPUT!
+    )
+)
+
+rem Make the environment artifact archive
 if defined ENV_ARTIFACT_PREFIX (
     set ENV_ARTIFACT_NAME=!ENV_ARTIFACT_PREFIX!_%ARTIFACT_UNIQUE_ID%
     echo ENV_ARTIFACT_NAME: !ENV_ARTIFACT_NAME!
 
-    set "ENV_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%ENV_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.zip"
-    7z a "!ENV_ARTIFACT_PATH!" -r "%CONDA_BLD_PATH%"/_*_env*/ -bb
+    set "ENV_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%ENV_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zst"
+    tar -v -c -f - "%ZSTD%" %ENVIRONMENT_PATHS% >"!ENV_ARTIFACT_PATH!"
     if errorlevel 1 exit 1
     echo ENV_ARTIFACT_PATH: !ENV_ARTIFACT_PATH!
 
