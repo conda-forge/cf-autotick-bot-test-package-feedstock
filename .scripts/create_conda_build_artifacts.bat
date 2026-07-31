@@ -14,8 +14,6 @@ rem BLD_ARTIFACT_PREFIX (prefix for the conda build artifact name, skip if unset
 rem ENV_ARTIFACT_PREFIX (prefix for the conda build environments artifact name, skip if unset)
 rem WRK_ARTIFACT_PREFIX (prefix for the conda work directory artifact name, skip if unset)
 
-echo FEEDSTOCK_NAME: %FEEDSTOCK_NAME%
-
 rem OUTPUTS
 rem
 rem BLD_ARTIFACT_NAME
