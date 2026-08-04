@@ -118,10 +118,15 @@ if [[ ! -z "$BLD_ARTIFACT_PREFIX" ]]; then
 
     # All our CI services have either GNU tar or bsdtar, and zstd.
     # Keep the command compatible with both!
-    set -x
-    tar -c -f "${BLD_ARTIFACT_PATH}" "${ZSTD}" \
-        "${EXCLUDE_FROM_BUILD_ARTIFACTS[@]/#/--exclude=}" .
-    set +x
+    if ! tar -c -f "${BLD_ARTIFACT_PATH}" "${ZSTD}" \
+            "${EXCLUDE_FROM_BUILD_ARTIFACTS[@]/#/--exclude=}" . &&
+        [[ -s ${BLD_ARTIFACT_PATH} ]]
+    then
+        # If tar failed but produced a (partial?) file, upload it as "broken".
+        mv -v "${BLD_ARTIFACT_PATH}" "${BLD_ARTIFACT_PATH/%.tar.zst/-broken&}"
+        BLD_ARTIFACT_NAME+=-broken
+        BLD_ARTIFACT_PATH=${BLD_ARTIFACT_PATH/%.tar.zst/-broken&}
+    fi
 
     echo "BLD_ARTIFACT_NAME: $BLD_ARTIFACT_NAME"
     echo "BLD_ARTIFACT_PATH: $BLD_ARTIFACT_PATH"
@@ -142,10 +147,15 @@ if [[ ! -z "$WRK_ARTIFACT_PREFIX" && -n ${WORK_PATHS[@]} ]]; then
 
     # All our CI services have either GNU tar or bsdtar, and zstd.
     # Keep the command compatible with both!
-    set -x
-    tar -c -f "${WRK_ARTIFACT_PATH}" "${ZSTD}" \
-        "${EXCLUDE_FROM_WORK[@]/#/--exclude=}" "${WORK_PATHS[@]}"
-    set +x
+    if ! tar -c -f "${WRK_ARTIFACT_PATH}" "${ZSTD}" \
+            "${EXCLUDE_FROM_WORK[@]/#/--exclude=}" "${WORK_PATHS[@]}" &&
+        [[ -s ${WRK_ARTIFACT_PATH} ]]
+    then
+        # If tar failed but produced a (partial?) file, upload it as "broken".
+        mv -v "${WRK_ARTIFACT_PATH}" "${WRK_ARTIFACT_PATH/%.tar.zst/-broken&}"
+        WRK_ARTIFACT_NAME+=-broken
+        WRK_ARTIFACT_PATH=${WRK_ARTIFACT_PATH/%.tar.zst/-broken&}
+    fi
 
     echo "WRK_ARTIFACT_NAME: $WRK_ARTIFACT_NAME"
     echo "WRK_ARTIFACT_PATH: $WRK_ARTIFACT_PATH"
