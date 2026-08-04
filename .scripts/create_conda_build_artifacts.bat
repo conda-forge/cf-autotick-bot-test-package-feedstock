@@ -88,7 +88,7 @@ if defined BLD_ARTIFACT_PREFIX (
     echo BLD_ARTIFACT_NAME: !BLD_ARTIFACT_NAME!
 
     set "BLD_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%BLD_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zst"
-    bsdtar -c -f "!BLD_ARTIFACT_PATH!" %ZSTD% %EXCLUDE_FROM_BUILD_ARTIFACTS% . x
+    bsdtar -c -f "!BLD_ARTIFACT_PATH!" %ZSTD% %EXCLUDE_FROM_BUILD_ARTIFACTS% .
     if errorlevel 1 (
         if exist "!BLD_ARTIFACT_PATH!" (
             move "!BLD_ARTIFACT_PATH!" "!BLD_ARTIFACT_PATH:.tar.zst=-broken.tar.zst!"
@@ -114,7 +114,7 @@ if defined WRK_ARTIFACT_PREFIX (
         echo WRK_ARTIFACT_NAME: !WRK_ARTIFACT_NAME!
 
         set "WRK_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%WRK_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zst"
-        bsdtar -c -f "!WRK_ARTIFACT_PATH!" %ZSTD% %EXCLUDE_FROM_WORK% %WORK_PATHS% y
+        bsdtar -c -f "!WRK_ARTIFACT_PATH!" %ZSTD% %EXCLUDE_FROM_WORK% %WORK_PATHS%
         if errorlevel 1 (
             if exist "!WRK_ARTIFACT_PATH!" (
                 move "!WRK_ARTIFACT_PATH!" "!WRK_ARTIFACT_PATH:.tar.zst=-broken.tar.zst!"
@@ -141,7 +141,7 @@ if defined ENV_ARTIFACT_PREFIX (
         echo ENV_ARTIFACT_NAME: !ENV_ARTIFACT_NAME!
 
         set "ENV_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%ENV_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zst"
-        bsdtar -c -f "!ENV_ARTIFACT_PATH!" %ZSTD% %ENVIRONMENT_PATHS% z
+        bsdtar -c -f "!ENV_ARTIFACT_PATH!" %ZSTD% %ENVIRONMENT_PATHS%
         if errorlevel 1 (
             if exist "!ENV_ARTIFACT_PATH!" (
                 move "!ENV_ARTIFACT_PATH!" "!ENV_ARTIFACT_PATH:.tar.zst=-broken.tar.zst!"
