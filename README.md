@@ -1,5 +1,5 @@
-About cf-autotick-bot-test-package-feedstock
-============================================
+About cf-autotick-bot-test-packagex-feedstock
+=============================================
 
 Feedstock license: [BSD-3-Clause](https://github.com/conda-forge/cf-autotick-bot-test-package-feedstock/blob/main/LICENSE.txt)
 
@@ -60,12 +60,12 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-cf--autotick--bot--test--package-green.svg)](https://anaconda.org/conda-forge/cf-autotick-bot-test-package) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cf-autotick-bot-test-package.svg)](https://anaconda.org/conda-forge/cf-autotick-bot-test-package) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cf-autotick-bot-test-package.svg)](https://anaconda.org/conda-forge/cf-autotick-bot-test-package) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cf-autotick-bot-test-package.svg)](https://anaconda.org/conda-forge/cf-autotick-bot-test-package) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-cf--autotick--bot--test--packagex-green.svg)](https://anaconda.org/conda-forge/cf-autotick-bot-test-packagex) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cf-autotick-bot-test-packagex.svg)](https://anaconda.org/conda-forge/cf-autotick-bot-test-packagex) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cf-autotick-bot-test-packagex.svg)](https://anaconda.org/conda-forge/cf-autotick-bot-test-packagex) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cf-autotick-bot-test-packagex.svg)](https://anaconda.org/conda-forge/cf-autotick-bot-test-packagex) |
 
-Installing cf-autotick-bot-test-package
-=======================================
+Installing cf-autotick-bot-test-packagex
+========================================
 
-Installing `cf-autotick-bot-test-package` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
+Installing `cf-autotick-bot-test-packagex` from the `conda-forge` channel can be achieved by adding `conda-forge` to your channels with:
 
 ```
 conda config --add channels conda-forge
@@ -79,7 +79,7 @@ How to use
 <summary>With conda</summary>
 
 ```
-conda install cf-autotick-bot-test-package
+conda install cf-autotick-bot-test-packagex
 ```
 
 </details>
@@ -88,7 +88,7 @@ conda install cf-autotick-bot-test-package
 <summary>With mamba</summary>
 
 ```
-mamba install cf-autotick-bot-test-package
+mamba install cf-autotick-bot-test-packagex
 ```
 
 </details>
@@ -98,9 +98,9 @@ mamba install cf-autotick-bot-test-package
 
 ```
 # for adding to your local project
-pixi add cf-autotick-bot-test-package
+pixi add cf-autotick-bot-test-packagex
 # for installing globally
-pixi global install cf-autotick-bot-test-package
+pixi global install cf-autotick-bot-test-packagex
 ```
 
 </details>
@@ -108,13 +108,13 @@ pixi global install cf-autotick-bot-test-package
 Search package versions
 -----------------------
 
-It is possible to list all of the versions of `cf-autotick-bot-test-package` available on your platform:
+It is possible to list all of the versions of `cf-autotick-bot-test-packagex` available on your platform:
 
 <details>
 <summary>With conda</summary>
 
 ```
-conda search cf-autotick-bot-test-package --channel conda-forge
+conda search cf-autotick-bot-test-packagex --channel conda-forge
 ```
 
 </details>
@@ -123,7 +123,7 @@ conda search cf-autotick-bot-test-package --channel conda-forge
 <summary>With mamba</summary>
 
 ```
-mamba search cf-autotick-bot-test-package --channel conda-forge
+mamba search cf-autotick-bot-test-packagex --channel conda-forge
 ```
 
 </details>
@@ -132,7 +132,7 @@ mamba search cf-autotick-bot-test-package --channel conda-forge
 <summary>With pixi</summary>
 
 ```
-pixi search cf-autotick-bot-test-package --channel conda-forge
+pixi search cf-autotick-bot-test-packagex --channel conda-forge
 ```
 
 </details>
@@ -142,13 +142,13 @@ pixi search cf-autotick-bot-test-package --channel conda-forge
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search cf-autotick-bot-test-package --channel conda-forge
+mamba repoquery search cf-autotick-bot-test-packagex --channel conda-forge
 
-# List packages depending on `cf-autotick-bot-test-package`:
-mamba repoquery whoneeds cf-autotick-bot-test-package --channel conda-forge
+# List packages depending on `cf-autotick-bot-test-packagex`:
+mamba repoquery whoneeds cf-autotick-bot-test-packagex --channel conda-forge
 
-# List dependencies of `cf-autotick-bot-test-package`:
-mamba repoquery depends cf-autotick-bot-test-package --channel conda-forge
+# List dependencies of `cf-autotick-bot-test-packagex`:
+mamba repoquery depends cf-autotick-bot-test-packagex --channel conda-forge
 ```
 
 </details>
@@ -195,17 +195,17 @@ Terminology
                   produce the finished article (built conda distributions)
 
 
-Updating cf-autotick-bot-test-package-feedstock
-===============================================
+Updating cf-autotick-bot-test-packagex-feedstock
+================================================
 
-If you would like to improve the cf-autotick-bot-test-package recipe or build a new
+If you would like to improve the cf-autotick-bot-test-packagex recipe or build a new
 package version, please fork this repository and submit a PR. Upon submission,
 your changes will be run on the appropriate platforms to give the reviewer an
 opportunity to confirm that the changes result in a successful build. Once
 merged, the recipe will be re-built and uploaded automatically to the
 `conda-forge` channel, whereupon the built conda packages will be available for
 everybody to install and use from the `conda-forge` channel.
-Note that all branches in the conda-forge/cf-autotick-bot-test-package-feedstock are
+Note that all branches in the conda-forge/cf-autotick-bot-test-packagex-feedstock are
 immediately built and any created packages are uploaded, so PRs should be based
 on branches in forks, and branches in the main repository should only be used to
 build distinct package versions.
