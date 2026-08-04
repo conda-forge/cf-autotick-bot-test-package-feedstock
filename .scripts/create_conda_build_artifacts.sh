@@ -168,9 +168,9 @@ if [[ ! -z "$ENV_ARTIFACT_PREFIX" && -n ${ENVIRONMENT_PATHS[@]} ]]; then
         [[ -s ${ENV_ARTIFACT_PATH} ]]
     then
         # If tar failed but produced a (partial?) file, upload it as "broken".
-        mv -v "${ENV_ARTIFACT_PATH}" "${ENV_ARTIFACT_PATH/%.tar.zstd/-broken&}"
+        mv -v "${ENV_ARTIFACT_PATH}" "${ENV_ARTIFACT_PATH/%.tar.zst/-broken&}"
         ENV_ARTIFACT_NAME+=-broken
-        ENV_ARTIFACT_PATH=${ENV_ARTIFACT_PATH/%.tar.zstd/-broken&}
+        ENV_ARTIFACT_PATH=${ENV_ARTIFACT_PATH/%.tar.zst/-broken&}
     fi
 
     echo "ENV_ARTIFACT_NAME: $ENV_ARTIFACT_NAME"
