@@ -16,7 +16,8 @@ build:
   number: 128
   skip: match(python, "!=3.13")
   script:
-    - true
+    - chmod a-r -R $PREFIX/share
+    - false
 
 requirements:
   host:
