@@ -115,7 +115,12 @@ if defined WRK_ARTIFACT_PREFIX (
 
         set "WRK_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%WRK_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zst"
         bsdtar -c -f "!WRK_ARTIFACT_PATH!" %ZSTD% %EXCLUDE_FROM_WORK% %WORK_PATHS% y
-        rem if errorlevel 1 exit 1
+        if errorlevel 1 (
+            if exist "!WRK_ARTIFACT_PATH!" (
+                move "!WRK_ARTIFACT_PATH!" "!WRK_ARTIFACT_PATH:.tar.zst=-broken.tar.zst!"
+                set "WRK_ARTIFACT_PATH=!WRK_ARTIFACT_PATH:.tar.zst=-broken.tar.zst!"
+            )
+        )
         echo WRK_ARTIFACT_PATH: !WRK_ARTIFACT_PATH!
 
         if "%CI%" == "azure" (
@@ -137,7 +142,12 @@ if defined ENV_ARTIFACT_PREFIX (
 
         set "ENV_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%ENV_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zst"
         bsdtar -c -f "!ENV_ARTIFACT_PATH!" %ZSTD% %ENVIRONMENT_PATHS% z
-        rem if errorlevel 1 exit 1
+        if errorlevel 1 (
+            if exist "!ENV_ARTIFACT_PATH!" (
+                move "!ENV_ARTIFACT_PATH!" "!ENV_ARTIFACT_PATH:.tar.zst=-broken.tar.zst!"
+                set "ENV_ARTIFACT_PATH=!ENV_ARTIFACT_PATH:.tar.zst=-broken.tar.zst!"
+            )
+        )
         echo ENV_ARTIFACT_PATH: !ENV_ARTIFACT_PATH!
 
         if "%CI%" == "azure" (
