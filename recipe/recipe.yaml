@@ -16,7 +16,7 @@ build:
   number: 128
   skip: match(python, "!=3.13")
   script:
-    - exit 1
+    - true
 
 requirements:
   host:
