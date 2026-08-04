@@ -164,9 +164,14 @@ if [[ ! -z "$ENV_ARTIFACT_PREFIX" && -n ${ENVIRONMENT_PATHS[@]} ]]; then
     export ENV_ARTIFACT_NAME="${ENV_ARTIFACT_PREFIX}_${ARTIFACT_UNIQUE_ID}"
     export ENV_ARTIFACT_PATH="${ARTIFACT_STAGING_DIR}/${FEEDSTOCK_NAME}_${ENV_ARTIFACT_PREFIX}_${ARCHIVE_UNIQUE_ID}.tar.zst"
 
-    set -x
-    tar -c -f "${ENV_ARTIFACT_PATH}" "${ZSTD}" "${ENVIRONMENT_PATHS[@]}"
-    set +x
+    if ! tar -c -f "${ENV_ARTIFACT_PATH}" "${ZSTD}" "${ENVIRONMENT_PATHS[@]}" &&
+        [[ -s ${ENV_ARTIFACT_PATH} ]]
+    then
+        # If tar failed but produced a (partial?) file, upload it as "broken".
+        mv -v "${ENV_ARTIFACT_PATH}" "${ENV_ARTIFACT_PATH/%.tar.zstd/-broken&}"
+        ENV_ARTIFACT_NAME+=-broken
+        ENV_ARTIFACT_PATH=${ENV_ARTIFACT_PATH/%.tar.zstd/-broken&}
+    fi
 
     echo "ENV_ARTIFACT_NAME: $ENV_ARTIFACT_NAME"
     echo "ENV_ARTIFACT_PATH: $ENV_ARTIFACT_PATH"
