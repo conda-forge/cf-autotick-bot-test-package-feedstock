@@ -201,9 +201,13 @@ jobs:
         # Archive the CONDA_BLD_PATH environments only when the job fails
         # Use different prefix for successful and failed build artifacts
         # so random failures don't prevent rebuilds from creating artifacts.
-        export BLD_ARTIFACT_PREFIX="conda_pkgs"
-        export ENV_ARTIFACT_PREFIX="conda_envs"
-        export WRK_ARTIFACT_PREFIX="conda_work"
+        if [ $JOB_STATUS == "failure" ]; then
+            export BLD_ARTIFACT_PREFIX="conda_pkgs_failed"
+            export ENV_ARTIFACT_PREFIX="conda_envs"
+            export WRK_ARTIFACT_PREFIX="conda_work"
+        else
+            export BLD_ARTIFACT_PREFIX="conda_pkgs"
+        fi
         if [ $OS == "windows" ]; then
           pwsh -Command ". '.scripts/create_conda_build_artifacts.bat'"
         else
