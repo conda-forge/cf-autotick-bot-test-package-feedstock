@@ -47,6 +47,18 @@ jobs:
             resize_partitions: False
             runs_on: ['macos-15-intel']
             tools_install_dir: ~/miniforge3
+          - CONFIG: win_64_python3.13.____cp313
+            CONFIG_SHORT: win_64_python3.13.____cp313
+            STORE_BUILD_ARTIFACTS: True
+            UPLOAD_PACKAGES: True
+            build_workspace_dir: D:\\bld\\
+            docker_run_args: 
+            free_disk_space: skip
+            os: windows
+            pagefile_size: 0
+            resize_partitions: False
+            runs_on: ['windows-2022']
+            tools_install_dir: D:\Miniforge
     steps:
 
     - name: Checkout code
