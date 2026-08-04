@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  name: cf-autotick-bot-test-package
+  name: cf-autotick-bot-test-packagex
   version: "0.14"
 
 package:
@@ -16,7 +16,7 @@ build:
   number: 128
   skip: match(python, "!=3.13")
   script:
-    - false
+    - true
 
 requirements:
   host:
