@@ -118,10 +118,12 @@ if defined BLD_ARTIFACT_PREFIX (
 ) else (
     echo Skipping build artifact archive
 )
+echo.
 
 rem Make the work directory artifact archive
 if defined WRK_ARTIFACT_PREFIX (
     if not "%WORK_PATHS%" == "" (
+        echo Creating work directory archive ...
         set WRK_ARTIFACT_NAME=!WRK_ARTIFACT_PREFIX!_%ARTIFACT_UNIQUE_ID%
         echo WRK_ARTIFACT_NAME: !WRK_ARTIFACT_NAME!
 
@@ -135,7 +137,8 @@ if defined WRK_ARTIFACT_PREFIX (
         )
 
         if exist "!WRK_ARTIFACT_PATH!" (
-            echo WRK_ARTIFACT_PATH: !WRK_ARTIFACT_PATH!
+            echo Archive created:
+            dir "!WRK_ARTIFACT_PATH!"
 
             if "%CI%" == "azure" (
                 echo ##vso[task.setVariable variable=WRK_ARTIFACT_NAME]!WRK_ARTIFACT_NAME!
@@ -145,13 +148,21 @@ if defined WRK_ARTIFACT_PREFIX (
                 echo WRK_ARTIFACT_NAME=!WRK_ARTIFACT_NAME!>> !GITHUB_OUTPUT!
                 echo WRK_ARTIFACT_PATH=!WRK_ARTIFACT_PATH!>> !GITHUB_OUTPUT!
             )
+        ) else (
+            echo No archive created
         )
+    ) else (
+        echo Skipping work directory artifact archive because of no files
     )
+) else (
+    echo Skipping work directory artifact archive
 )
+echo.
 
 rem Make the environment artifact archive
 if defined ENV_ARTIFACT_PREFIX (
     if not "%ENVIRONMENT_PATHS%" == "" (
+        echo Creating build environment artifact archive ...
         set ENV_ARTIFACT_NAME=!ENV_ARTIFACT_PREFIX!_%ARTIFACT_UNIQUE_ID%
         echo ENV_ARTIFACT_NAME: !ENV_ARTIFACT_NAME!
 
@@ -165,7 +176,8 @@ if defined ENV_ARTIFACT_PREFIX (
         )
 
         if exist "!ENV_ARTIFACT_PATH!" (
-            echo ENV_ARTIFACT_PATH: !ENV_ARTIFACT_PATH!
+            echo Archive created:
+            dir "!ENV_ARTIFACT_PATH!"
 
             if "%CI%" == "azure" (
                 echo ##vso[task.setVariable variable=ENV_ARTIFACT_NAME]!ENV_ARTIFACT_NAME!
@@ -175,6 +187,13 @@ if defined ENV_ARTIFACT_PREFIX (
                 echo ENV_ARTIFACT_NAME=!ENV_ARTIFACT_NAME!>> !GITHUB_OUTPUT!
                 echo ENV_ARTIFACT_PATH=!ENV_ARTIFACT_PATH!>> !GITHUB_OUTPUT!
             )
+        ) else (
+            echo No archive created
         )
+    ) else (
+        echo Skipping environment artifact archive because of no files
     )
+) else (
+    echo Skipping environment artifact archive
 )
+echo.
