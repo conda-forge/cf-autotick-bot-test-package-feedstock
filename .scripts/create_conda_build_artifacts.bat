@@ -88,8 +88,8 @@ set "EXCLUDE_FROM_WORK=%EXCLUDE_COMMON%%EXCLUDE_FROM_WORK%"
 
 rem Make the build artifact archive
 if defined BLD_ARTIFACT_PREFIX (
+    echo Creating build artifact archive ...
     set BLD_ARTIFACT_NAME=%BLD_ARTIFACT_PREFIX%_%ARTIFACT_UNIQUE_ID%
-    echo BLD_ARTIFACT_NAME: !BLD_ARTIFACT_NAME!
 
     set "BLD_ARTIFACT_PATH=%ARTIFACT_STAGING_DIR%\%FEEDSTOCK_NAME%_%BLD_ARTIFACT_PREFIX%_%ARCHIVE_UNIQUE_ID%.tar.zst"
     bsdtar -c -f "!BLD_ARTIFACT_PATH!" %ZSTD% %EXCLUDE_FROM_BUILD_ARTIFACTS% .
@@ -99,15 +99,10 @@ if defined BLD_ARTIFACT_PREFIX (
             set "BLD_ARTIFACT_PATH=!BLD_ARTIFACT_PATH:.tar.zst=-broken.tar.zst!"
         )
     )
-<<<<<<< Updated upstream
-=======
 
     if exist "!BLD_ARTIFACT_PATH!" (
-    )
->>>>>>> Stashed changes
-
-    if exist "!BLD_ARTIFACT_PATH!" (
-        echo BLD_ARTIFACT_PATH: !BLD_ARTIFACT_PATH!
+        echo Archive created:
+        dir "!BLD_ARTIFACT_PATH!"
 
         if "%CI%" == "azure" (
             echo ##vso[task.setVariable variable=BLD_ARTIFACT_NAME]!BLD_ARTIFACT_NAME!
@@ -117,7 +112,11 @@ if defined BLD_ARTIFACT_PREFIX (
             echo BLD_ARTIFACT_NAME=!BLD_ARTIFACT_NAME!>> !GITHUB_OUTPUT!
             echo BLD_ARTIFACT_PATH=!BLD_ARTIFACT_PATH!>> !GITHUB_OUTPUT!
         )
+    ) else (
+        echo No archive created
     )
+) else (
+    echo Skipping build artifact archive
 )
 
 rem Make the work directory artifact archive
