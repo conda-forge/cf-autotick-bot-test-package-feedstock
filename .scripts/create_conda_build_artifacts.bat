@@ -24,6 +24,7 @@ rem WRK_ARTIFACT_NAME
 rem WRK_ARTIFACT_PATH
 
 call "%MINIFORGE_HOME%\Scripts\activate.bat"
+if errorlevel 1 exit 1
 
 rem Check that the conda-build directory exists
 if not exist %CONDA_BLD_PATH% (
