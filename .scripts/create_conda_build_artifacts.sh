@@ -129,10 +129,6 @@ if [[ ! -z "$BLD_ARTIFACT_PREFIX" ]]; then
     fi
 
     if [[ -s ${BLD_ARTIFACT_PATH} ]]; then
-        echo
-        echo "Build artifact archive:"
-        ls -l -h "${BLD_ARTIFACT_PATH}"
-        echo
         echo "BLD_ARTIFACT_NAME: $BLD_ARTIFACT_NAME"
         echo "BLD_ARTIFACT_PATH: $BLD_ARTIFACT_PATH"
 
@@ -164,10 +160,6 @@ if [[ ! -z "$WRK_ARTIFACT_PREFIX" && -n ${WORK_PATHS[@]} ]]; then
     fi
 
     if [[ -s ${WRK_ARTIFACT_PATH} ]]; then
-        echo
-        echo "Work directory artifact archive:"
-        ls -l -h "${WRK_ARTIFACT_PATH}"
-        echo
         echo "WRK_ARTIFACT_NAME: $WRK_ARTIFACT_NAME"
         echo "WRK_ARTIFACT_PATH: $WRK_ARTIFACT_PATH"
 
@@ -196,10 +188,6 @@ if [[ ! -z "$ENV_ARTIFACT_PREFIX" && -n ${ENVIRONMENT_PATHS[@]} ]]; then
     fi
 
     if [[ -s ${ENV_ARTIFACT_PATH} ]]; then
-        echo
-        echo "Build environment artifact archive:"
-        ls -l -h "${ENV_ARTIFACT_PATH}"
-        echo
         echo "ENV_ARTIFACT_NAME: $ENV_ARTIFACT_NAME"
         echo "ENV_ARTIFACT_PATH: $ENV_ARTIFACT_PATH"
 
