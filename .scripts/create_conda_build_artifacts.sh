@@ -128,15 +128,19 @@ if [[ ! -z "$BLD_ARTIFACT_PREFIX" ]]; then
         BLD_ARTIFACT_PATH=${BLD_ARTIFACT_PATH/%.tar.zst/-broken&}
     fi
 
-    echo "BLD_ARTIFACT_NAME: $BLD_ARTIFACT_NAME"
-    echo "BLD_ARTIFACT_PATH: $BLD_ARTIFACT_PATH"
+    if [[ -s ${BLD_ARTIFACT_PATH} ]]; then
+        echo "Build artifact archive:"
+        ls -l -h "${BLD_ARTIFACT_PATH}"
+        echo "BLD_ARTIFACT_NAME: $BLD_ARTIFACT_NAME"
+        echo "BLD_ARTIFACT_PATH: $BLD_ARTIFACT_PATH"
 
-    if [[ "$CI" == "azure" ]]; then
-        echo "##vso[task.setVariable variable=BLD_ARTIFACT_NAME]$BLD_ARTIFACT_NAME"
-        echo "##vso[task.setVariable variable=BLD_ARTIFACT_PATH]$BLD_ARTIFACT_PATH"
-    elif [[ "$CI" == "github_actions" ]]; then
-        echo "BLD_ARTIFACT_NAME=$BLD_ARTIFACT_NAME" >> $GITHUB_OUTPUT
-        echo "BLD_ARTIFACT_PATH=$BLD_ARTIFACT_PATH" >> $GITHUB_OUTPUT
+        if [[ "$CI" == "azure" ]]; then
+            echo "##vso[task.setVariable variable=BLD_ARTIFACT_NAME]$BLD_ARTIFACT_NAME"
+            echo "##vso[task.setVariable variable=BLD_ARTIFACT_PATH]$BLD_ARTIFACT_PATH"
+        elif [[ "$CI" == "github_actions" ]]; then
+            echo "BLD_ARTIFACT_NAME=$BLD_ARTIFACT_NAME" >> $GITHUB_OUTPUT
+            echo "BLD_ARTIFACT_PATH=$BLD_ARTIFACT_PATH" >> $GITHUB_OUTPUT
+        fi
     fi
 fi
 
