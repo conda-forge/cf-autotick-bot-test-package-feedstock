@@ -69,6 +69,7 @@ pushd "${CONDA_BLD_PATH}"
 # -T0 uses all cores
 # 12 gives reasonable compression while remaining fast
 ZSTD="--use-compress-prog=zstd -T0 -12"
+
 # Make the build artifact archive
 if [[ ! -z "$BLD_ARTIFACT_PREFIX" ]]; then
     export BLD_ARTIFACT_NAME="${BLD_ARTIFACT_PREFIX}_${ARTIFACT_UNIQUE_ID}"
@@ -76,7 +77,7 @@ if [[ ! -z "$BLD_ARTIFACT_PREFIX" ]]; then
 
     # All our CI services have either GNU tar or bsdtar, and zstd.
     # Keep the command compatible with both!
-    tar -c -f "${BLD_ARTIFACT_PATH}" ${ZSTD} \
+    tar -c -f "${BLD_ARTIFACT_PATH}" "${ZSTD}" \
         --exclude='.git' --exclude='_*_env*' --exclude='*_cache' .
 
     echo "BLD_ARTIFACT_NAME: $BLD_ARTIFACT_NAME"
@@ -96,7 +97,7 @@ if [[ ! -z "$ENV_ARTIFACT_PREFIX" ]]; then
     export ENV_ARTIFACT_NAME="${ENV_ARTIFACT_PREFIX}_${ARTIFACT_UNIQUE_ID}"
     export ENV_ARTIFACT_PATH="${ARTIFACT_STAGING_DIR}/${FEEDSTOCK_NAME}_${ENV_ARTIFACT_PREFIX}_${ARCHIVE_UNIQUE_ID}.tar.zst"
 
-    tar -c -f "${ENV_ARTIFACT_PATH}" ${ZSTD} $(find -name '*_*_env*' -prune)
+    tar -c -f "${ENV_ARTIFACT_PATH}" "${ZSTD}" $(find -name '*_*_env*' -prune)
 
     echo "ENV_ARTIFACT_NAME: $ENV_ARTIFACT_NAME"
     echo "ENV_ARTIFACT_PATH: $ENV_ARTIFACT_PATH"
