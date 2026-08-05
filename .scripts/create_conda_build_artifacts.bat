@@ -99,6 +99,12 @@ if defined BLD_ARTIFACT_PREFIX (
             set "BLD_ARTIFACT_PATH=!BLD_ARTIFACT_PATH:.tar.zst=-broken.tar.zst!"
         )
     )
+<<<<<<< Updated upstream
+=======
+
+    if exist "!BLD_ARTIFACT_PATH!" (
+    )
+>>>>>>> Stashed changes
 
     if exist "!BLD_ARTIFACT_PATH!" (
         echo BLD_ARTIFACT_PATH: !BLD_ARTIFACT_PATH!
