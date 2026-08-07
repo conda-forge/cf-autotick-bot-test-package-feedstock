@@ -1,11 +1,20 @@
 bot:
   automerge: true
+build_platform:
+  win_arm64: win_64
 conda_forge_output_validation: true
 github:
   branch_name: main
   tooling_branch_name: main
 conda_build:
   pkg_format: 2
+conda_build_tool: rattler-build
+conda_install_tool: pixi
 provider:
+  linux_aarch64: github_actions
   linux_64: azure
   osx_64: github_actions
+  osx_arm64: azure
+  win_64: github_actions
+workflow_settings:
+  store_build_artifacts: true
