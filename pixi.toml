@@ -5,7 +5,7 @@
 
 [workspace]
 name = "cf-autotick-bot-test-package-feedstock"
-version = "0.0.0"  # conda-smithy version used to generate this file
+version = "2026.8.5"  # conda-smithy version used to generate this file
 description = "Pixi configuration for conda-forge/cf-autotick-bot-test-package-feedstock"
 authors = ["@conda-forge/cf-autotick-bot-test-package"]
 channels = ["conda-forge"]
