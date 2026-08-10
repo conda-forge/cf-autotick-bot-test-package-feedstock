@@ -20,7 +20,7 @@ outputs:
       name: foo
     build:
       script:
-        - "true"
+        - echo
     requirements:
       host:
         - python 3.13.*
