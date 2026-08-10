@@ -15,16 +15,14 @@ build:
 
 
 outputs:
-  - package:
-      name: foo
+  - name: foo
     build:
       script:
         - "true"
     requirements:
       host:
         - python
-  - package:
-      name: bar
+  - name: bar
     build:
       script:
         - "false"
