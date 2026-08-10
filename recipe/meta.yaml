@@ -23,7 +23,7 @@ requirements:
 
 test:
   commands:
-    - echo "works!"
+    - "false"
 
 about:
   home: https://github.com/regro/cf-scripts
