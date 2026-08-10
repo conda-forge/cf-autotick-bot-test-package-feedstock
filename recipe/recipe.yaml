@@ -24,6 +24,9 @@ outputs:
     requirements:
       host:
         - python 3.13.*
+    tests:
+      - script:
+          - echo
   - package:
       name: bar
     build:
