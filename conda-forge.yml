@@ -7,7 +7,10 @@ github:
 conda_build:
   pkg_format: 2
 provider:
-  linux_64: azure
-  osx_64: github_actions
+  linux_64: default
+  linux_aarch64: default
+  osx_64: default
+  osx_arm64: default
+  win_64: default
 workflow_settings:
   store_build_artifacts: true
