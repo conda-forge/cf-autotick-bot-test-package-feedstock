@@ -9,3 +9,5 @@ conda_build:
 provider:
   linux_64: azure
   osx_64: github_actions
+workflow_settings:
+  store_build_artifacts: true
