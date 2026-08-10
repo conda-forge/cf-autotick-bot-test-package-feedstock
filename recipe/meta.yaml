@@ -13,13 +13,27 @@ build:
   number: 128
   skip: true  # [py != 313 or win or aarch64 or ppc64le or s390x]
 
-requirements:
-  host:
-    - python
-    - pip
-    - setuptools
-  run:
-    - python
+
+outputs:
+  - package:
+      name: foo
+    build:
+      script:
+        - "true"
+    requirements:
+      host:
+        - python
+  - package:
+      name: bar
+    build:
+      script:
+        - "false"
+    requirements:
+      build:
+        - {{ compiler('c') }}
+        - {{ stdlib('c') }}
+      host:
+        - {{ pin_subpackage('foo') }}
 
 test:
   commands:
