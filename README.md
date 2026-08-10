@@ -13,7 +13,46 @@ Current build status
 ====================
 
 
-<table>
+<table><tr>
+    <td>GitHub Actions</td>
+    <td>
+      <a href="https://github.com/conda-forge/cf-autotick-bot-test-package-feedstock/actions/workflows/conda-build.yml">
+        <img src="https://github.com/conda-forge/cf-autotick-bot-test-package-feedstock/actions/workflows/conda-build.yml/badge.svg?event=push&branch=main">
+      </a>
+    </td>
+  </tr>
+    
+  <tr>
+    <td>Azure</td>
+    <td>
+      <details>
+        <summary>
+          <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8857&branchName=main">
+            <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cf-autotick-bot-test-package-feedstock?branchName=main">
+          </a>
+        </summary>
+        <table>
+          <thead><tr><th>Variant</th><th>Status</th></tr></thead>
+          <tbody><tr>
+              <td>osx_64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8857&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cf-autotick-bot-test-package-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_64_" alt="variant">
+                </a>
+              </td>
+            </tr><tr>
+              <td>osx_arm64</td>
+              <td>
+                <a href="https://dev.azure.com/conda-forge/feedstock-builds/_build/latest?definitionId=8857&branchName=main">
+                  <img src="https://dev.azure.com/conda-forge/feedstock-builds/_apis/build/status/cf-autotick-bot-test-package-feedstock?branchName=main&jobName=osx&configuration=osx%20osx_arm64_" alt="variant">
+                </a>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </details>
+    </td>
+  </tr>
 </table>
 
 Current release info
@@ -21,7 +60,8 @@ Current release info
 
 | Name | Downloads | Version | Platforms |
 | --- | --- | --- | --- |
-| [![Conda Recipe](https://img.shields.io/badge/recipe-cf--autotick--bot--test--package-green.svg)](https://anaconda.org/conda-forge/cf-autotick-bot-test-package) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/cf-autotick-bot-test-package.svg)](https://anaconda.org/conda-forge/cf-autotick-bot-test-package) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/cf-autotick-bot-test-package.svg)](https://anaconda.org/conda-forge/cf-autotick-bot-test-package) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/cf-autotick-bot-test-package.svg)](https://anaconda.org/conda-forge/cf-autotick-bot-test-package) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-bar-green.svg)](https://anaconda.org/conda-forge/bar) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/bar.svg)](https://anaconda.org/conda-forge/bar) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/bar.svg)](https://anaconda.org/conda-forge/bar) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/bar.svg)](https://anaconda.org/conda-forge/bar) |
+| [![Conda Recipe](https://img.shields.io/badge/recipe-foo-green.svg)](https://anaconda.org/conda-forge/foo) | [![Conda Downloads](https://img.shields.io/conda/dn/conda-forge/foo.svg)](https://anaconda.org/conda-forge/foo) | [![Conda Version](https://img.shields.io/conda/vn/conda-forge/foo.svg)](https://anaconda.org/conda-forge/foo) | [![Conda Platforms](https://img.shields.io/conda/pn/conda-forge/foo.svg)](https://anaconda.org/conda-forge/foo) |
 
 Installing cf-autotick-bot-test-package
 =======================================
@@ -40,7 +80,7 @@ How to use
 <summary>With conda</summary>
 
 ```
-conda install cf-autotick-bot-test-package
+conda install bar foo
 ```
 
 </details>
@@ -49,7 +89,7 @@ conda install cf-autotick-bot-test-package
 <summary>With mamba</summary>
 
 ```
-mamba install cf-autotick-bot-test-package
+mamba install bar foo
 ```
 
 </details>
@@ -59,9 +99,9 @@ mamba install cf-autotick-bot-test-package
 
 ```
 # for adding to your local project
-pixi add cf-autotick-bot-test-package
+pixi add bar foo
 # for installing globally
-pixi global install cf-autotick-bot-test-package
+pixi global install bar foo
 ```
 
 </details>
@@ -69,13 +109,13 @@ pixi global install cf-autotick-bot-test-package
 Search package versions
 -----------------------
 
-It is possible to list all of the versions of `cf-autotick-bot-test-package` available on your platform:
+It is possible to list all of the versions of `bar` available on your platform:
 
 <details>
 <summary>With conda</summary>
 
 ```
-conda search cf-autotick-bot-test-package --channel conda-forge
+conda search bar --channel conda-forge
 ```
 
 </details>
@@ -84,7 +124,7 @@ conda search cf-autotick-bot-test-package --channel conda-forge
 <summary>With mamba</summary>
 
 ```
-mamba search cf-autotick-bot-test-package --channel conda-forge
+mamba search bar --channel conda-forge
 ```
 
 </details>
@@ -93,7 +133,7 @@ mamba search cf-autotick-bot-test-package --channel conda-forge
 <summary>With pixi</summary>
 
 ```
-pixi search cf-autotick-bot-test-package --channel conda-forge
+pixi search bar --channel conda-forge
 ```
 
 </details>
@@ -103,13 +143,13 @@ pixi search cf-autotick-bot-test-package --channel conda-forge
 
 ```
 # Search all versions available on your platform:
-mamba repoquery search cf-autotick-bot-test-package --channel conda-forge
+mamba repoquery search bar --channel conda-forge
 
-# List packages depending on `cf-autotick-bot-test-package`:
-mamba repoquery whoneeds cf-autotick-bot-test-package --channel conda-forge
+# List packages depending on `bar`:
+mamba repoquery whoneeds bar --channel conda-forge
 
-# List dependencies of `cf-autotick-bot-test-package`:
-mamba repoquery depends cf-autotick-bot-test-package --channel conda-forge
+# List dependencies of `bar`:
+mamba repoquery depends bar --channel conda-forge
 ```
 
 </details>
