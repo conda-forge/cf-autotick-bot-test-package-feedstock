@@ -127,7 +127,7 @@ if [[ ! -z ${BLD_ARTIFACT_PREFIX} && -n ${ARTIFACT_PATHS} ]]; then
 
     # All our CI services have either GNU tar or bsdtar, and zstd.
     # Keep the command compatible with both!
-    if ! tar -v -c -f "${BLD_ARTIFACT_PATH}" "${ZSTD}" "${ARTIFACT_PATHS[@]}" &&
+    if ! tar -c -f "${BLD_ARTIFACT_PATH}" "${ZSTD}" "${ARTIFACT_PATHS[@]}" &&
         [[ -s ${BLD_ARTIFACT_PATH} ]]
     then
         # If tar failed but produced a (partial?) file, upload it as "broken".
@@ -163,7 +163,7 @@ if [[ ! -z ${WRK_ARTIFACT_PREFIX} ]]; then
 
     # All our CI services have either GNU tar or bsdtar, and zstd.
     # Keep the command compatible with both!
-    if ! tar -v -c -f "${WRK_ARTIFACT_PATH}" "${ZSTD}" \
+    if ! tar -c -f "${WRK_ARTIFACT_PATH}" "${ZSTD}" \
             "${EXCLUDE_FROM_WORK[@]/#/--exclude=}" . &&
         [[ -s ${WRK_ARTIFACT_PATH} ]]
     then
@@ -198,7 +198,7 @@ if [[ ! -z ${ENV_ARTIFACT_PREFIX} && -n ${ENVIRONMENT_PATHS[@]} ]]; then
     export ENV_ARTIFACT_NAME="${ENV_ARTIFACT_PREFIX}_${ARTIFACT_UNIQUE_ID}"
     export ENV_ARTIFACT_PATH="${ARTIFACT_STAGING_DIR}/${FEEDSTOCK_NAME}_${ENV_ARTIFACT_PREFIX}_${ARCHIVE_UNIQUE_ID}.tar.zst"
 
-    if ! tar -v -c -f "${ENV_ARTIFACT_PATH}" "${ZSTD}" "${ENVIRONMENT_PATHS[@]}" &&
+    if ! tar -c -f "${ENV_ARTIFACT_PATH}" "${ZSTD}" "${ENVIRONMENT_PATHS[@]}" &&
         [[ -s ${ENV_ARTIFACT_PATH} ]]
     then
         # If tar failed but produced a (partial?) file, upload it as "broken".
