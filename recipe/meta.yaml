@@ -20,7 +20,7 @@ outputs:
         - "true"
     requirements:
       host:
-        - python
+        - python 3.13.*
   - name: bar
     build:
       script:
