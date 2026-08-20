@@ -7,7 +7,7 @@ package:
 
 source:
   url: https://github.com/regro/cf-autotick-bot-test-package/archive/v{{ version }}.tar.gz
-  sha256: b9c0a16ec72cf7df804b86e8740811b9b6ce1096e71f08e565807d4c33c42ab7
+  sha256: 5b3ae5b7d09cf65a4daca4e34f9e4ed64a046fd992fa77bc03d2b9bc77906424
 
 build:
   number: 0
