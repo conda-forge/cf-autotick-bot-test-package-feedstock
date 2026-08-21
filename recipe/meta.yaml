@@ -10,7 +10,7 @@ source:
 
 build:
   number: 4312
-  skip: true  # [py != 313 or win or aarch64 or ppc64le or s390x]
+  skip: true  # [py != 313 or win or aarch64 or ppc64le or s390x or (osx and x86_64)]
 
 requirements:
   host:
@@ -25,7 +25,7 @@ test:
     - echo "works!"
 
 about:
-  home: https://github.com/regro/cf-scripts
+  home: https://github.com/conda-forge/conda-forge-bot
   license: BSD-3-Clause
   license_family: BSD
   license_file: LICENSE
@@ -33,4 +33,4 @@ about:
 
 extra:
   recipe-maintainers:
-    - conda-forge-blah
+    - conda-forge-daemon
