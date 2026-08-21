@@ -3,7 +3,7 @@
 
 package:
   name: {{ name|lower }}
-  version: "0.14"
+  version: "{{ version }}"
 
 source:
   url: https://github.com/regro/cf-autotick-bot-test-package/archive/v{{ version }}.tar.gz
