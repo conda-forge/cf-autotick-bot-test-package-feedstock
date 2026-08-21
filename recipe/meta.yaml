@@ -7,10 +7,10 @@ package:
 
 source:
   url: https://github.com/regro/cf-autotick-bot-test-package/archive/v{{ version }}.tar.gz
-  sha256: 1d1a25b9cafeda8bfaf417283aaae0b048af620f6d0d58470f0d574aac148a65
+  sha256: ad8a818c19127dc5f8c65da3b65108e89f3d8898f31048d2aa9327a957eaf960
 
 build:
-  number: 4352342
+  number: 4312
   skip: true  # [py != 313 or win or aarch64 or ppc64le or s390x]
 
 requirements:
