@@ -1,7 +1,7 @@
 schema_version: 1
 
 context:
-  version: "0.13"
+  version: "0.15"
 
 package:
   name: cf-autotick-bot-test-package
@@ -9,10 +9,10 @@ package:
 
 source:
   url: https://github.com/regro/cf-autotick-bot-test-package/archive/v${{ version }}.tar.gz
-  sha256: 605dc48ba83048ee4d10654cd01ec8816e6db77b062ff94a554ea087061704b7
+  sha256: 7504d6acc80bd59c6d813044b9daaedec3d670fd40ee3586fd6a051eb6c5c046
 
 build:
-  number: 4312
+  number: 0
   skip:
     - match(python, "!=3.13") or win or aarch64 or ppc64le or s390x or (osx and x86_64)
 
