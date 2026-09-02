@@ -46,6 +46,9 @@ jobs:
           docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
         fi
 
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
+
     - name: Build on Linux
       id: build-linux
       if: matrix.os == 'ubuntu'
