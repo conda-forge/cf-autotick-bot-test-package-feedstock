@@ -46,8 +46,11 @@ jobs:
           docker run --rm --privileged multiarch/qemu-user-static:register --reset --credential yes
         fi
 
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+    - uses: msys2/setup-msys2@v2
+      id: setup-msys2
+    - uses: mxschmitt/action-tmate@v3
+      with:
+        msys2-location: ${{ steps.setup-msys2.outputs.msys2-location }}
 
     - name: Build on Linux
       id: build-linux
