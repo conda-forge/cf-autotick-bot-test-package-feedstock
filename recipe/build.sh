@@ -1,0 +1,2 @@
+arch
+exit 1
