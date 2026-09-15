@@ -11,3 +11,4 @@ conda_build:
 provider:
   linux_64: azure
   osx_64: github_actions
+upload_on_branch: automerge-live-test-head-branch-hd10185
