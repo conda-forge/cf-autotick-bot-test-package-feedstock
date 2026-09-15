@@ -9,3 +9,4 @@ conda_build:
 provider:
   linux_64: github_actions
   osx_arm64: azure
+upload_on_branch: rerender-live-test
