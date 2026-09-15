@@ -12,3 +12,4 @@ github:
 conda_pkg_format: '2'
 conda_build:
   pkg_format: '2'
+upload_on_branch: test-ci-fail
