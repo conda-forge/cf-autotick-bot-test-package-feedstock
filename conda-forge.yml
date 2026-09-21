@@ -8,4 +8,5 @@ conda_build:
   pkg_format: 2
 provider:
   linux_64: github_actions
+  linux_riscv64: github_actions
   osx_arm64: azure
