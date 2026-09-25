@@ -9,9 +9,3 @@ conda_build:
 provider:
   linux_64: github_actions
   osx_arm64: azure
-# conda-forge-webservices' live tests ask for version updates from this workflow
-trusted_publishers:
-  - provider: github
-    repository: conda-forge/conda-forge-webservices
-    repository_owner_id: 11897326
-    workflow: tests.yml
