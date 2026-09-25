@@ -9,4 +9,3 @@ conda_build:
 provider:
   linux_64: github_actions
   osx_arm64: azure
-conda_build_tool: rattler-build
