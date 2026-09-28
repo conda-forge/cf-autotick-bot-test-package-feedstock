@@ -8,6 +8,7 @@ conda_build:
   pkg_format: 2
 provider:
   linux_64: github_actions
+  linux_riscv64: github_actions
   osx_arm64: azure
 # the live tests of conda-forge-webservices and conda-forge/release ask for
 # version updates from these workflows
