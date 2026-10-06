@@ -9,6 +9,7 @@ conda_build:
 provider:
   linux_64: github_actions
   osx_arm64: azure
+conda_build_tool: rattler-build
 # the live tests of conda-forge-webservices and conda-forge/release ask for
 # version updates from these workflows
 trusted_publishers:
