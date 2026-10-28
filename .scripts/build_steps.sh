@@ -51,7 +51,7 @@ mv "${MINIFORGE_HOME}"/conda-meta/history "${MINIFORGE_HOME}"/conda-meta/history
 echo > "${MINIFORGE_HOME}"/conda-meta/history
 "${MICROMAMBA_EXE}" install --yes --root-prefix "${MAMBA_ROOT_PREFIX}" --prefix "${MINIFORGE_HOME}" \
     --override-channels --channel conda-forge --strict-channel-priority \
-    pip  rattler-build conda-forge-ci-setup=4 "conda-build>=26.3"
+    pip  python=3.14 conda-build conda-forge-ci-setup=4 "conda-build>=26.3"
 
 ( endgroup "Provisioning base env with micromamba" ) 2> /dev/null
 
@@ -86,17 +86,15 @@ if [[ "${BUILD_WITH_CONDA_DEBUG:-0}" == 1 ]]; then
     #   - --output-id vs. --output-name
     #   - --clobber-file vs. none
     #   - none vs. --target-platform
-    export CONDA_BLD_PATH="${CONDA_BLD_PATH:-${FEEDSTOCK_ROOT}/build_artifacts}"
-    rattler-build debug setup \
-        --recipe "${RECIPE_ROOT}" \
+    CONDA_SUBDIR="${BUILD_PLATFORM}" conda debug \
+        "${RECIPE_ROOT}" \
         -m "${CONFIG_FILE}" \
         ${EXTRA_CB_OPTIONS:-} \
-        ${BUILD_OUTPUT_ID:+--output-name "${BUILD_OUTPUT_ID}"} \
-        --build-platform "${BUILD_PLATFORM}" \
-        --target-platform "${HOST_PLATFORM}"
+        ${BUILD_OUTPUT_ID:+--output-id "${BUILD_OUTPUT_ID}"} \
+        --clobber-file "${CI_SUPPORT}/clobber_${CONFIG}.yaml"
 
-    rattler-build debug shell
-    exit 0
+    # Drop into an interactive shell
+    /bin/bash
 fi
 
 # Build the recipe
@@ -109,15 +107,13 @@ echo Building recipe
 #   - none vs. --target-platform
 #   - --extra-meta a=b c=d vs. --extra-meta a=b --extra-meta c=d
 
-rattler-build build \
-    --recipe "${RECIPE_ROOT}" \
+CONDA_SUBDIR="${BUILD_PLATFORM}" conda-build \
+    "${RECIPE_ROOT}" \
     -m "${CONFIG_FILE}" \
     ${EXTRA_CB_OPTIONS:-} \
-    --build-platform "${BUILD_PLATFORM}" \
-    --target-platform "${HOST_PLATFORM}" \
-    --extra-meta flow_run_id="${flow_run_id:-}" \
-    --extra-meta remote_url="${remote_url:-}" \
-    --extra-meta sha="${sha:-}"
+    --suppress-variables \
+    --clobber-file "${CI_SUPPORT}/clobber_${CONFIG}.yaml" \
+    --extra-meta flow_run_id="${flow_run_id:-}" remote_url="${remote_url:-}" sha="${sha:-}"
 
 ( startgroup "Inspecting artifacts" ) 2> /dev/null
 
