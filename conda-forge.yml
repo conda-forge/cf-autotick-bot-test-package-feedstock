@@ -20,3 +20,4 @@ trusted_publishers:
     repository: conda-forge/release
     repository_owner_id: 11897326
     workflow: tests.yml
+conda_build_tool: rattler-build
